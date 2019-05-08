@@ -1,0 +1,15 @@
+{% if pager.paginator.num_pages > 1 %}
+<div class="box-footer clearfix">
+  <ul class="pagination pagination-sm no-margin pull-right">
+    {% if pager.has_previous %}
+    <li><a href="?page=1">«</a></li>
+    <li><a href="?page={{pager.previous_page_number}}">{{ pager.previous_page_number }}</a></li>
+    {% endif %}
+    <li class="active"><a href="#">{{ pager.number }}</a></li>
+    {% if pager.has_next %}
+    <li><a href="?page={{pager.next_page_number}}">{{ pager.next_page_number }}</a></li>
+    <li><a href="?page={{ pager.paginator.num_pages }}">»</a></li>
+    {% endif %}
+  </ul>
+</div>
+{% endif %}

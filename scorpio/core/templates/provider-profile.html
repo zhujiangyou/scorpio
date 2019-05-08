@@ -1,0 +1,48 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provider-Profile</title>
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
+</head>
+<body>
+<div class="page-provider-profile">
+    <div class="profile">
+
+        <img src="{{ provider.head_img }}" class="profile-avatar">
+        <p class="profile-title">{{ provider.nickname }}</p>
+        <p class="profile-subtitle">provider</p>
+    </div>
+    <hr class="division">
+    <ul class="menu">
+        <li class="menu-item">
+            <a href="/get_credit_list/{{ provider.id }}/">
+                <p class="menu-item-label">Credits</p>
+                <span class="menu-item-hint">{{ provider.credits_total }}</span>
+                <i class="menu-item-arrow iconfont icon-arrow-right-s-line"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="footer">
+    <div class="footer-item">
+        <a href="/get_foods/{{ provider.id }}/">
+            <span class="iconfont icon-food"></span>
+            <p class="footer-item-label">Food</p>
+        </a>
+    </div>
+    <div class="footer-item active">
+        <a href="/get_provider_info/{{ provider.id }}/">
+            <span class="iconfont icon-yonghu"></span>
+            <p class="footer-item-label">Profile</p>
+        </a>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static "/js/app.js" %}"></script>
+</body>
+</html>

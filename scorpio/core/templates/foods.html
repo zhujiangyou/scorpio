@@ -1,0 +1,71 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foods</title>
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
+</head>
+<body>
+<div class="header">
+    <span id="J_backBtn" class="header-back iconfont icon-arrow-left-s-line"></span>
+    <h1 class="header-title">Foods</h1>
+</div>
+<div class="page-foods">
+    <ul class="reservation-list">
+        {% for food in foods %}
+        <li class="reservation-item">
+            <div class="reservation-item-image" style="background-image: url({{ food.food_img.url }})"></div>
+            <div class="reservation-item-info">
+                <h3 class="reservation-item-title">{{ food.name }}</h3>
+                <p class="reservation-item-subtitle">Subtitle</p>
+            </div>
+                 
+            <span data-target="{{ food.qrcode.url }}" class="J_qrcode-icon iconfont icon-erweima">
+
+
+            </span>
+        </li>
+        {% endfor %}
+    </ul>
+    <div id="J_QrCodeModel" class="qrcode-model">
+        <span class="iconfont icon-baseline-close-px"></span>
+        <img class="qrcode-image">
+    </div>
+</div>
+<div class="footer">
+    <div class="footer-item active">
+        <a href="/get_foods/{{ provider_id }}/">
+            <span class="iconfont icon-food"></span>
+            <p class="footer-item-label">Food</p>
+        </a>
+    </div>
+    <div class="footer-item">
+        <a href="/get_provider_info/{{ provider_id }}/">
+            <span class="iconfont icon-yonghu"></span>
+            <p class="footer-item-label">Profile</p>
+        </a>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static "/js/app.js" %}"></script>
+<script>
+    $(function () {
+        var $qrCodeIcon = $('.J_qrcode-icon')
+        var $qrCodeModel = $('#J_QrCodeModel')
+
+        $qrCodeIcon.on('click', function () {
+            var targetUrl = $(this).attr('data-target')
+            $qrCodeModel.fadeIn(150).find('.qrcode-image').attr('src', targetUrl)
+        })
+
+        $qrCodeModel.find('.icon-baseline-close-px').on('click', function () {
+            $qrCodeModel.fadeOut(150)
+        })
+    })
+</script>
+</body>
+</html>

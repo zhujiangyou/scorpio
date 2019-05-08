@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="box">
+
+        {% if me.status == 1%}
+        <div class="box-header with-border">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-addattachment">
+                Add Food
+            </button>
+        </div>
+        {% endif %}
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Credit</th>
+                    <th>ProvideID</th>
+                    <th>FoodImg</th>
+                    <th>QRcode</th>
+                </tr>
+                {% for food in foods %}
+                    <tr>
+                        <td>{{ food.id }}</td>
+                        <td>{{ food.name }}</td>
+                        <td>{{ food.credit }}</td>
+                        <td>{{ food.provider_id }}</td>
+                        <td><img src="{{ food.food_img.url }}" style="width: 150px;height: 100px;"></td>
+                        <td><img src="{{ food.qrcode.url }}" style="width: 150px;height: 100px;"></td>
+                        <td>
+                            <a href="/delete_food/?fid={{ food.id }}&page={{ pager.number }}&eid={{ eid }}">
+                                <button type="button" class="btn btn-danger" >
+                                    Delete
+                                </button>
+                            </a>
+                        </td>
+
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- /.box-body -->
+        {% if pager.paginator.num_pages > 1 %}
+        <div class="box-footer clearfix">
+          <ul class="pagination pagination-sm no-margin pull-right">
+            {% if pager.has_previous %}
+            <li><a href="?page=1&eid={{ eid }}">«</a></li>
+            <li><a href="?page={{pager.previous_page_number}}&eid={{ eid }}">{{ pager.previous_page_number }}</a></li>
+            {% endif %}
+            <li class="active"><a href="#">{{ pager.number }}</a></li>
+            {% if pager.has_next %}
+            <li><a href="?page={{pager.next_page_number}}&eid={{ eid }}">{{ pager.next_page_number }}</a></li>
+            <li><a href="?page={{ pager.paginator.num_pages }}&eid={{ eid }}">»</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        {% endif %}
+
+
+        <div class="modal modal-success fade" id="modal-addattachment">
+            <form action="/add_food/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="add_attachment"/>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Add Food</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                <label for="name">Name</label>
+                                <input class="form-control" type="text" name="name" id="name">
+                            </p>
+                            <p>
+                                <label for="credit">Credit</label>
+                                <input class="form-control" type="text" name="credit" id="credit">
+                            </p>
+                            <!-- <div>
+                                <select class="form-control" name="event_id">
+                                    {% for event in events %}
+                                        <option value="{{event.id}}">{{event}}</option>
+                                    {% endfor %}
+                                  </select>
+                            </div> -->
+                            <p>
+                                <label for="food_img">Food Image</label>
+                                <input class="form-control" type="file" name="food_img" id="food_img">
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-outline">Add Food</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </form>
+        </div>
+
+
+    </div>
+{% endblock %}

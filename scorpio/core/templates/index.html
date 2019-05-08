@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<head>
+<title>生成二维码</title>
+</head>
+<body>
+<form method='post' action='/sub/'>
+<p>网址：<input type='text' name='website' value='http://'></p>
+<button type="submit">提交</button>
+{% csrf_token %}
+</form>
+</body>

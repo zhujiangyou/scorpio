@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="box">
+        <div class="box-header with-border">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-addattachment">
+                Add Event
+            </button>
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Time</th>
+                    <th>Address</th>
+                    <th>Introduce</th>
+                    <th>image</th>
+                    <th>qrcode</th>
+                </tr>
+                {% for event in events %}
+                    <tr>
+                        <td>{{ event.id }}</td>
+                        <td><a href="/event/?eid={{ event.id }}">{{ event.name }}</a></td>
+                        <td>{{ event.time | date:'Y-m-d' }}</td>
+                        <td>{{ event.address }}</td>
+                        <td>{{ event.introduce }}</td>
+                        <td><img src="{{ event.event_img.url }}" style="width: 100px;height: 100px;"></td>
+                        <td><img src="{{ event.qrcode.url }}" style="width: 100px;height: 100px;"></td>
+                        <!-- <td>
+                            <a href="/event/?eid={{ event.id }}">
+                                <button type="button" class="btn btn-primary" >
+                                    Detail
+                                </button>
+                        </a>
+                        </td> -->
+                        <!-- <td>
+                            <a href="/delete_event/?eid={{ event.id }}">
+                                <button type="button" class="btn btn-danger" >
+                                    Delete
+                                </button>
+                            </a>
+                        </td> -->
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- /.box-body -->
+        {% include 'pager.html' %}
+
+        <div class="modal modal-success fade" id="modal-addattachment">
+            <form action="/add_event/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="add_attachment"/>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Add Event</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                event image
+                            </p>
+                            <p>
+                                <label for="name">Name</label>
+                                <input class="form-control" type="text" name="name" id="name">
+                            </p>
+                            <p>
+                                <label for="time">Time</label>
+                                <input class="form-control" type="date" name="time" id="time">
+                            </p>
+                            <p>
+                                <label for="address">Address</label>
+                                <input class="form-control" type="text" name="address" id="address">
+                            </p>
+                            <p>
+                                <label for="introduce">Introduce</label>
+                                <input class="form-control" type="text" name="introduce" id="introduce">
+                            </p>
+                            <p>
+                                <label for="event_img">Event Image</label>
+                                <input class="form-control" type="file" name="event_img" id="event_img">
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-outline">Add Event</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </form>
+        </div>
+
+    </div>
+{% endblock %}

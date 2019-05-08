@@ -1,0 +1,384 @@
+* {
+  margin: 0;
+  padding: 0;
+  word-break: break-all;
+  box-sizing: border-box;
+  font-size: 14px;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+body {
+  background: #f5f5f6;
+}
+.header {
+  position: fixed;
+  width: 100%;
+  height: 44px;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background: #FFFFFF;
+}
+.header-back {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  left: 0;
+  top: 0;
+  font-size: 30px !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-title {
+  height: 100%;
+  font-size: 20px;
+  border-bottom: 1px solid #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.footer {
+  position: fixed;
+  width: 100%;
+  height: 44px;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  background: #FFFFFF;
+  border-top: 1px solid #f4f4f4;
+}
+.footer .footer-item {
+  flex: 1;
+  color: #606266;
+}
+.footer .footer-item.active {
+  color: #F56C6C;
+}
+.footer .footer-item a {
+  padding-top: 2px;
+  text-decoration: inherit;
+  color: inherit;
+  width: 44px;
+  height: 44px;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+}
+.footer .footer-item a .iconfont {
+  font-size: 18px;
+}
+.footer .footer-item a p {
+  font-size: 12px;
+}
+.division {
+  height: 8px;
+  border: none;
+}
+.button {
+  padding: 10px 15px;
+  outline: none;
+  border-radius: 3px;
+  background-color: #e9e9e9;
+  border: 1px solid #d5d5d5;
+}
+.button:active {
+  background-color: #d8d8d8;
+}
+.button.big {
+  padding: 12px 15px;
+  font-size: 16px;
+}
+.button.block {
+  display: block;
+  width: 100%;
+}
+.button.primary {
+  color: #FFFFFF;
+  background-color: #F56C6C;
+  border: none;
+}
+.button.primary:active {
+  background-color: orangered;
+}
+.menu .menu-item {
+  background: #FFFFFF;
+  border-bottom: 1px solid #f4f4f4;
+}
+.menu .menu-item a {
+  text-decoration: inherit;
+  color: inherit;
+  padding: 15px 12px 15px 15px;
+  display: flex;
+  align-items: center;
+}
+.menu .menu-item-label {
+  font-size: 18px;
+  font-weight: normal;
+  color: #303133;
+  flex: 1;
+}
+.menu .menu-item-hint {
+  margin: 0 10px;
+  color: #606266;
+}
+.menu .menu-item-arrow {
+  font-size: 24px;
+  color: #606266;
+}
+.page-customer-profile .profile,
+.page-provider-profile .profile {
+  padding: 40px 0 30px 0;
+  background: #606266;
+  text-align: center;
+}
+.page-customer-profile .profile-avatar,
+.page-provider-profile .profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 80px;
+}
+.page-customer-profile .profile-title,
+.page-provider-profile .profile-title {
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFFFFF;
+  margin-top: 10px;
+}
+.page-customer-profile .profile-subtitle,
+.page-provider-profile .profile-subtitle {
+  margin-top: 5px;
+  color: #F1F1F1;
+}
+.page-customer-profile .scan-button,
+.page-provider-profile .scan-button {
+  display: block;
+  margin: 20px auto;
+}
+.page-customer-profile .qr-image,
+.page-provider-profile .qr-image {
+  width: 150px;
+  display: block;
+  margin: 80px auto;
+}
+.page-customer-credits,
+.page-provider-credits {
+  padding-top: 44px;
+}
+.page-customer-credits .credits-detail,
+.page-provider-credits .credits-detail {
+  text-align: center;
+  background-color: #FFFFFF;
+  padding: 30px 15px;
+}
+.page-customer-credits .credits-detail-hint,
+.page-provider-credits .credits-detail-hint {
+  color: #606266;
+}
+.page-customer-credits .credits-detail-count,
+.page-provider-credits .credits-detail-count {
+  font-weight: bold;
+  font-size: 30px;
+  color: #F56C6C;
+  margin: 8px 0;
+}
+.page-customer-credits .credits-list,
+.page-provider-credits .credits-list {
+  background: #FFFFFF;
+  margin-bottom: 20px;
+}
+.page-customer-credits .credits-list-title,
+.page-provider-credits .credits-list-title {
+  height: 38px;
+  padding: 0 12px;
+  display: flex;
+  align-items: center;
+}
+.page-customer-credits .credits-list-title-split,
+.page-provider-credits .credits-list-title-split {
+  height: 16px;
+  width: 4px;
+  border-radius: 2px;
+  margin-right: 8px;
+  background: #F56C6C;
+}
+.page-customer-credits .credits-item,
+.page-provider-credits .credits-item {
+  border-top: 1px solid #f4f4f4;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+}
+.page-customer-credits .credits-item-info,
+.page-provider-credits .credits-item-info {
+  flex: 1;
+  margin-right: 10px;
+}
+.page-customer-credits .credits-item-label,
+.page-provider-credits .credits-item-label {
+  font-size: 16px;
+  color: #303133;
+  font-weight: normal;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+.page-customer-credits .credits-item-date,
+.page-provider-credits .credits-item-date {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #606266;
+}
+.page-customer-credits .credits-item-price,
+.page-provider-credits .credits-item-price {
+  font-size: 16px;
+  font-weight: bold;
+}
+.page-customer-credits .credits-item-price.reduce,
+.page-provider-credits .credits-item-price.reduce {
+  color: #303133;
+}
+.page-customer-credits .credits-item-price.add,
+.page-provider-credits .credits-item-price.add {
+  color: #F56C6C;
+}
+.page-reservation,
+.page-last-supper,
+.page-foods {
+  padding-top: 44px;
+}
+.page-reservation .reservation-list,
+.page-last-supper .reservation-list,
+.page-foods .reservation-list {
+  margin-bottom: 20px;
+  background: #FFFFFF;
+}
+.page-reservation .reservation-item,
+.page-last-supper .reservation-item,
+.page-foods .reservation-item {
+  padding: 12px;
+  border-bottom: 1px solid #f4f4f4;
+  display: flex;
+  align-items: center;
+}
+.page-reservation .reservation-item-image,
+.page-last-supper .reservation-item-image,
+.page-foods .reservation-item-image {
+  width: 64px;
+  height: 48px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.page-reservation .reservation-item-info,
+.page-last-supper .reservation-item-info,
+.page-foods .reservation-item-info {
+  flex: 1;
+  margin: 0 10px;
+}
+.page-reservation .reservation-item-info .reservation-item-title,
+.page-last-supper .reservation-item-info .reservation-item-title,
+.page-foods .reservation-item-info .reservation-item-title {
+  font-size: 16px;
+  color: #303133;
+  margin-bottom: 4px;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+.page-reservation .reservation-item-info .reservation-item-subtitle,
+.page-last-supper .reservation-item-info .reservation-item-subtitle,
+.page-foods .reservation-item-info .reservation-item-subtitle {
+  font-size: 14px;
+  color: #606266;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+}
+.page-reservation .reservation-item-like,
+.page-last-supper .reservation-item-like,
+.page-foods .reservation-item-like {
+  font-size: 20px;
+  color: #606266;
+}
+.page-reservation .reservation-item-like.active,
+.page-last-supper .reservation-item-like.active,
+.page-foods .reservation-item-like.active {
+  color: #F56C6C;
+}
+.page-reservation .J_qrcode-icon,
+.page-last-supper .J_qrcode-icon,
+.page-foods .J_qrcode-icon {
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  color: #606266;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-foods .qrcode-model {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 100;
+}
+.page-foods .qrcode-model .iconfont {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  right: 0;
+  top: 0;
+  color: #FFFFFF;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.page-foods .qrcode-model .qrcode-image {
+  width: 200px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.page-foods,
+.page-customer-profile,
+.page-provider-profile {
+  padding-bottom: 44px;
+}
+.page-pay-failed,
+.page-pay-success {
+  padding: 0 12px;
+  padding-top: 40px;
+  text-align: center;
+}
+.page-pay-failed img,
+.page-pay-success img {
+  width: 128px;
+}
+.page-pay-failed p,
+.page-pay-success p {
+  font-size: 20px;
+  margin-top: 20px;
+}
+.page-pay-failed button,
+.page-pay-success button {
+  margin-top: 20px;
+}

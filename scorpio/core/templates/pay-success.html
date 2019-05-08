@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Successful</title>
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
+</head>
+<body>
+<div class="page-pay-success">
+    <img src="../static/images/success.png">
+    <p>Payment Success</p>
+
+    <a href="/customer_profile/{{ me.id }}"><button id="J_backBtn" class="button big block">Back</button></a>
+
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static "/js/app.js" %}"></script>
+</body>
+</html>

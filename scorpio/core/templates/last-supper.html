@@ -1,0 +1,33 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'ultima cena</title>
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
+</head>
+<body>
+<div class="header">
+    <span id="J_backBtn" class="header-back iconfont icon-arrow-left-s-line"></span>
+    <h1 class="header-title">I'ultima cena</h1>
+</div>
+<div class="page-last-supper">
+    <ul class="reservation-list">
+        {% for last_food in last_foods %}
+            <li class="reservation-item">
+                <div class="reservation-item-image" style="background-image: url({{ last_food.food_img.url }})"></div>
+                <div class="reservation-item-info">
+                    <h3 class="reservation-item-title">{{ last_food.name }}</h3>
+{#                    <p class="reservation-item-subtitle">Subtitle</p>#}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static "/js/app.js" %}"></script>
+</body>
+</html>

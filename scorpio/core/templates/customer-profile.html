@@ -1,0 +1,111 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer-Profile</title>
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
+</head>
+<body>
+<div class="page-customer-profile">
+    <div class="profile">
+        <img src="{{ user.head_img}}" class="profile-avatar">
+        <p class="profile-title">{{ user.nickname }}</p>
+        <p class="profile-subtitle">customer</p>
+    </div>
+    <hr class="division">
+    <ul class="menu">
+        <li class="menu-item">
+            <a href="/credit_history">
+                <p class="menu-item-label">My Credits</p>
+                <span class="menu-item-hint">{{ user.credit }}</span>
+                <i class="menu-item-arrow iconfont icon-arrow-right-s-line"></i>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/reservation_list">
+                <p class="menu-item-label">Room Amenities Selection</p>
+                <i class="menu-item-arrow iconfont icon-arrow-right-s-line"></i>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="/last_supper">
+                <p class="menu-item-label">June 27th Lunch Selection</p>
+                <i class="menu-item-arrow iconfont icon-arrow-right-s-line"></i>
+            </a>
+        </li>
+    </ul>
+    <button class="scan-button button primary" id='scanQRCode'>Scan QR</button>
+</div>
+<div class="footer">
+    <div class="footer-item">
+        <a href="/reservation_list">
+            <span class="iconfont icon-food"></span>
+            <p class="footer-item-label">My Reservation</p>
+        </a>
+    </div>
+    <div class="footer-item active">
+        <a href="/customer_profile/{{ user.id }}">
+            <span class="iconfont icon-yonghu"></span>
+            <p class="footer-item-label">Profile</p>
+        </a>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static "/js/app.js" %}"></script>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+<script type="text/javascript">
+
+var btn = document.getElementById("scanQRCode");
+btn.onclick = function () {
+        var current_url = window.location.href
+        $.ajax({
+            type:"post",
+            url:"http://pinkslash.metatype.cn/getticket",
+            data:{'current_url':current_url},
+            dataType : "json",
+            success:function(result){
+                wx.config({
+                debug: false,
+                appId: result.appId,
+                timestamp: result.timestamp,
+                nonceStr:result.nonceStr,
+                 signature:result.signature,
+                 jsApiList : [ 'checkJsApi', 'scanQRCode' ]
+                 });
+              },
+	     error:function(result) {
+                alert(result)
+            }
+        })
+
+        wx.error(function(res) {
+            alert("出错了：" + res.errMsg);
+        });
+
+        wx.ready(function() {
+            wx.checkJsApi({
+                 jsApiList : ['scanQRCode'],
+                 success : function(res) {
+                 }
+            });
+
+            wx.scanQRCode({
+                needResult : 0, 
+                scanType : [ "qrCode"],
+                success : function(res) {
+                }
+            });
+            // };
+
+        });
+
+     }
+
+
+</script>
+</body>
+</html>

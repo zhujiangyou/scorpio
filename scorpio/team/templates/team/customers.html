@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="box">
+        <!-- /.box-header -->
+        <div class="box-body table-responsive no-padding">
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>UserName</th>
+                    <th>Password</th>
+                    <th>UnionID</th>
+                    <th>NickName</th>
+                    <th>head_img</th>
+                    <th>credit</th>
+                    <th>event_id</th>
+                    <th>status</th>
+                </tr>
+                {% for customer in customers %}
+                    <tr>
+                        <td>{{ customer.id }}</td>
+                        <td>{{ customer.name }}</td>
+                        <td>{{ customer.username }}</td>
+                        <td>{{ customer.password }}</td>
+                        <td>{{ customer.union_id }}</td>
+                        <td>{{ customer.nickname }}</td>
+                        <td><img src="{{ customer.head_img.url }}" style="width: 150px;height: 100px;"></td>
+                        <td>{{ customer.credit }}</td>
+                        <td>{{ customer.event_id }}</td>
+                        <td>{{ customer.status }}</td>
+                        <td><a href="/delete_customer/?uid={{ customer.id }}&page={{ pager.number }}&eid={{ eid }}">
+                                <button type="button" class="btn btn-danger" >
+                                    Delete
+                                </button>
+                            </a>
+                        </td>
+                        <div>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <!-- /.box-body -->
+        {% if pager.paginator.num_pages > 1 %}
+        <div class="box-footer clearfix">
+          <ul class="pagination pagination-sm no-margin pull-right">
+            {% if pager.has_previous %}
+            <li><a href="?page=1&eid={{ eid }}">«</a></li>
+            <li><a href="?page={{pager.previous_page_number}}&eid={{ eid }}">{{ pager.previous_page_number }}</a></li>
+            {% endif %}
+            <li class="active"><a href="#">{{ pager.number }}</a></li>
+            {% if pager.has_next %}
+            <li><a href="?page={{pager.next_page_number}}&eid={{ eid }}">{{ pager.next_page_number }}</a></li>
+            <li><a href="?page={{ pager.paginator.num_pages }}&eid={{ eid }}">»</a></li>
+            {% endif %}
+          </ul>
+        </div>
+        {% endif %}
+
+        <div class="modal modal-success fade" id="modal-addattachment">
+            <form action="." method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="add_attachment"/>
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Add Customer</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                customer image
+                            </p>
+                            <p>
+                                <input class="form-control" type="file" name="file">
+                            </p>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-outline">Add Event</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </form>
+
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer-Credits</title>
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
+</head>
+<body>
+<div class="header">
+    <span id="J_backBtn" class="header-back iconfont icon-arrow-left-s-line"></span>
+    <h1 class="header-title">Credits</h1>
+</div>
+<div class="page-customer-credits">
+    <div class="credits-detail">
+        <p class="credits-detail-hint">Current credits</p>
+        <p class="credits-detail-count">{{ me.credit }}</p>
+    </div>
+    <hr class="division">
+    <div class="credits-list">
+        <div class="credits-list-title">
+            <span class="credits-list-title-split"></span>
+            Credits history
+        </div>
+        {% for history in histories %}
+            <div class="credits-item">
+                <div class="credits-item-info">
+                    <h3 class="credits-item-label">Selling food</h3>
+                    <p class="credits-item-date">{{ history.create_time }}</p>
+                </div>
+                <span class="credits-item-price add">{{ history.credit }}</span>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static "/js/app.js" %}"></script>
+</body>
+</html>

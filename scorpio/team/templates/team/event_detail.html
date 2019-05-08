@@ -1,0 +1,197 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="box">
+        <div class="box-header with-border">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_credit">
+                Add Credit
+            </button>
+        </div>
+        {# 积分列表 #}
+        <div class="box-body table-responsive no-padding">
+            <h3 style="padding-left: 8px">Credit List</h3>
+            <table class="table table-hover  table-striped">
+                <tbody>
+                <tr>
+                    <th>Credit</th>
+                    <th>Qrcode</th>
+                </tr>
+                {% for credit in credits %}
+                    <tr>
+                        <td>{{ credit.credit }}</td>
+                        <td><img src="{{ credit.qrcode.url }}"></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if pager.paginator.num_pages > 1 %}
+            <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                {% if pager.has_previous %}
+                <li><a href="?page=1&eid={{ eid }}">«</a></li>
+                <li><a href="?page={{pager.previous_page_number}}&eid={{ eid }}">{{ pager.previous_page_number }}</a></li>
+                {% endif %}
+                <li class="active"><a href="#">{{ pager.number }}</a></li>
+                {% if pager.has_next %}
+                <li><a href="?page={{pager.next_page_number}}&eid={{ eid }}">{{ pager.next_page_number }}</a></li>
+                <li><a href="?page={{ pager.paginator.num_pages }}&eid={{ eid }}">»</a></li>
+                {% endif %}
+              </ul>
+            </div>
+        {% endif %}
+
+
+        <div class="modal modal-success fade" id="add_credit">
+            <form action="/add_credit/" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="eid" value="{{ event.id }}" hidden="hidden">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Add Credit</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                <label for="name">Credit</label>
+                                <input class="form-control" type="number" min="1" max="10000" name="credit" id="name">
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-outline">Add Credit</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </form>
+        </div>
+    </div>
+    <div class="box">
+        <div class="box-header with-border">
+            <button type="button" class="btn btn-yahoo" data-toggle="modal" data-target="#add_last_food">
+                Add Last Food
+            </button>
+            <div class="box-body table-responsive no-padding">
+                <h3 style="padding-left: 8px">last foods List</h3>
+                <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <th>Name</th>
+                    <th>food image</th>
+                    <th>event</th>
+                </tr>
+                {% for last_food in last_foods %}
+                    <tr>
+
+                        <td>{{ last_food.name }}</td>
+                        <td>
+                            <img src="{{ last_food.food_img.url }}" style="width: 50px;height: 50px;">
+                        </td>
+                        <td>
+                            {{ last_food.event.name }}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+            {% if last_foods_pager.paginator.num_pages > 1 %}
+                <div class="box-footer clearfix">
+                  <ul class="pagination pagination-sm no-margin pull-right">
+                    {% if last_foods_pager.has_previous %}
+                    <li><a href="?last_foods_page=1&eid={{ eid }}">«</a></li>
+                    <li><a href="?last_foods_page={{last_foods_pager.previous_page_number}}&eid={{ eid }}">{{ last_foods_pager.previous_page_number }}</a></li>
+                    {% endif %}
+                    <li class="active"><a href="#">{{ last_foods_pager.number }}</a></li>
+                    {% if last_foods_pager.has_next %}
+                    <li><a href="?last_foods_page={{last_foods_pager.next_page_number}}&eid={{ eid }}">{{ last_foods_pager.next_page_number }}</a></li>
+                    <li><a href="?last_foods_page={{ last_foods_pager.paginator.num_pages }}&eid={{ eid }}">»</a></li>
+                    {% endif %}
+                  </ul>
+                </div>
+            {% endif %}
+
+            <!-- <a href="/foods/?eid={{ event.id }}&page=1" >
+
+                <button type="button" class="btn btn-info" >
+                    Food Provider
+                </button>
+            </a>
+            <a href="/customers/?eid={{ event.id }}&page=1">
+                <button type="button" class="btn btn-info" >
+                    Customer
+                </button>
+            </a> -->
+            <!-- <a href="/last_foods/?eid={{ event.id }}&page=1">
+                <button type="button" class="btn btn-info" >
+                    LastFood
+                </button>
+            </a> -->
+        </div>
+        <!-- <div class="box-body table-responsive no-padding">
+            <h3 style="padding-left: 8px">Event Detail</h3>
+            <table class="table table-hover">
+                <tbody>
+                <tr>
+                    <th>Name</th>
+                    <th>Time</th>
+                    <th>Address</th>
+                    <th>Introduce</th>
+                    <th>image</th>
+                    <th>qrcode</th>
+                </tr>
+                <tr>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.time }}</td>
+                    <td>{{ event.address }}</td>
+                    <td>{{ event.introduce }}</td>
+                    <td>
+                        <img src="{{ event.event_img.url }}" style="width: 100px;height: 100px;">
+
+                    </td>
+                    <td><img src="{{ event.qrcode.url }}" style="width: 150px;height: 100px;"></td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div> -->
+
+
+        <div class="modal modal-success fade" id="add_last_food">
+            <form action="/add_last_food/" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" name="eid" value="{{ event.id }}" hidden="hidden">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Add Last Food</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                <label for="name">Food Name</label>
+                                <input class="form-control" type="text" name="name" id="name">
+                            </p>
+                            <p>
+                                <label for="img">Food Image</label>
+                                <input class="form-control" type="file" name="img" id="img">
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-outline">Add Last Food</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
