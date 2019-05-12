@@ -328,7 +328,7 @@ def lunch_reserve(request, me, lunch_id):
         if me.credit >= lunch.credit:
             me.credit -= lunch.credit
             me.save()
-            History.objects.create(user=me, credit='-{0}'.format(str(room_amenity.credit)), desc='Lunch Reservation')
+            History.objects.create(user=me, credit='-{0}'.format(str(lunch.credit)), desc='Lunch Reservation')
             return redirect('/reserve_success')
         else:
             return redirect('/reserve_failed')

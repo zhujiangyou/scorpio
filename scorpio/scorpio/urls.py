@@ -73,4 +73,6 @@ urlpatterns = [
     path('reserve_success', core_views.reserve_success),
     path('reserve_failed', core_views.reserve_failed),
 
+    path('user_reservation', core_views.user_reservation)
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
