@@ -17,9 +17,8 @@
 
 
 <div class="page-reservation">
-    <div class="header">
+
     <h2 class="header-title">Room Amenity Reservation</h2>
-    </div>
     <ul class="reservation-list">
         {% for package in roomAmenityReservation %}
             <a href="/room_amenity/detail/{{ package.id }}" style="text-decoration:none;">
@@ -35,9 +34,7 @@
         {% endfor %}
     </ul>
     <br>
-    <div class="header">
     <h2 class="header-title">Lunch Reservation</h2>
-    </div>
     <ul class="reservation-list">
         {% for package in lunchReservation %}
                 <a href="/lunch/detail/{{ package.id }}" style="text-decoration:none;">
