@@ -22,6 +22,7 @@
                     <h3 class="reservation-item-title">{{ food.name }}</h3>
                     {#                    <p class="reservation-item-subtitle">Subtitle</p>#}
                 </div>
+
                 <a href="/add_favorite/{{ food.id }}" class="reservation-item-like iconfont icon-like
                     {% if food.id in favo_ids %}
                         active

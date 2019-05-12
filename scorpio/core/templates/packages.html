@@ -16,21 +16,22 @@
 <div class="page-reservation">
     <ul class="reservation-list">
         {% for package in packages %}
-            <li class="reservation-item">
-                <a href="/room_amenity/detail/{{ package.id }}">
+            <a href="/room_amenity/detail/{{ package.id }}">
+                <li class="reservation-item">
                     <div class="reservation-item-image" style="background-image: url({{ package.img.url }})"></div>
-                    <div class="reservation-item-info">
-                        <h3 class="reservation-item-title">{{ package.name }}</h3>
-                        {#                    <p class="reservation-item-subtitle">Subtitle</p>#}
-                    </div>
-                </a>
-                <!--
-                <a href="/add_favorite/{{ food.id }}" class="reservation-item-like iconfont icon-like
-                    {% if food.id in favo_ids %}
-                        active
-                    {% endif %}" style="text-decoration-line: none">
-                </a> -->
-            </li>
+                        <div class="reservation-item-info">
+                            <h3 class="reservation-item-title">{{ package.name }}</h3>
+                            {#                    <p class="reservation-item-subtitle">Subtitle</p>#}
+                        </div>
+                    <!--
+                    <a href="/add_favorite/{{ food.id }}" class="reservation-item-like iconfont icon-like
+                        {% if food.id in favo_ids %}
+                            active
+                        {% endif %}" style="text-decoration-line: none">
+                    </a> -->
+                </li>
+            </a>
+
         {% endfor %}
     </ul>
 </div>
