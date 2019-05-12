@@ -16,7 +16,7 @@
 <div class="page-reservation">
     <ul class="reservation-list">
         {% for package in packages %}
-            <a href="/room_amenity/detail/{{ package.id }}">
+            <a href="/room_amenity/detail/{{ package.id }}" style="text-decoration:none;">
                 <li class="reservation-item">
                     <div class="reservation-item-image" style="background-image: url({{ package.img.url }})"></div>
                         <div class="reservation-item-info">
