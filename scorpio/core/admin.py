@@ -11,4 +11,8 @@ admin.site.register(History)
 
 admin.site.register(Favorite)
 admin.site.register(LastFood)
+admin.site.register(Lunch)
+admin.site.register(RoomAmenity)
+admin.site.register(RoomAmenityReservation)
+admin.site.register(LunchReservation)
 
