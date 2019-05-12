@@ -15,7 +15,7 @@
     <img src="{{ lunch.img.url }}">
     <!-- <p>Payment Success</p> -->
     {% if status == 0 %}
-        <a href="lunch/reserve/{{ lunch.id }}" style="text-decoration:none;"><button  class="button big block">Reserve</button></a>
+        <a href="/lunch/reserve/{{ lunch.id }}" style="text-decoration:none;"><button  class="button big block">Reserve</button></a>
     {% else %}
         <button  class="button big block">Reservations have been made.</button>
     {% endif %}
