@@ -313,7 +313,7 @@ def lunch_reserve(request, me, lunch_id):
     if not lunchReservation:
         LunchReservation.objects.create(user=me, lunch=lunch)
 
-    return redirect('/lunch/reserve/{0}'.format(lunch_id))
+    return redirect('/lunch')
 
 @user_required
 def room_amenity_reserve(request, me, room_amenity_id):
@@ -322,7 +322,7 @@ def room_amenity_reserve(request, me, room_amenity_id):
     if not roomAmenityReserve:
         RoomAmenityReservation.objects.create(user=me, roomAmenity=room_amenity)
 
-    return redirect('/room_amenity/reserve/{0}'.format(room_amenity_id))
+    return redirect('/room_amenity')
 
 def getticket(request):
 
