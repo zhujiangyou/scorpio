@@ -278,9 +278,15 @@ def lunch(request, me):
 def room_amenity_detail(request, me, room_amenity_id):
 
     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
+    roomAmenityReserve = RoomAmenityReservation.objects.filter(user=me, roomAmenity=room_amenity).first()
     ctx = {
         'room_amenity':room_amenity
     }
+    if roomAmenityReserve:
+        ctx['status'] = 1
+    else:
+        ctx['status'] = 0
+
     return render(request, 'room-amenity-detail.html', ctx)
 
 @user_required
@@ -289,9 +295,41 @@ def lunch_detail(request, me, lunch_id):
     ctx = {
         'lunch':lunch
     }
+    lunchReservation = LunchReservation.objects.filter(user=me, lunch=lunch).first()
+    if lunchReservation:
+        ctx['status'] = 1
+    else:
+        ctx['status'] = 0
+
     return render(request, 'lunch-detail.html', ctx)
 
+@user_required
+def lunch_reserve(request, me, lunch_id):
 
+    lunch = Lunch.objects.filter(id=lunch_id).first()
+    lunchReservation = LunchReservation.objects.filter(user=me, lunch=lunch).first()
+    if not lunchReservation:
+        LunchReservation.objects.create(user=me, lunch=lunch)
+
+    ctx = {
+        'lunch':lunch,
+        'status':1
+    }
+    return render(request, 'lunch-detail.html', ctx)
+
+@user_required
+def room_amenity_reserve(request, me, room_amenity_id):
+    room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
+    roomAmenityReserve = RoomAmenityReservation.objects.filter(user=me, roomAmenity=room_amenity).first()
+    if not roomAmenityReserve:
+        RoomAmenityReservation.objects.create(user=me, roomAmenity=roomAmenityReserve)
+
+    ctx = {
+        'room_amenity':room_amenity,
+        'status':1
+    }
+
+    return render(request, 'lunch-detail.html', ctx)
 
 def getticket(request):
 
