@@ -26,13 +26,13 @@
             </a>
         </li>
         <li class="menu-item">
-            <a href="/reservation_list">
+            <a href="/room_amenity">
                 <p class="menu-item-label">Room Amenities Selection</p>
                 <i class="menu-item-arrow iconfont icon-arrow-right-s-line"></i>
             </a>
         </li>
         <li class="menu-item">
-            <a href="/last_supper">
+            <a href="/lunch">
                 <p class="menu-item-label">June 27th Lunch Selection</p>
                 <i class="menu-item-arrow iconfont icon-arrow-right-s-line"></i>
             </a>
@@ -94,7 +94,7 @@ btn.onclick = function () {
             });
 
             wx.scanQRCode({
-                needResult : 0, 
+                needResult : 0,
                 scanType : [ "qrCode"],
                 success : function(res) {
                 }

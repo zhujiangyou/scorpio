@@ -247,6 +247,48 @@ def reservation_list(request, me):
     }
     return render(request, 'reservation.html', ctx)
 
+
+@user_required
+def room_amenity(request, me):
+
+    packages = RoomAmenity.objects.filter(event=me.event)
+    ctx = {
+        'packages': packages
+    }
+
+    return render(request, 'packages.html', ctx)
+
+
+@user_required
+def lunch(request, me):
+
+    packages = Lunch.objects.filter(event=me.event)
+    ctx = {
+        'packages': packages
+    }
+    return render(request, 'packages.html', ctx)
+
+
+
+@user_required
+def room_amenity_detail(request, me, room_amenity_id):
+
+    room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
+    ctx = {
+        'room_amenity':room_amenity
+    }
+    return render(request, 'room-amenity-detail.html', ctx)
+
+@user_required
+def lunch_detail(request, me, lunch_id):
+    lunch = Lunch.objects.filter(id=lunch_id).first()
+    ctx = {
+        'lunch':lunch
+    }
+    return render(request, 'lunch-detail.html', ctx)
+
+
+
 def getticket(request):
 
     current_url =  request.POST.get('current_url', '')

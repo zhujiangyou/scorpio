@@ -59,13 +59,35 @@ class History(models.Model):
     create_time = models.DateTimeField(auto_now=True)
     credit = models.CharField(max_length=10)
 
-
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
-
 
 class LastFood(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     food_img = models.ImageField(upload_to='food')
     name = models.CharField(max_length=100)
+
+class Lunch(models.Model):
+    name = models.CharField(max_length=100, default='')
+    img = models.ImageField(upload_to='lunch')
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+class RoomAmenity(models.Model):
+    name = models.CharField(max_length=100, default='')
+    img = models.ImageField(upload_to='roomAmenity')
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+
+class RoomAmenityReservation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    roomAmenity = models.ForeignKey(RoomAmenity, on_delete=models.CASCADE)
+
+class LunchReservation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    lunch = models.ForeignKey(Lunch, on_delete=models.CASCADE)
+
+
+
+
+
+

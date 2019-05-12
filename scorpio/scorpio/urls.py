@@ -59,6 +59,12 @@ urlpatterns = [
     path('pay_failed', core_views.pay_failed),
 
     path('wechat_login/', core_views.wechat_login),
-    path('getticket', core_views.getticket)
+    path('getticket', core_views.getticket),
+
+    path('room_amenity/', core_views.room_amenity),
+    path('lunch/', core_views.lunch),
+
+    path('room_amenity/detail/<int:room_amenity_id>', core_views.room_amenity_detail),
+    path('lunch/detail/<int:lunch_id>', core_views.lunch_detail),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
