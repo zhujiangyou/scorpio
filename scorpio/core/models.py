@@ -58,6 +58,7 @@ class History(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     create_time = models.DateTimeField(auto_now=True)
     credit = models.CharField(max_length=10)
+    desc = models.CharField(max_length=100, default='')
 
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

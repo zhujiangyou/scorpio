@@ -138,8 +138,8 @@ def wechat_login(request):
                         provider.credit += food.credit
                         provider.save()
 
-                        History.objects.create(user=user, credit='-{0}'.format(str(food.credit)))
-                        History.objects.create(user=provider, credit='+{0}'.format(str(food.credit)))
+                        History.objects.create(user=user, credit='-{0}'.format(str(food.credit)), desc='Buying Food')
+                        History.objects.create(user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food')
 
                         return redirect('/pay_success')
                     else:
@@ -149,8 +149,11 @@ def wechat_login(request):
                     credit = status.split('_')[2]
                 except:
                     return HttpResponse('Customers cannot log in as food providers')
+
                 user.credit += int(credit)
                 user.save()
+                History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
+
                 return redirect('/customer_profile/{0}/'.format(user.id))
         else:
             event_id = status.split('_')[1]
@@ -168,10 +171,11 @@ def wechat_login(request):
                     name=nickname, union_id=union_id,
                     head_img=head_img, status=0,
                     event=event, credit=int(credit))
+                History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
                 request.session['uid'] = user.id
                 return redirect('/customer_profile/{0}/'.format(user.id))
             elif 'purchase' in full_path:
-                return HttpResponse("Please get the points before you buy them")
+                return HttpResponse("Please get the credits before you buy them")
     else:
 
         redirect_uri = 'http://pinkslash.metatype.cn' + full_path
