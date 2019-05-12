@@ -70,4 +70,7 @@ urlpatterns = [
     path('lunch/reserve/<int:lunch_id>', core_views.lunch_reserve),
     path('room_amenity/reserve/<int:room_amenity_id>', core_views.room_amenity_reserve),
 
+    path('reserve_success', core_views.reserve_success),
+    path('reserve_failed', core_views.reserve_failed),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
