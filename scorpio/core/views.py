@@ -251,6 +251,17 @@ def reservation_list(request, me):
     }
     return render(request, 'reservation.html', ctx)
 
+@user_required
+def user_reservation(request, me):
+    roomAmenityReservation = RoomAmenityReservation.objects.filter(user=me)
+    lunchReservation = LunchReservation.objects.filter(user=me)
+    ctx = {
+        'roomAmenityReservation': roomAmenityReservation,
+        'lunchReservation': lunchReservation
+    }
+
+    return render(request, 'user_reservation.html', ctx)
+
 
 @user_required
 def room_amenity(request, me):
@@ -317,6 +328,7 @@ def lunch_reserve(request, me, lunch_id):
         if me.credit >= lunch.credit:
             me.credit -= lunch.credit
             me.save()
+            History.objects.create(user=me, credit='-{0}'.format(str(room_amenity.credit)), desc='Lunch Reservation')
             return redirect('/reserve_success')
         else:
             return redirect('/reserve_failed')
@@ -332,10 +344,10 @@ def room_amenity_reserve(request, me, room_amenity_id):
     roomAmenityReserve = RoomAmenityReservation.objects.filter(user=me, roomAmenity=room_amenity).first()
     if not roomAmenityReserve:
         RoomAmenityReservation.objects.create(user=me, roomAmenity=room_amenity)
-
         if me.credit >= room_amenity.credit:
             me.credit -= room_amenity.credit
             me.save()
+            History.objects.create(user=me, credit='-{0}'.format(str(room_amenity.credit)), desc='Room Amenity Reservation')
             return redirect('/reserve_success')
         else:
             return redirect('/reserve_failed')
