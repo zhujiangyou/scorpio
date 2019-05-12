@@ -322,7 +322,7 @@ def room_amenity_reserve(request, me, room_amenity_id):
     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
     roomAmenityReserve = RoomAmenityReservation.objects.filter(user=me, roomAmenity=room_amenity).first()
     if not roomAmenityReserve:
-        RoomAmenityReservation.objects.create(user=me, roomAmenity=roomAmenityReserve)
+        RoomAmenityReservation.objects.create(user=me, roomAmenity=room_amenity)
 
     ctx = {
         'room_amenity':room_amenity,
