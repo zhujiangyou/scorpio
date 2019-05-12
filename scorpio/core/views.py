@@ -257,7 +257,8 @@ def room_amenity(request, me):
 
     packages = RoomAmenity.objects.filter(event=me.event)
     ctx = {
-        'packages': packages
+        'packages': packages,
+        'status':'room_amenity'
     }
 
     return render(request, 'packages.html', ctx)
@@ -268,7 +269,8 @@ def lunch(request, me):
 
     packages = Lunch.objects.filter(event=me.event)
     ctx = {
-        'packages': packages
+        'packages': packages,
+        'status':'lunch'
     }
     return render(request, 'packages.html', ctx)
 
@@ -320,7 +322,7 @@ def room_amenity_reserve(request, me, room_amenity_id):
     if not roomAmenityReserve:
         RoomAmenityReservation.objects.create(user=me, roomAmenity=room_amenity)
 
-    return redirect('/room_amenity/reserve/{0}'.format(room_amenity.id))
+    return redirect('/room_amenity/reserve/{0}'.format(room_amenity_id))
 
 def getticket(request):
 

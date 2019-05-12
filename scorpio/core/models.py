@@ -73,11 +73,13 @@ class Lunch(models.Model):
     name = models.CharField(max_length=100, default='')
     img = models.ImageField(upload_to='lunch')
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    credit = models.IntegerField(default=0)
 
 class RoomAmenity(models.Model):
     name = models.CharField(max_length=100, default='')
     img = models.ImageField(upload_to='roomAmenity')
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    credit = models.IntegerField(default=0)
 
 class RoomAmenityReservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
