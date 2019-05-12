@@ -14,34 +14,34 @@
     <h1 class="header-title">My Reservation</h1>
 </div>
 
-
+<br>
 
 <div class="page-reservation">
 
     <h2 class="header-title">Room Amenity Reservation</h2>
     <ul class="reservation-list">
         {% for package in roomAmenityReservation %}
-            <a href="/room_amenity/detail/{{ package.id }}" style="text-decoration:none;">
+            <a href="/room_amenity/detail/{{ package.roomAmenity.id }}" style="text-decoration:none;">
                 <li class="reservation-item">
-                    <div class="reservation-item-image" style="background-image: url({{ package.img.url }})"></div>
+                    <div class="reservation-item-image" style="background-image: url({{ package.roomAmenity.img.url }})"></div>
                         <div class="reservation-item-info">
-                            <h3 class="reservation-item-title">{{ package.name }}</h3>
+                            <h3 class="reservation-item-title">{{ package.roomAmenity.name }}</h3>
                         </div>
 
                 </li>
             </a>
-
         {% endfor %}
+
     </ul>
     <br>
     <h2 class="header-title">Lunch Reservation</h2>
     <ul class="reservation-list">
         {% for package in lunchReservation %}
-                <a href="/lunch/detail/{{ package.id }}" style="text-decoration:none;">
+                <a href="/lunch/detail/{{ package.lunch.id }}" style="text-decoration:none;">
                 <li class="reservation-item">
-                    <div class="reservation-item-image" style="background-image: url({{ package.img.url }})"></div>
+                    <div class="reservation-item-image" style="background-image: url({{ package.lunch.img.url }})"></div>
                         <div class="reservation-item-info">
-                            <h3 class="reservation-item-title">{{ package.name }}</h3>
+                            <h3 class="reservation-item-title">{{ package.lunch.name }}</h3>
                         </div>
 
                 </li>

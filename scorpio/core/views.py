@@ -255,6 +255,7 @@ def reservation_list(request, me):
 def user_reservation(request, me):
     roomAmenityReservation = RoomAmenityReservation.objects.filter(user=me)
     lunchReservation = LunchReservation.objects.filter(user=me)
+
     ctx = {
         'roomAmenityReservation': roomAmenityReservation,
         'lunchReservation': lunchReservation
