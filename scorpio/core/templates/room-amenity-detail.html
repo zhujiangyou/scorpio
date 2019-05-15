@@ -43,17 +43,19 @@
 
         <!-- 模态框主体 -->
         <div class="modal-body">
-          Make a reservation with 20 credits deducted. Are you sure?
+         {{ room_amenity.credit }} credits will be deducted from the reservation. Are you sure?
         </div>
 
         <!-- 模态框底部 -->
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <a href="/room_amenity/reserve/{{ room_amenity.id }}" style="text-decoration:none;">
+
                 <button type="button" class="btn btn-success" data-dismiss="modal">
+                    <a href="/room_amenity/reserve/{{ room_amenity.id }}" style="text-decoration:none;">
                     Confirm
+                    </a>
                 </button>
-            </a>
+
         </div>
 
       </div>
