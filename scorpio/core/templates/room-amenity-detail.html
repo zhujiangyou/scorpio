@@ -8,6 +8,11 @@
     <title>{{room_amenity.name}}</title>
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div class="header">
@@ -20,11 +25,40 @@
     <img src="{{ room_amenity.img.url }}">
 
     {% if status == 0 %}
-        <a href="/room_amenity/reserve/{{ room_amenity.id }}" style="text-decoration:none;"><button  class="button big block">Reserve</button></a>
+        <button  class="button big block" data-toggle="modal" data-target="#myModal">Reserve</button></a>
     {% else %}
         <button  class="button big block">Reservations have been made.</button>
     {% endif %}
+
 </div>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <!-- 模态框头部 -->
+        <div class="modal-header">
+          <h4 class="modal-title">Reservation</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+
+        <!-- 模态框主体 -->
+        <div class="modal-body">
+          Make a reservation with 20 credits deducted. Are you sure?
+        </div>
+
+        <!-- 模态框底部 -->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            <a href="/room_amenity/reserve/{{ room_amenity.id }}" style="text-decoration:none;">
+                <button type="button" class="btn btn-success" data-dismiss="modal">
+                    Confirm
+                </button>
+            </a>
+        </div>
+
+      </div>
+    </div>
+  </div>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="{% static "/js/app.js" %}"></script>
 </body>
