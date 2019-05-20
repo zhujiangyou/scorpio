@@ -1,19 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title></title>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 </head>
 <body>
-
+<div class="page-login">
     <form action="/customer/save_message/" method='post'>
-        Real name
-        <input type="text" name="realName">
-        Hotel name
-        <input type="text" name="hotelName">
-        Email
-        <input type="email" name="email">
-        <input type="submit" name="" value="提交">
+        <div class="form-item required">
+            <p>Real name</p>
+            <input type="text" name="realName" required oninvalid="alert('Please input real name!')">
+        </div>
+        <div class="form-item required">
+            <p>Hotel Name</p>
+            <input type="number" name="hotelName" required oninvalid="alert('Please input phone number!')">
+        </div>
+        <div class="form-item required">
+            <p>Email</p>
+            <input value="Submit" type="email" name="email" required oninvalid="alert('Please input email!')">
+        </div>
+        <input type="submit" class="button primary">
     </form>
-
+</div>
 </body>
 </html>
