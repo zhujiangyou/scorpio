@@ -214,8 +214,7 @@ def customer_save_message(request, me):
 
         return redirect('/customer_profile/{0}/'.format(me.id))
 
-
-    return render(request, 'provider-login.html')
+    return render(request, 'customer-login.html')
 
 
 @user_required
