@@ -397,8 +397,14 @@ def add_only_once_credit(request, me):
         box_size=1,
         border=4
     )
+    # 这里先创建一行数据，好将id传过去
+    s = OnlyOnceCredit.objects.create(
+        credit=credit,
+        event_id=event_id,
+        qrcode='a'
+    )
     qr.add_data(
-        'http://pinkslash.metatype.cn/wechat_login/?status=customeronce_{0}_{1}_{2}'.format(event_id, credit, me.id))
+        'http://pinkslash.metatype.cn/wechat_login/?status=customeronce_{0}_{1}_{2}_{3}'.format(event_id, credit, me.id, s.id))
     img = qr.make_image()
     buf = BytesIO()
     img.save(buf)
@@ -410,10 +416,12 @@ def add_only_once_credit(request, me):
                                   size=len(qr_data),
                                   charset=None)
     # 保存到数据库
-    OnlyOnceCredit.objects.create(
-        credit=credit,
-        event_id=event_id,
-        qrcode=qr_img
-    )
+    # OnlyOnceCredit.objects.create(
+    #     credit=credit,
+    #     event_id=event_id,
+    #     qrcode=qr_img
+    # )
+    s.qrcode=qr_img
+    s.save()
     return redirect('/event?eid={0}'.format(event_id))
 

@@ -100,13 +100,13 @@
             <div class="box-footer clearfix">
               <ul class="pagination pagination-sm no-margin pull-right">
                 {% if once_credit_pager.has_previous %}
-                <li><a href="?page=1&eid={{ eid }}">«</a></li>
-                <li><a href="?page={{once_credit_pager.previous_page_number}}&eid={{ eid }}">{{ once_credit_pager.previous_page_number }}</a></li>
+                <li><a href="?once_credit_page=1&eid={{ eid }}">«</a></li>
+                <li><a href="?once_credit_page={{once_credit_pager.previous_page_number}}&eid={{ eid }}">{{ once_credit_pager.previous_page_number }}</a></li>
                 {% endif %}
                 <li class="active"><a href="#">{{ once_credit_pager.number }}</a></li>
-                {% if pager.has_next %}
-                <li><a href="?page={{once_credit_pager.next_page_number}}&eid={{ eid }}">{{ once_credit_pager.next_page_number }}</a></li>
-                <li><a href="?page={{ once_credit_pager.paginator.num_pages }}&eid={{ eid }}">»</a></li>
+                {% if once_credit_pager.has_next %}
+                <li><a href="?once_credit_page={{once_credit_pager.next_page_number}}&eid={{ eid }}">{{ once_credit_pager.next_page_number }}</a></li>
+                <li><a href="?once_credit_page={{ once_credit_pager.paginator.num_pages }}&eid={{ eid }}">»</a></li>
                 {% endif %}
               </ul>
             </div>
