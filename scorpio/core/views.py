@@ -200,7 +200,7 @@ def customer_save_message(request, me):
         me.hotel_name = hotel_name
         me.email = email
         me.save()
-        return render('/customer_profile/{0}/'.format(me.id))
+        return redirect('/customer_profile/{0}/'.format(me.id))
 
     return render(request, 'customer-login.html')
 
