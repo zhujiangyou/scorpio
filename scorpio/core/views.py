@@ -174,8 +174,8 @@ def wechat_login(request):
                     event=event, credit=int(credit))
                 History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
                 request.session['uid'] = user.id
-<<<<<<< HEAD
-                return redirect('/customer_profile/{0}/'.format(user.id))
+                return redirect('/customer/save_message/')
+                # return redirect('/customer_profile/{0}/'.format(user.id))
 
             # 2019.5.20 by jiangyuwei
             elif 'customeronce' in full_path:
@@ -187,10 +187,6 @@ def wechat_login(request):
                 History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
                 request.session['uid'] = user.id
                 return redirect('/customer_profile/{0}/'.format(user.id))
-=======
-                return redirect('/customer/save_message/')
-                # return redirect('/customer_profile/{0}/'.format(user.id))
->>>>>>> df62a918404d75208b7aadf850280ef832b60dc2
 
             elif 'purchase' in full_path:
                 return HttpResponse("Please get the credits before you buy them")
