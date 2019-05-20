@@ -205,6 +205,24 @@ def customer_save_message(request, me):
     return render(request, 'customer-login.html')
 
 
+@user_required
+def provider_save_message(request, me):
+
+    if request.method == 'POST':
+        real_name = request.POST.get('realName', '')
+        hotel_name = request.POST.get('hotelName', '')
+        email = request.POST.get('email', '')
+
+        me.name = real_name
+        me.hotel_name = hotel_name
+        me.email = email
+        me.save()
+
+        return redirect('/customer_profile/{0}/'.format(me.id))
+
+    return render(request, 'provider-login.html')
+
+
 
 def wechat_api(code):
     appid = 'wxc7594d7d49e0235f'

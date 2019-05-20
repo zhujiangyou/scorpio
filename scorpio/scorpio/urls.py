@@ -75,7 +75,9 @@ urlpatterns = [
 
     path('user_reservation', core_views.user_reservation),
 
-    path('customer/save_message/', core_views.customer_save_message)
+    path('customer/save_message/', core_views.customer_save_message),
+
+    path('provider/save_message/', core_views.provider_save_message),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
