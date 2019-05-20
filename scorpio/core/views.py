@@ -159,13 +159,14 @@ def wechat_login(request):
 
             if 'provider' in full_path:
                 user = User.objects.create(
-                    password='123456', union_id=union_id, head_img=head_img,
+                    union_id=union_id, head_img=head_img,
                     status=1, event=event
                 )
 
                 request.session['uid'] = user.id
+                return redirect('/provider/save_message/')
 
-                return redirect('/get_provider_info/{0}/'.format(user.id))
+
 
             elif 'customer' in full_path:
                 credit = status.split('_')[2]
@@ -211,9 +212,10 @@ def customer_save_message(request, me):
         me.hotel_name = hotel_name
         me.email = email
         me.save()
-        return redirect('/customer_profile/{0}/'.format(me.id))
 
-    return render(request, 'customer-login.html')
+        return redirect('/get_provider_info/{0}/'.format(user.id))
+
+    return render(request, 'provider-login.html')
 
 
 @user_required
@@ -223,10 +225,14 @@ def provider_save_message(request, me):
         real_name = request.POST.get('realName', '')
         hotel_name = request.POST.get('hotelName', '')
         email = request.POST.get('email', '')
+        phone = request.POST.get('phone', '')
+        password = request.POST.get('password', '')
+
 
         me.name = real_name
         me.hotel_name = hotel_name
         me.email = email
+        me.password = password
         me.save()
 
         return redirect('/customer_profile/{0}/'.format(me.id))
