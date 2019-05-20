@@ -103,7 +103,6 @@ def pay_failed(request, me):
     return render(request, 'pay-failed.html', ctx)
 
 
-
 def wechat_login(request):
     full_path = request.get_full_path()
 
@@ -117,7 +116,6 @@ def wechat_login(request):
         head_img = user_data['head_img']
 
         user = User.objects.filter(union_id=union_id).first()
-
         status = request.GET.get('status')
 
         if user:
@@ -160,20 +158,25 @@ def wechat_login(request):
             event = Event.objects.filter(id=int(event_id)).first()
 
             if 'provider' in full_path:
-                user = User.objects.create(name=nickname, nickname=nickname, username=nickname, password='123456', union_id=union_id, head_img=head_img,
-                                           status=1, event=event)
+                user = User.objects.create(
+                    password='123456', union_id=union_id, head_img=head_img,
+                    status=1, event=event
+                )
+
                 request.session['uid'] = user.id
+
                 return redirect('/get_provider_info/{0}/'.format(user.id))
 
             elif 'customer' in full_path:
                 credit = status.split('_')[2]
                 user = User.objects.create(
-                    name=nickname, union_id=union_id,
-                    head_img=head_img, status=0,
+                    union_id=union_id, head_img=head_img, status=0,
                     event=event, credit=int(credit))
                 History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
                 request.session['uid'] = user.id
-                return redirect('/customer_profile/{0}/'.format(user.id))
+                return redirect('/customer/save_message/')
+                # return redirect('/customer_profile/{0}/'.format(user.id))
+
             elif 'purchase' in full_path:
                 return HttpResponse("Please get the credits before you buy them")
     else:
@@ -183,6 +186,24 @@ def wechat_login(request):
         return redirect(get_code_url)
 
     return HttpResponse("xixi")
+
+
+@user_required
+def customer_save_message(request, me):
+
+    if request.method == 'POST':
+        real_name = request.POST.get('realName', '')
+        hotel_name = request.POST.get('hotelName', '')
+        email = request.POST.get('email', '')
+
+        me.name = real_name
+        me.hotel_name = hotel_name
+        me.email = email
+        me.save()
+        return render('/customer_profile/{0}/'.format(me.id))
+
+    return render(request, 'customer-login.html')
+
 
 
 def wechat_api(code):
@@ -371,7 +392,6 @@ def reserve_failed(request, me):
     }
 
     return render(request, 'reserve-failed.html', ctx)
-
 
 
 def getticket(request):

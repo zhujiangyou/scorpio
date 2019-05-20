@@ -10,7 +10,7 @@ USER_STATUS = [
 
 
 class User(models.Model):
-    name = models.CharField(max_length=100, verbose_name='name')
+
     username = models.CharField(max_length=100, verbose_name='username', default='')
     password = models.CharField(max_length=100, verbose_name='password', default='')
     union_id = models.CharField(max_length=200)
@@ -19,6 +19,10 @@ class User(models.Model):
     credit = models.IntegerField(default=0)
     event = models.ForeignKey('Event', null=True, on_delete=models.CASCADE, blank=True)
     status = models.IntegerField(choices=USER_STATUS)
+
+    name = models.CharField(max_length=100, verbose_name='name', default='')
+    hotel_name = models.CharField(max_length=100, verbose_name='hotel_name', default='')
+    email = models.CharField(max_length=100, verbose_name='email', default='')
 
     def __str__(self):
         return self.name
