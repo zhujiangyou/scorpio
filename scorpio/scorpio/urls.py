@@ -42,6 +42,9 @@ urlpatterns = [
 
     path('add_event/', home_views.add_event),
     path('add_credit/', home_views.add_credit),
+    # 2019.5.20 by jiangyuwei
+    path('add_only_once_credit/', home_views.add_only_once_credit),
+
     path('add_last_food/', home_views.add_last_food),
     path('add_favorite/<int:food_id>', core_views.add_favorite),
 

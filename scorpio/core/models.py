@@ -57,6 +57,17 @@ class Credit(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     qrcode = models.ImageField(upload_to='credit/qrcode')
 
+# 2019.5.20 by jiangyuwei
+class OnlyOnceCredit(models.Model):
+    credit = models.IntegerField(default=0)
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    qrcode = models.ImageField(upload_to='credit/qrcode')
+
+# 2019.5.20 by jiangyuwei
+class UserScan(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    credit = models.ForeignKey(OnlyOnceCredit, on_delete=models.CASCADE)
+
 
 class History(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -64,14 +75,17 @@ class History(models.Model):
     credit = models.CharField(max_length=10)
     desc = models.CharField(max_length=100, default='')
 
+
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
+
 
 class LastFood(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     food_img = models.ImageField(upload_to='food')
     name = models.CharField(max_length=100)
+
 
 class Lunch(models.Model):
     name = models.CharField(max_length=100, default='')
@@ -79,22 +93,19 @@ class Lunch(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     credit = models.IntegerField(default=0)
 
+
 class RoomAmenity(models.Model):
     name = models.CharField(max_length=100, default='')
     img = models.ImageField(upload_to='roomAmenity')
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     credit = models.IntegerField(default=0)
 
+
 class RoomAmenityReservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     roomAmenity = models.ForeignKey(RoomAmenity, on_delete=models.CASCADE)
 
+
 class LunchReservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     lunch = models.ForeignKey(Lunch, on_delete=models.CASCADE)
-
-
-
-
-
-

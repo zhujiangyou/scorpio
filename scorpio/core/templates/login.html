@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="../static/css/style.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+</head>
+<body>
+<div class="page-login">
+    <form action="">
+        <div class="form-item required">
+            <p>Real name</p>
+            <input type="text" required oninvalid="alert('Please input real name!')">
+        </div>
+        <div class="form-item required">
+            <p>Phone Number</p>
+            <input type="number" required oninvalid="alert('Please input phone number!')">
+        </div>
+        <div class="form-item required">
+            <p>Email</p>
+            <input value="Submit" type="email" required oninvalid="alert('Please input email!')">
+        </div>
+        <input type="submit" class="button primary">
+    </form>
+</div>
+</body>
+</html>

@@ -70,6 +70,77 @@
             </form>
         </div>
     </div>
+    {# 2019.5.20 by jiangyuwei #}
+    <div class="box">
+        <div class="box-header with-border">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#add_only_once_credit">
+                Add Only Once Credit
+            </button>
+        </div>
+        {# 只能扫描一次的积分列表 #}
+        <div class="box-body table-responsive no-padding">
+            <h3 style="padding-left: 8px">Only Once Credit List</h3>
+            <table class="table table-hover  table-striped">
+                <tbody>
+                <tr>
+                    <th>Credit</th>
+                    <th>Qrcode</th>
+                </tr>
+                {% for credit in once_credits %}
+                    <tr>
+                        <td>{{ credit.credit }}</td>
+                        <td><img src="{{ credit.qrcode.url }}"></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if once_credit_pager.paginator.num_pages > 1 %}
+            <div class="box-footer clearfix">
+              <ul class="pagination pagination-sm no-margin pull-right">
+                {% if once_credit_pager.has_previous %}
+                <li><a href="?page=1&eid={{ eid }}">«</a></li>
+                <li><a href="?page={{once_credit_pager.previous_page_number}}&eid={{ eid }}">{{ once_credit_pager.previous_page_number }}</a></li>
+                {% endif %}
+                <li class="active"><a href="#">{{ once_credit_pager.number }}</a></li>
+                {% if pager.has_next %}
+                <li><a href="?page={{once_credit_pager.next_page_number}}&eid={{ eid }}">{{ once_credit_pager.next_page_number }}</a></li>
+                <li><a href="?page={{ once_credit_pager.paginator.num_pages }}&eid={{ eid }}">»</a></li>
+                {% endif %}
+              </ul>
+            </div>
+        {% endif %}
+
+
+        <div class="modal modal-success fade" id="add_only_once_credit">
+            <form action="/add_only_once_credit/" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="eid" value="{{ event.id }}" hidden="hidden">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span></button>
+                            <h4 class="modal-title">Add Only Once Credit</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>
+                                <label for="name">Credit</label>
+                                <input class="form-control" type="number" min="1" max="10000" name="credit" id="name">
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-outline">Add Credit</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </form>
+        </div>
+    </div>
     <div class="box">
         <div class="box-header with-border">
             <button type="button" class="btn btn-yahoo" data-toggle="modal" data-target="#add_last_food">
