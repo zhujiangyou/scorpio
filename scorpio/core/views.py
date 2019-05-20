@@ -162,10 +162,8 @@ def wechat_login(request):
                     union_id=union_id, head_img=head_img,
                     status=1, event=event
                 )
-
                 request.session['uid'] = user.id
                 return redirect('/provider/save_message/')
-
 
 
             elif 'customer' in full_path:
@@ -175,6 +173,7 @@ def wechat_login(request):
                     event=event, credit=int(credit))
                 History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
                 request.session['uid'] = user.id
+
                 return redirect('/customer/save_message/')
                 # return redirect('/customer_profile/{0}/'.format(user.id))
 
@@ -213,7 +212,8 @@ def customer_save_message(request, me):
         me.email = email
         me.save()
 
-        return redirect('/get_provider_info/{0}/'.format(user.id))
+        return redirect('/customer_profile/{0}/'.format(me.id))
+
 
     return render(request, 'provider-login.html')
 
@@ -235,7 +235,7 @@ def provider_save_message(request, me):
         me.password = password
         me.save()
 
-        return redirect('/customer_profile/{0}/'.format(me.id))
+        return redirect('/get_provider_info/{0}/'.format(me.id))
 
     return render(request, 'provider-login.html')
 
