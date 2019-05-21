@@ -202,6 +202,7 @@ def wechat_login(request):
 
 @user_required
 def customer_save_message(request, me):
+    ctx = {}
 
     if request.method == 'POST':
         real_name = request.POST.get('realName', '')
@@ -215,7 +216,7 @@ def customer_save_message(request, me):
 
         return redirect('/customer_profile/{0}/'.format(me.id))
 
-    return render(request, 'customer-login.html')
+    return render(request, 'customer-login.html', ctx)
 
 
 @user_required
