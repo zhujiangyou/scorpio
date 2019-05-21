@@ -94,7 +94,8 @@ body {
   width: 100%;
 }
 .button.primary {
-  color: #FFFFFF;
+  /*color: #FFFFFF;*/
+  color: #08194e;
   background-color: #F56C6C;
   border: none;
 }
