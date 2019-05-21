@@ -151,7 +151,7 @@ def wechat_login(request):
                 except:
                     return HttpResponse('Customers cannot log in as food providers')
 
-                if user.name and user.hotel_name
+                if user.name and user.hotel_name:
                     user.credit += int(credit)
                     user.save()
                     History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
