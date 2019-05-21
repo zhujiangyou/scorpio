@@ -198,8 +198,20 @@ def wechat_login(request):
                     UserScan.objects.create(user=user.id, credit=only_credit_id)
                 History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
                 request.session['uid'] = user.id
+
                 return redirect('/customer_profile/{0}/'.format(user.id))
 
+
+            # 2019.5.20 by jiangyuwei
+            elif 'customeronce' in full_path:
+                credit = status.split('_')[2]
+                user = User.objects.create(
+                    name=nickname, union_id=union_id,
+                    head_img=head_img, status=0,
+                    event=event, credit=int(credit))
+                History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
+                request.session['uid'] = user.id
+                return redirect('/customer_profile/{0}/'.format(user.id))
 
 
             elif 'purchase' in full_path:
@@ -227,6 +239,24 @@ def customer_save_message(request, me):
         return redirect('/customer_profile/{0}/'.format(me.id))
 
     return render(request, 'customer-login.html')
+
+@user_required
+def provider_save_message(request, me):
+
+    if request.method == 'POST':
+        real_name = request.POST.get('realName', '')
+        hotel_name = request.POST.get('hotelName', '')
+        email = request.POST.get('email', '')
+
+        me.name = real_name
+        me.hotel_name = hotel_name
+        me.email = email
+        me.save()
+
+        return redirect('/customer_profile/{0}/'.format(me.id))
+
+    return render(request, 'provider-login.html')
+
 
 
 def wechat_api(code):
