@@ -95,8 +95,8 @@ body {
 }
 .button.primary {
   /*color: #FFFFFF;*/
-  color: #08194e;
-  background-color: #F56C6C;
+  color: #f7f4f4;
+  background-color: #08194e;
   border: none;
 }
 .button.primary:active {
