@@ -14,7 +14,6 @@ import string
 import random
 import time
 
-
 def get_foods(request, pid):
     ctx = {}
     provider = User.objects.filter(id=pid).first()
@@ -58,7 +57,6 @@ def customer_profile(request, user_id):
     ctx['user'] = user
     return render(request, 'customer-profile.html', ctx)
 
-
 @user_required
 def add_favorite(request, me):
     """
@@ -79,7 +77,6 @@ def last_supper(request, me):
     ctx = {'last_foods': last_food}
     return render(request, 'last-supper.html', ctx)
 
-
 @user_required
 def credit_history(request, me):
     histories = History.objects.filter(user_id=me.id).order_by('-create_time')
@@ -89,20 +86,18 @@ def credit_history(request, me):
     }
     return render(request, 'customer-credits.html', ctx)
 
-
 @user_required
 def pay_success(request, me):
     ctx = {
-        'me': me
+        'me':me
     }
 
     return render(request, 'pay-success.html', ctx)
 
-
 @user_required
 def pay_failed(request, me):
     ctx = {
-        'me': me
+        'me':me
     }
 
     return render(request, 'pay-failed.html', ctx)
@@ -129,7 +124,10 @@ def wechat_login(request):
                 if 'purchase' in full_path:
                     return HttpResponse("Food providers cannot buy food")
 
-                return redirect('/get_provider_info/{0}/'.format(user.id))
+                if user.name and user.username:
+                    return redirect('/get_provider_info/{0}/'.format(user.id))
+                else:
+                    return redirect('/provider/save_message/')
             elif user.status == 0:
                 if 'purchase' in full_path:
                     food_id = status.split('_')[2]
@@ -142,8 +140,7 @@ def wechat_login(request):
                         provider.save()
 
                         History.objects.create(user=user, credit='-{0}'.format(str(food.credit)), desc='Buying Food')
-                        History.objects.create(user=provider, credit='+{0}'.format(str(food.credit)),
-                                               desc='Selling Food')
+                        History.objects.create(user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food')
 
                         return redirect('/pay_success')
                     else:
@@ -153,54 +150,40 @@ def wechat_login(request):
                     credit = status.split('_')[2]
                 except:
                     return HttpResponse('Customers cannot log in as food providers')
-                # 2019.5.20 by jiangyuwei
-                if 'customeronce' in full_path:
-                    try:
-                        only_credit_id = status.split('_')[4]
-                    except:
-                        only_credit_id = None
-                    user_scan = UserScan.objects.filter(pk=only_credit_id)
-                    if user_scan:
-                        return HttpResponse('You have scanned the QR code')
-                    else:
-                        try:
-                            user_id = status.split('_')[3]
-                            UserScan.objects.create(user=user_id, credit=only_credit_id)
-                        except:
-                            return HttpResponse('Please scan again')
 
-                user.credit += int(credit)
-                user.save()
-                History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
+                if user.name and user.hotel_name:
+                    user.credit += int(credit)
+                    user.save()
+                    History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
 
-                return redirect('/customer_profile/{0}/'.format(user.id))
+                    return redirect('/customer_profile/{0}/'.format(user.id))
+                else:
+                    return redirect('/customer/save_message/')
+
         else:
             event_id = status.split('_')[1]
             event = Event.objects.filter(id=int(event_id)).first()
 
             if 'provider' in full_path:
                 user = User.objects.create(
-                    password='123456', union_id=union_id, head_img=head_img,
+                    union_id=union_id, head_img=head_img,
                     status=1, event=event
                 )
-
                 request.session['uid'] = user.id
 
-                return redirect('/get_provider_info/{0}/'.format(user.id))
+                return redirect('/provider/save_message/')
+
 
             elif 'customer' in full_path:
                 credit = status.split('_')[2]
                 user = User.objects.create(
                     union_id=union_id, head_img=head_img, status=0,
                     event=event, credit=int(credit))
-                if 'customeronce' in full_path:
-                    only_credit_id = status.split('_')[4]
-                    UserScan.objects.create(user=user.id, credit=only_credit_id)
                 History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
                 request.session['uid'] = user.id
 
-                return redirect('/customer_profile/{0}/'.format(user.id))
-
+                return redirect('/customer/save_message/')
+                # return redirect('/customer_profile/{0}/'.format(user.id))
 
             # 2019.5.20 by jiangyuwei
             elif 'customeronce' in full_path:
@@ -212,7 +195,6 @@ def wechat_login(request):
                 History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
                 request.session['uid'] = user.id
                 return redirect('/customer_profile/{0}/'.format(user.id))
-
 
             elif 'purchase' in full_path:
                 return HttpResponse("Please get the credits before you buy them")
@@ -227,6 +209,8 @@ def wechat_login(request):
 
 @user_required
 def customer_save_message(request, me):
+    ctx = {}
+
     if request.method == 'POST':
         real_name = request.POST.get('realName', '')
         hotel_name = request.POST.get('hotelName', '')
@@ -236,9 +220,11 @@ def customer_save_message(request, me):
         me.hotel_name = hotel_name
         me.email = email
         me.save()
+
         return redirect('/customer_profile/{0}/'.format(me.id))
 
-    return render(request, 'customer-login.html')
+    return render(request, 'customer-login.html', ctx)
+
 
 @user_required
 def provider_save_message(request, me):
@@ -247,13 +233,17 @@ def provider_save_message(request, me):
         real_name = request.POST.get('realName', '')
         hotel_name = request.POST.get('hotelName', '')
         email = request.POST.get('email', '')
+        phone = request.POST.get('phone', '')
+        password = request.POST.get('password', '')
 
         me.name = real_name
         me.hotel_name = hotel_name
         me.email = email
+        me.password = password
+        me.username = phone
         me.save()
 
-        return redirect('/customer_profile/{0}/'.format(me.id))
+        return redirect('/get_provider_info/{0}/'.format(me.id))
 
     return render(request, 'provider-login.html')
 
@@ -296,7 +286,6 @@ def wechat_api(code):
 
     return user_data
 
-
 @user_required
 def add_favorite(request, me, food_id):
     user_id = me.id
@@ -313,6 +302,7 @@ def add_favorite(request, me, food_id):
 
 @user_required
 def reservation_list(request, me):
+
     eid = me.event_id
     foods = Food.objects.filter(event_id=eid)
     favo_foods = Favorite.objects.filter(user_id=me.id)
@@ -324,7 +314,6 @@ def reservation_list(request, me):
         'favo_ids': favo_ids
     }
     return render(request, 'reservation.html', ctx)
-
 
 @user_required
 def user_reservation(request, me):
@@ -341,10 +330,11 @@ def user_reservation(request, me):
 
 @user_required
 def room_amenity(request, me):
+
     packages = RoomAmenity.objects.filter(event=me.event)
     ctx = {
         'packages': packages,
-        'status': 'room_amenity'
+        'status':'room_amenity'
     }
 
     return render(request, 'packages.html', ctx)
@@ -352,20 +342,23 @@ def room_amenity(request, me):
 
 @user_required
 def lunch(request, me):
+
     packages = Lunch.objects.filter(event=me.event)
     ctx = {
         'packages': packages,
-        'status': 'lunch'
+        'status':'lunch'
     }
     return render(request, 'packages.html', ctx)
 
 
+
 @user_required
 def room_amenity_detail(request, me, room_amenity_id):
+
     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
     roomAmenityReserve = RoomAmenityReservation.objects.filter(user=me, roomAmenity=room_amenity).first()
     ctx = {
-        'room_amenity': room_amenity
+        'room_amenity':room_amenity
     }
     if roomAmenityReserve:
         ctx['status'] = 1
@@ -374,12 +367,11 @@ def room_amenity_detail(request, me, room_amenity_id):
 
     return render(request, 'room-amenity-detail.html', ctx)
 
-
 @user_required
 def lunch_detail(request, me, lunch_id):
     lunch = Lunch.objects.filter(id=lunch_id).first()
     ctx = {
-        'lunch': lunch
+        'lunch':lunch
     }
     lunchReservation = LunchReservation.objects.filter(user=me, lunch=lunch).first()
     if lunchReservation:
@@ -389,9 +381,9 @@ def lunch_detail(request, me, lunch_id):
 
     return render(request, 'lunch-detail.html', ctx)
 
-
 @user_required
 def lunch_reserve(request, me, lunch_id):
+
     LunchReservation.objects.filter(user=me).delete()
 
     lunch = Lunch.objects.filter(id=lunch_id).first()
@@ -408,9 +400,9 @@ def lunch_reserve(request, me, lunch_id):
 
     return redirect('/lunch')
 
-
 @user_required
 def room_amenity_reserve(request, me, room_amenity_id):
+
     RoomAmenityReservation.objects.filter(user=me).delete()
 
     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
@@ -420,8 +412,7 @@ def room_amenity_reserve(request, me, room_amenity_id):
         if me.credit >= room_amenity.credit:
             me.credit -= room_amenity.credit
             me.save()
-            History.objects.create(user=me, credit='-{0}'.format(str(room_amenity.credit)),
-                                   desc='Room Amenity Reservation')
+            History.objects.create(user=me, credit='-{0}'.format(str(room_amenity.credit)), desc='Room Amenity Reservation')
             return redirect('/reserve_success')
         else:
             return redirect('/reserve_failed')
@@ -432,23 +423,23 @@ def room_amenity_reserve(request, me, room_amenity_id):
 @user_required
 def reserve_success(request, me):
     ctx = {
-        'me': me
+        'me':me
     }
 
     return render(request, 'reserve-success.html', ctx)
 
-
 @user_required
 def reserve_failed(request, me):
     ctx = {
-        'me': me
+        'me':me
     }
 
     return render(request, 'reserve-failed.html', ctx)
 
 
 def getticket(request):
-    current_url = request.POST.get('current_url', '')
+
+    current_url =  request.POST.get('current_url', '')
 
     appid = 'wxc7594d7d49e0235f'
     secret = 'ebbda5cbab00241032bc936fe3839393'
@@ -464,8 +455,7 @@ def getticket(request):
     response = json.loads(response.text)
     print('response', response)
     access_token = response['access_token']
-    get_jsapi_ticket_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi'.format(
-        access_token)
+    get_jsapi_ticket_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi'.format(access_token)
 
     jsapi_response = requests.get(url=get_jsapi_ticket_url)
     jsapi_response.encoding = 'utf-8'
@@ -476,8 +466,7 @@ def getticket(request):
 
     timestamp = int(time.time())
 
-    string1 = 'jsapi_ticket={0}&noncestr={1}&timestamp={2}&url={3}'.format(jsapi_ticket, noncestr, timestamp,
-                                                                           current_url)
+    string1 = 'jsapi_ticket={0}&noncestr={1}&timestamp={2}&url={3}'.format(jsapi_ticket, noncestr, timestamp, current_url)
     signature = hashlib.sha1(string1.encode('utf-8')).hexdigest()
 
     params = {

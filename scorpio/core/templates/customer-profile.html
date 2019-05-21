@@ -1,23 +1,21 @@
-{% load static %}
-
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer-Profile</title>
-    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
 </head>
 <body>
 <div class="page-customer-profile">
     <div class="profile">
         <img src="{{ user.head_img}}" class="profile-avatar">
-
         <p class="profile-title">{{ user.name }}</p>
         <p class="profile-subtitle">customer</p>
-
     </div>
+
     <hr class="division">
     <ul class="menu">
         <li class="menu-item">
@@ -102,11 +100,8 @@ btn.onclick = function () {
                 }
             });
             // };
-
         });
-
      }
-
 
 </script>
 </body>

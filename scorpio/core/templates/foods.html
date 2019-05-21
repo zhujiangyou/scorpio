@@ -23,10 +23,7 @@
                 <h3 class="reservation-item-title">{{ food.name }}</h3>
                 <p class="reservation-item-subtitle">Subtitle</p>
             </div>
-                 
             <span data-target="{{ food.qrcode.url }}" class="J_qrcode-icon iconfont icon-erweima">
-
-
             </span>
         </li>
         {% endfor %}
@@ -66,6 +63,7 @@
             $qrCodeModel.fadeOut(150)
         })
     })
+
 </script>
 </body>
 </html>

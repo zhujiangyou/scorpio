@@ -1,9 +1,11 @@
+{% load staticfiles %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 </head>
 <body>
@@ -15,13 +17,13 @@
         </div>
         <div class="form-item required">
             <p>Hotel Name</p>
-            <input type="number" name="hotelName" required oninvalid="alert('Please input phone number!')">
+            <input type="text" name="hotelName" required oninvalid="alert('Please input hotel name!')">
         </div>
         <div class="form-item required">
             <p>Email</p>
-            <input value="Submit" type="email" name="email" required oninvalid="alert('Please input email!')">
+            <input type="email" name="email" required oninvalid="alert('Please input email!')">
         </div>
-        <input type="submit" class="button primary">
+        <button type="submit" class="button primary">Submit</button>
     </form>
 </div>
 </body>
