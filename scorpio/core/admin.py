@@ -16,4 +16,5 @@ admin.site.register(RoomAmenity)
 admin.site.register(RoomAmenityReservation)
 admin.site.register(LunchReservation)
 admin.site.register(OnlyOnceCredit)
+admin.site.register(UserScan)
 

@@ -159,7 +159,8 @@ def wechat_login(request):
                         only_credit_id = status.split('_')[4]
                     except:
                         only_credit_id = None
-                    user_scan = UserScan.objects.filter(pk=only_credit_id)
+
+                    user_scan = UserScan.objects.filter(pk=only_credit_id).first()
                     if user_scan:
                         return HttpResponse('You have scanned the QR code')
                     else:
