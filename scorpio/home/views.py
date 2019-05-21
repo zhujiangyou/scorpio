@@ -421,7 +421,7 @@ def add_only_once_credit(request, me):
     #     event_id=event_id,
     #     qrcode=qr_img
     # )
-    s.qrcode=qr_img
+    s.qrcode = qr_img
     s.save()
     return redirect('/event?eid={0}'.format(event_id))
 
