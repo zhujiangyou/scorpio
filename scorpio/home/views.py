@@ -411,7 +411,7 @@ def add_only_once_credit(request, me):
     qr_data = buf.getvalue()
     qr_img = InMemoryUploadedFile(file=buf,
                                   field_name=None,
-                                  name='credit.png',
+                                  name='oncecredit.png',
                                   content_type='image/png',
                                   size=len(qr_data),
                                   charset=None)
@@ -423,5 +423,6 @@ def add_only_once_credit(request, me):
     # )
     s.qrcode=qr_img
     s.save()
+
     return redirect('/event?eid={0}'.format(event_id))
 
