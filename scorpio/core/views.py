@@ -163,6 +163,7 @@ def wechat_login(request):
                     status=1, event=event
                 )
                 request.session['uid'] = user.id
+
                 return redirect('/provider/save_message/')
 
 
@@ -227,7 +228,6 @@ def provider_save_message(request, me):
         phone = request.POST.get('phone', '')
         password = request.POST.get('password', '')
 
-        print('real_name',real_name)
         me.name = real_name
         me.hotel_name = hotel_name
         me.email = email
