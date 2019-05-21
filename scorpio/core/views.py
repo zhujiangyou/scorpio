@@ -150,6 +150,24 @@ def wechat_login(request):
                     credit = status.split('_')[2]
                 except:
                     return HttpResponse('Customers cannot log in as food providers')
+                # 2019.5.20 by jiangyuwei
+                # 功能：如果这个码是一个用户只能扫一次的，就将其id取出来去表中查这个数据
+                #      如果查得到就说明已经扫过了，返回`You have scanned the QR code`
+                #      如果查不到说明没扫过，在取出user_id并且在表中添加一条数据，最后将积分加上
+                if 'customeronce' in full_path:
+                    try:
+                        only_credit_id = status.split('_')[4]
+                    except:
+                        only_credit_id = None
+                    user_scan = UserScan.objects.filter(pk=only_credit_id)
+                    if user_scan:
+                        return HttpResponse('You have scanned the QR code')
+                    else:
+                        try:
+                            # 在表中添加当前用户扫描某一个二维码的记录
+                            UserScan.objects.create(user=user, credit=only_credit_id)
+                        except:
+                            return HttpResponse('Please scan again')
 
                 if user.name and user.hotel_name:
                     user.credit += int(credit)
@@ -179,22 +197,17 @@ def wechat_login(request):
                 user = User.objects.create(
                     union_id=union_id, head_img=head_img, status=0,
                     event=event, credit=int(credit))
+                if 'customeronce' in full_path:
+                    # 取出credit_id
+                    only_credit_id = status.split('_')[3]
+                    # 在用户已经扫描的表中添加一条 新用户扫描该二维码的数据
+                    UserScan.objects.create(user=user, credit=only_credit_id)
                 History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
                 request.session['uid'] = user.id
 
                 return redirect('/customer/save_message/')
                 # return redirect('/customer_profile/{0}/'.format(user.id))
 
-            # 2019.5.20 by jiangyuwei
-            elif 'customeronce' in full_path:
-                credit = status.split('_')[2]
-                user = User.objects.create(
-                    name=nickname, union_id=union_id,
-                    head_img=head_img, status=0,
-                    event=event, credit=int(credit))
-                History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
-                request.session['uid'] = user.id
-                return redirect('/customer_profile/{0}/'.format(user.id))
 
             elif 'purchase' in full_path:
                 return HttpResponse("Please get the credits before you buy them")
