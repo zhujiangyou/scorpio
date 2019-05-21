@@ -124,7 +124,10 @@ def wechat_login(request):
                 if 'purchase' in full_path:
                     return HttpResponse("Food providers cannot buy food")
 
-                return redirect('/get_provider_info/{0}/'.format(user.id))
+                if user.name and user.username:
+                    return redirect('/get_provider_info/{0}/'.format(user.id))
+                else:
+                    return redirect('/provider/save_message/')
             elif user.status == 0:
                 if 'purchase' in full_path:
                     food_id = status.split('_')[2]
@@ -148,11 +151,15 @@ def wechat_login(request):
                 except:
                     return HttpResponse('Customers cannot log in as food providers')
 
-                user.credit += int(credit)
-                user.save()
-                History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
+                if user.name and user.hotel_name
+                    user.credit += int(credit)
+                    user.save()
+                    History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
 
-                return redirect('/customer_profile/{0}/'.format(user.id))
+                    return redirect('/customer_profile/{0}/'.format(user.id))
+                else:
+                    return redirect('/customer/save_message/')
+
         else:
             event_id = status.split('_')[1]
             event = Event.objects.filter(id=int(event_id)).first()
@@ -233,6 +240,7 @@ def provider_save_message(request, me):
         me.hotel_name = hotel_name
         me.email = email
         me.password = password
+        me.username = phone
         me.save()
 
         return redirect('/get_provider_info/{0}/'.format(me.id))
