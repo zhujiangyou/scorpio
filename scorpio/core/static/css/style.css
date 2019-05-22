@@ -132,6 +132,7 @@ body {
   background: #606266;
   text-align: center;
   background-image:url(../images/profile-banner.jpg);
+  width: 100%;
 }
 .page-customer-profile .profile-avatar,
 .page-provider-profile .profile-avatar {
