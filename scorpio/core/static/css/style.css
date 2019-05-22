@@ -94,9 +94,8 @@ body {
   width: 100%;
 }
 .button.primary {
-  /*color: #FFFFFF;*/
-  color: #f7f4f4;
-  background-color: #08194e;
+  color: #FFFFFF;
+  background-color: #F56C6C;
   border: none;
 }
 .button.primary:active {
@@ -439,4 +438,20 @@ body {
   display: block;
   margin: 0 auto;
   padding: 8px 15px;
+}
+.page-topic {
+  padding: 12px;
+}
+.page-topic .title {
+  font-size: 20px;
+  font-weight: bold;
+}
+.page-topic .banner {
+  width: 100%;
+  margin: 10px 0;
+}
+.page-topic .content {
+  font-size: 14px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
