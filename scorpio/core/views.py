@@ -496,7 +496,7 @@ def getticket(request):
     return HttpResponse(json.dumps(params), content_type='application/json')
 
 def tea_break(request):
-
     ctx = {}
-
+    tea = TeaBreak.objects.all().first()
+    ctx['tea'] = tea
     return render(request, 'topic.html', ctx)

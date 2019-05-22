@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tea break</title>
+    <!-- <title>Tea break</title> -->
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
 </head>
@@ -14,9 +14,9 @@
         <h1 class="header-title">Tea break</h1>
     </div>
     <div class="page-topic">
-        <img class="banner" src="http://placehold.it/100x50">
+        <img class="banner" src="{{tea.img.url}}">
         <pre class="content">
-            high stool tea: GaoDengCha this word comes from the rich, superior. Tea time at 6, afternoon tea and dinner of a combination of form similar to dinner, form very rich, is widely used in commercial banquet。
+            {{tea.text}}
         </pre>
     </div>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
