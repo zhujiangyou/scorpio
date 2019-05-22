@@ -453,5 +453,6 @@ body {
 .page-topic .content {
   font-size: 18px;
   white-space: pre-wrap;
-  word-wrap: break-word;
+  /*word-wrap: break-word;*/
+  word-wrap: normal;
 }
