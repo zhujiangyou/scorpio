@@ -13,14 +13,12 @@
     <span id="J_backBtn" class="header-back iconfont icon-arrow-left-s-line"></span>
     <h1 class="header-title">My Reservation</h1>
 </div>
-
 <br>
-
 <div class="page-reservation">
-    {% if roomAmenityReservation %}
-    <h2 class="header-title">Room Amenity Reservation</h2>
-    {% else %}
+    {% if not roomAmenityReservation %}
 
+    {% else %}
+        <h2 class="header-title">Room Amenity Reservation</h2>
     {% endif %}
     <ul class="reservation-list">
         {% for package in roomAmenityReservation %}
@@ -36,9 +34,9 @@
 
     </ul>
     <br>
-    {% if lunchReservation %}
-        <h2 class="header-title">Lunch Reservation</h2>
+    {% if not lunchReservation %}
     {% else %}
+        <h2 class="header-title">Lunch Reservation</h2>
     {% endif %}
     <ul class="reservation-list">
         {% for package in lunchReservation %}
