@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Reservation</title>
+    <!-- <title>My Reservation</title> -->
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
 </head>
@@ -13,37 +13,39 @@
     <span id="J_backBtn" class="header-back iconfont icon-arrow-left-s-line"></span>
     <h1 class="header-title">My Reservation</h1>
 </div>
-
 <br>
-
 <div class="page-reservation">
+    {% if not roomAmenityReservation %}
 
-    <h2 class="header-title">Room Amenity Reservation</h2>
+    {% else %}
+        <h2 class="header-title">Room Amenity Reservation</h2>
+    {% endif %}
     <ul class="reservation-list">
         {% for package in roomAmenityReservation %}
             <a href="/room_amenity/detail/{{ package.roomAmenity.id }}" style="text-decoration:none;">
                 <li class="reservation-item">
                     <div class="reservation-item-image" style="background-image: url({{ package.roomAmenity.img.url }})"></div>
-                        <div class="reservation-item-info">
-                            <h3 class="reservation-item-title">{{ package.roomAmenity.name }}</h3>
-                        </div>
-
+                    <div class="reservation-item-info">
+                        <h3 class="reservation-item-title">{{ package.roomAmenity.name }}</h3>
+                    </div>
                 </li>
             </a>
         {% endfor %}
 
     </ul>
     <br>
-    <h2 class="header-title">Lunch Reservation</h2>
+    {% if not lunchReservation %}
+    {% else %}
+        <h2 class="header-title">Lunch Reservation</h2>
+    {% endif %}
     <ul class="reservation-list">
         {% for package in lunchReservation %}
                 <a href="/lunch/detail/{{ package.lunch.id }}" style="text-decoration:none;">
                 <li class="reservation-item">
                     <div class="reservation-item-image" style="background-image: url({{ package.lunch.img.url }})"></div>
-                        <div class="reservation-item-info">
-                            <h3 class="reservation-item-title">{{ package.lunch.name }}</h3>
-                        </div>
-
+                    <div class="reservation-item-info">
+                        <h3 class="reservation-item-title">{{ package.lunch.name }}</h3>
+                    </div>
                 </li>
             </a>
         {% endfor %}
