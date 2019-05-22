@@ -164,12 +164,12 @@ def wechat_login(request):
                     if user_scan:
                         return HttpResponse('You have scanned the QR code')
                     else:
-                        try:
+                        # try:
                             # 在表中添加当前用户扫描某一个二维码的记录
-                            once_credit = OnlyOnceCredit.objects.get(pk=only_credit_id)
-                            UserScan.objects.create(user=user, credit=once_credit)
-                        except:
-                            return HttpResponse('Please scan again')
+                        once_credit = OnlyOnceCredit.objects.get(pk=only_credit_id)
+                        UserScan.objects.create(user=user, credit=once_credit)
+                        # except:
+                        return HttpResponse('Please scan again')
 
 
                 if user.name and user.hotel_name:
