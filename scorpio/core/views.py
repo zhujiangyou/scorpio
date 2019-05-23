@@ -168,20 +168,19 @@ def wechat_login(request):
                     except BaseException:
                         only_credit_id = None
 
-                    user_scan = UserScan.objects.filter(
-                        pk=only_credit_id)
+                    user_scan = UserScan.objects.filter(credit=only_credit_id)
                     if user_scan:
                         return HttpResponse('You have scanned the QR code')
                     else:
-                        try:
-                            # 在表中添加当前用户扫描某一个二维码的记录
+                        # try:
+                        #     # 在表中添加当前用户扫描某一个二维码的记录
 
-                            once_credit = OnlyOnceCredit.objects.get(
-                                pk=only_credit_id)
-                            UserScan.objects.create(
-                                user=user, credit=once_credit)
-                        except BaseException:
-                            return HttpResponse('Please scan again')
+                        once_credit = OnlyOnceCredit.objects.get(
+                            pk=only_credit_id)
+                        UserScan.objects.create(
+                            user=user, credit=once_credit)
+                        # except BaseException:
+                        #     return HttpResponse('Please scan again')
 
                 if user.name and user.hotel_name:
                     user.credit += int(credit)
@@ -216,6 +215,7 @@ def wechat_login(request):
                 if 'customeronce' in full_path:
                     # 取出credit_id
                     only_credit_id = status.split('_')[3]
+                    print("219  219**************", only_credit_id)
                     # 在用户已经扫描的表中添加一条 新用户扫描该二维码的数据
                     once_credit = OnlyOnceCredit.objects.get(pk=only_credit_id)
                     UserScan.objects.create(credit=once_credit, user=user)
