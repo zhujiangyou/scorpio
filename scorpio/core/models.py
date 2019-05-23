@@ -109,3 +109,8 @@ class RoomAmenityReservation(models.Model):
 class LunchReservation(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     lunch = models.ForeignKey(Lunch, on_delete=models.CASCADE)
+
+
+class TeaBreak(models.Model):
+    img = models.ImageField(upload_to='teaBreak')
+    text = models.CharField(default='', max_length=5000)

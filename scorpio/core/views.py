@@ -14,6 +14,7 @@ import string
 import random
 import time
 
+
 def get_foods(request, pid):
     ctx = {}
     provider = User.objects.filter(id=pid).first()
@@ -57,6 +58,7 @@ def customer_profile(request, user_id):
     ctx['user'] = user
     return render(request, 'customer-profile.html', ctx)
 
+
 @user_required
 def add_favorite(request, me):
     """
@@ -77,6 +79,7 @@ def last_supper(request, me):
     ctx = {'last_foods': last_food}
     return render(request, 'last-supper.html', ctx)
 
+
 @user_required
 def credit_history(request, me):
     histories = History.objects.filter(user_id=me.id).order_by('-create_time')
@@ -86,18 +89,20 @@ def credit_history(request, me):
     }
     return render(request, 'customer-credits.html', ctx)
 
+
 @user_required
 def pay_success(request, me):
     ctx = {
-        'me':me
+        'me': me
     }
 
     return render(request, 'pay-success.html', ctx)
 
+
 @user_required
 def pay_failed(request, me):
     ctx = {
-        'me':me
+        'me': me
     }
 
     return render(request, 'pay-failed.html', ctx)
@@ -139,8 +144,10 @@ def wechat_login(request):
                         provider.credit += food.credit
                         provider.save()
 
-                        History.objects.create(user=user, credit='-{0}'.format(str(food.credit)), desc='Buying Food')
-                        History.objects.create(user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food')
+                        History.objects.create(
+                            user=user, credit='-{0}'.format(str(food.credit)), desc='Buying Food')
+                        History.objects.create(
+                            user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food')
 
                         return redirect('/pay_success')
                     else:
@@ -148,8 +155,9 @@ def wechat_login(request):
 
                 try:
                     credit = status.split('_')[2]
-                except:
-                    return HttpResponse('Customers cannot log in as food providers')
+                except BaseException:
+                    return HttpResponse(
+                        'Customers cannot log in as food providers')
                 # 2019.5.20 by jiangyuwei
                 # 功能：如果这个码是一个用户只能扫一次的，就将其id取出来去表中查这个数据
                 #      如果查得到就说明已经扫过了，返回`You have scanned the QR code`
@@ -157,25 +165,30 @@ def wechat_login(request):
                 if 'customeronce' in full_path:
                     try:
                         only_credit_id = status.split('_')[3]
-                    except:
+                    except BaseException:
                         only_credit_id = None
 
-                    user_scan = UserScan.objects.filter(pk=only_credit_id).first()
+                    user_scan = UserScan.objects.filter(
+                        pk=only_credit_id)
                     if user_scan:
                         return HttpResponse('You have scanned the QR code')
                     else:
                         try:
                             # 在表中添加当前用户扫描某一个二维码的记录
-                            once_credit = OnlyOnceCredit.objects.get(pk=only_credit_id)
-                            UserScan.objects.create(user=user, credit=once_credit)
-                        except:
-                            return HttpResponse('Please scan again')
 
+                            once_credit = OnlyOnceCredit.objects.get(
+                                pk=only_credit_id)
+                            UserScan.objects.create(
+                                user=user, credit=once_credit)
+                        except BaseException:
+                            return HttpResponse('Please scan again')
 
                 if user.name and user.hotel_name:
                     user.credit += int(credit)
                     user.save()
-                    History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
+                    History.objects.create(user=user,
+                                           credit='+{0}'.format(str(credit)),
+                                           desc='Scanning QRCode')
 
                     return redirect('/customer_profile/{0}/'.format(user.id))
                 else:
@@ -194,31 +207,35 @@ def wechat_login(request):
 
                 return redirect('/provider/save_message/')
 
-
             elif 'customer' in full_path:
                 credit = status.split('_')[2]
                 user = User.objects.create(
                     union_id=union_id, head_img=head_img, status=0,
                     event=event, credit=int(credit))
+
                 if 'customeronce' in full_path:
                     # 取出credit_id
                     only_credit_id = status.split('_')[3]
                     # 在用户已经扫描的表中添加一条 新用户扫描该二维码的数据
                     once_credit = OnlyOnceCredit.objects.get(pk=only_credit_id)
-                    UserScan.objects.create(user=user, credit=once_credit)
-                History.objects.create(user=user, credit='+{0}'.format(str(credit)), desc='Scanning QRCode')
+                    UserScan.objects.create(credit=once_credit, user=user)
+
+                History.objects.create(user=user,
+                                       credit='+{0}'.format(str(credit)),
+                                       desc='Scanning QRCode')
                 request.session['uid'] = user.id
 
                 return redirect('/customer/save_message/')
                 # return redirect('/customer_profile/{0}/'.format(user.id))
 
-
             elif 'purchase' in full_path:
-                return HttpResponse("Please get the credits before you buy them")
+                return HttpResponse(
+                    "Please get the credits before you buy them")
     else:
 
         redirect_uri = 'http://pinkslash.metatype.cn' + full_path
-        get_code_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc7594d7d49e0235f&redirect_uri=" + redirect_uri + "&response_type=code&scope=snsapi_userinfo";
+        get_code_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc7594d7d49e0235f&redirect_uri=" + \
+                       redirect_uri + "&response_type=code&scope=snsapi_userinfo"
         return redirect(get_code_url)
 
     return HttpResponse("xixi")
@@ -265,7 +282,6 @@ def provider_save_message(request, me):
     return render(request, 'provider-login.html')
 
 
-
 def wechat_api(code):
     appid = 'wxc7594d7d49e0235f'
     secret = 'ebbda5cbab00241032bc936fe3839393'
@@ -277,7 +293,9 @@ def wechat_api(code):
         'grant_type': 'authorization_code'
     }
     get_access_token_url = 'https://api.weixin.qq.com/sns/oauth2/access_token'
-    response = requests.get(url=get_access_token_url, params=access_token_params)
+    response = requests.get(
+        url=get_access_token_url,
+        params=access_token_params)
     response.encoding = 'utf-8'
 
     response = json.loads(response.text)
@@ -290,7 +308,10 @@ def wechat_api(code):
         'access_token': access_token,
         'openid': openid
     }
-    res = json.loads(requests.get(url=get_user_info_url, params=user_info_params).text)
+    res = json.loads(
+        requests.get(
+            url=get_user_info_url,
+            params=user_info_params).text)
     print(res)
     openid = res['openid']
     nickname = res['nickname'].encode('raw_unicode_escape').decode()
@@ -302,6 +323,7 @@ def wechat_api(code):
     }
 
     return user_data
+
 
 @user_required
 def add_favorite(request, me, food_id):
@@ -332,6 +354,7 @@ def reservation_list(request, me):
     }
     return render(request, 'reservation.html', ctx)
 
+
 @user_required
 def user_reservation(request, me):
     roomAmenityReservation = RoomAmenityReservation.objects.filter(user=me)
@@ -351,7 +374,7 @@ def room_amenity(request, me):
     packages = RoomAmenity.objects.filter(event=me.event)
     ctx = {
         'packages': packages,
-        'status':'room_amenity'
+        'status': 'room_amenity'
     }
 
     return render(request, 'packages.html', ctx)
@@ -363,19 +386,19 @@ def lunch(request, me):
     packages = Lunch.objects.filter(event=me.event)
     ctx = {
         'packages': packages,
-        'status':'lunch'
+        'status': 'lunch'
     }
     return render(request, 'packages.html', ctx)
-
 
 
 @user_required
 def room_amenity_detail(request, me, room_amenity_id):
 
     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
-    roomAmenityReserve = RoomAmenityReservation.objects.filter(user=me, roomAmenity=room_amenity).first()
+    roomAmenityReserve = RoomAmenityReservation.objects.filter(
+        user=me, roomAmenity=room_amenity).first()
     ctx = {
-        'room_amenity':room_amenity
+        'room_amenity': room_amenity
     }
     if roomAmenityReserve:
         ctx['status'] = 1
@@ -384,13 +407,15 @@ def room_amenity_detail(request, me, room_amenity_id):
 
     return render(request, 'room-amenity-detail.html', ctx)
 
+
 @user_required
 def lunch_detail(request, me, lunch_id):
     lunch = Lunch.objects.filter(id=lunch_id).first()
     ctx = {
-        'lunch':lunch
+        'lunch': lunch
     }
-    lunchReservation = LunchReservation.objects.filter(user=me, lunch=lunch).first()
+    lunchReservation = LunchReservation.objects.filter(
+        user=me, lunch=lunch).first()
     if lunchReservation:
         ctx['status'] = 1
     else:
@@ -398,24 +423,29 @@ def lunch_detail(request, me, lunch_id):
 
     return render(request, 'lunch-detail.html', ctx)
 
+
 @user_required
 def lunch_reserve(request, me, lunch_id):
 
     LunchReservation.objects.filter(user=me).delete()
 
     lunch = Lunch.objects.filter(id=lunch_id).first()
-    lunchReservation = LunchReservation.objects.filter(user=me, lunch=lunch).first()
+    lunchReservation = LunchReservation.objects.filter(
+        user=me, lunch=lunch).first()
     if not lunchReservation:
         LunchReservation.objects.create(user=me, lunch=lunch)
         if me.credit >= lunch.credit:
             me.credit -= lunch.credit
             me.save()
-            History.objects.create(user=me, credit='-{0}'.format(str(lunch.credit)), desc='Lunch Reservation')
+            History.objects.create(user=me,
+                                   credit='-{0}'.format(str(lunch.credit)),
+                                   desc='Lunch Reservation')
             return redirect('/reserve_success')
         else:
             return redirect('/reserve_failed')
 
     return redirect('/lunch')
+
 
 @user_required
 def room_amenity_reserve(request, me, room_amenity_id):
@@ -423,13 +453,17 @@ def room_amenity_reserve(request, me, room_amenity_id):
     RoomAmenityReservation.objects.filter(user=me).delete()
 
     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
-    roomAmenityReserve = RoomAmenityReservation.objects.filter(user=me, roomAmenity=room_amenity).first()
+    roomAmenityReserve = RoomAmenityReservation.objects.filter(
+        user=me, roomAmenity=room_amenity).first()
     if not roomAmenityReserve:
-        RoomAmenityReservation.objects.create(user=me, roomAmenity=room_amenity)
+        RoomAmenityReservation.objects.create(
+            user=me, roomAmenity=room_amenity)
         if me.credit >= room_amenity.credit:
             me.credit -= room_amenity.credit
             me.save()
-            History.objects.create(user=me, credit='-{0}'.format(str(room_amenity.credit)), desc='Room Amenity Reservation')
+            History.objects.create(user=me,
+                                   credit='-{0}'.format(str(room_amenity.credit)),
+                                   desc='Room Amenity Reservation')
             return redirect('/reserve_success')
         else:
             return redirect('/reserve_failed')
@@ -440,15 +474,16 @@ def room_amenity_reserve(request, me, room_amenity_id):
 @user_required
 def reserve_success(request, me):
     ctx = {
-        'me':me
+        'me': me
     }
 
     return render(request, 'reserve-success.html', ctx)
 
+
 @user_required
 def reserve_failed(request, me):
     ctx = {
-        'me':me
+        'me': me
     }
 
     return render(request, 'reserve-failed.html', ctx)
@@ -456,7 +491,7 @@ def reserve_failed(request, me):
 
 def getticket(request):
 
-    current_url =  request.POST.get('current_url', '')
+    current_url = request.POST.get('current_url', '')
 
     appid = 'wxc7594d7d49e0235f'
     secret = 'ebbda5cbab00241032bc936fe3839393'
@@ -467,12 +502,15 @@ def getticket(request):
     }
     get_access_token_url = 'https://api.weixin.qq.com/cgi-bin/token'
 
-    response = requests.get(url=get_access_token_url, params=access_token_params)
+    response = requests.get(
+        url=get_access_token_url,
+        params=access_token_params)
     response.encoding = 'utf-8'
     response = json.loads(response.text)
     print('response', response)
     access_token = response['access_token']
-    get_jsapi_ticket_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi'.format(access_token)
+    get_jsapi_ticket_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token={0}&type=jsapi'.format(
+        access_token)
 
     jsapi_response = requests.get(url=get_jsapi_ticket_url)
     jsapi_response.encoding = 'utf-8'
@@ -483,7 +521,8 @@ def getticket(request):
 
     timestamp = int(time.time())
 
-    string1 = 'jsapi_ticket={0}&noncestr={1}&timestamp={2}&url={3}'.format(jsapi_ticket, noncestr, timestamp, current_url)
+    string1 = 'jsapi_ticket={0}&noncestr={1}&timestamp={2}&url={3}'.format(
+        jsapi_ticket, noncestr, timestamp, current_url)
     signature = hashlib.sha1(string1.encode('utf-8')).hexdigest()
 
     params = {
@@ -494,3 +533,10 @@ def getticket(request):
     }
 
     return HttpResponse(json.dumps(params), content_type='application/json')
+
+
+def tea_break(request):
+    ctx = {}
+    tea = TeaBreak.objects.all().first()
+    ctx['tea'] = tea
+    return render(request, 'topic.html', ctx)
