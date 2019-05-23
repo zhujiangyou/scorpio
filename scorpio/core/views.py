@@ -156,7 +156,7 @@ def wechat_login(request):
                 #      如果查不到说明没扫过，在取出user_id并且在表中添加一条数据，最后将积分加上
                 if 'customeronce' in full_path:
                     try:
-                        only_credit_id = status.split('_')[4]
+                        only_credit_id = status.split('_')[3]
                     except:
                         only_credit_id = None
 
