@@ -171,10 +171,10 @@ def wechat_login(request):
                     user_scan = UserScan.objects.filter(credit=only_credit_id)
                     if user_scan:
                         # return HttpResponse('You have scanned the QR code')
-                        return redirect('/customer/save_message/')
+                        return redirect('/customer_profile/{0}/'.format(user.id))
                     else:
                         try:
-                        #     # 在表中添加当前用户扫描某一个二维码的记录
+                            # 在表中添加当前用户扫描某一个二维码的记录
 
                             once_credit = OnlyOnceCredit.objects.get(
                                 pk=only_credit_id)
