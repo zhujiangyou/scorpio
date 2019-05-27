@@ -414,6 +414,7 @@ def user_reservation(request, me):
 @user_required
 def room_amenity(request, me):
     packages = RoomAmenity.objects.filter(event=me.event)
+    print(packages)
     ctx = {
         'packages': packages,
         'status': 'room_amenity'
@@ -425,6 +426,7 @@ def room_amenity(request, me):
 @user_required
 def lunch(request, me):
     packages = Lunch.objects.filter(event=me.event)
+    print(packages)
     ctx = {
         'packages': packages,
         'status': 'lunch'
