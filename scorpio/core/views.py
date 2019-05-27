@@ -105,9 +105,7 @@ def pay_failed(request, me):
     ctx = {
         'me': me
     }
-
     return render(request, 'pay-failed.html', ctx)
-
 
 def wechat_login(request):
     full_path = request.get_full_path()
@@ -154,8 +152,7 @@ def wechat_login(request):
                     else:
                         return redirect('/pay_failed')
                 elif 'sendcredits' in full_path:
-
-                    receiver_id = status.split('_')[2]
+                    receiver_id = status.split('_')[1]
                     ctx = {
                         'receiver_id': receiver_id
                     }
@@ -233,7 +230,7 @@ def wechat_login(request):
 
                 request.session['uid'] = user.id
                 # 用户第一次登陆时生成赠送积分二维码
-                qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=customer_sendcredits_{0}'.format(user.id))
+                qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
                 buf = BytesIO()
                 qr.save(buf)
                 qr_data = buf.getvalue()
@@ -252,11 +249,14 @@ def wechat_login(request):
                 # return redirect('/customer_profile/{0}/'.format(user.id))
 
             elif 'sendcredits' in full_path:
+
+                event_id = status.split('_')[2]
+                event = Event.objects.filter(id=int(event_id)).first()
                 user = User.objects.create(
                     union_id=union_id, head_img=head_img, status=0,
                     event=event)
                 request.session['uid'] = user.id
-                qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=customer_sendcredits_{0}'.format(user.id))
+                qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
                 buf = BytesIO()
                 qr.save(buf)
                 qr_data = buf.getvalue()
@@ -413,6 +413,7 @@ def user_reservation(request, me):
 
 @user_required
 def room_amenity(request, me):
+
     packages = RoomAmenity.objects.filter(event=me.event)
     print(packages)
     ctx = {
