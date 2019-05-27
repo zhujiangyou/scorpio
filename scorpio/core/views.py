@@ -583,7 +583,7 @@ def tea_break(request):
 def send_credits(request, me):
     ctx = {'me':me}
     if request.method == 'POST':
-        receiver_id = request.POST['receiver_id', '']
+        receiver_id = request.POST['receiver_id']
         sender_id = me.id
         credit = request.POST['credit']
         # 积分赠送者
