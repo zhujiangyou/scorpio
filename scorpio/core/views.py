@@ -212,7 +212,6 @@ def wechat_login(request):
                     status=1, event=event
                 )
                 request.session['uid'] = user.id
-
                 return redirect('/provider/save_message/')
 
             elif 'customer' in full_path:
@@ -252,6 +251,28 @@ def wechat_login(request):
 
                 return redirect('/customer/save_message/')
                 # return redirect('/customer_profile/{0}/'.format(user.id))
+
+            elif 'sendcredits' in full_path:
+                user = User.objects.create(
+                    union_id=union_id, head_img=head_img, status=0,
+                    event=event)
+                request.session['uid'] = user.id
+                qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=customer_sendcredits_{0}'.format(user.id))
+                buf = BytesIO()
+                qr.save(buf)
+                qr_data = buf.getvalue()
+                buf.write(qr_data)
+                qr_img = InMemoryUploadedFile(file=buf,
+                                              field_name=None,
+                                              name='food.png',
+                                              content_type='image/png',
+                                              size=len(qr_data),
+                                              charset=None)
+                _user = User.objects.get(id=user.id)
+                _user.qrcode = qr_img
+                _user.save()
+                return redirect('/customer/save_message/')
+
 
             elif 'purchase' in full_path:
                 return HttpResponse(
