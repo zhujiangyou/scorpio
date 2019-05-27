@@ -602,6 +602,7 @@ def send_credits(request, me):
 
             History.objects.create(
                 user=sender, credit='-{0}'.format(str(credit)), desc='Give to {0} {1} credits'.format(receiver.name, str(credit)))
+
             History.objects.create(
                 user=receiver, credit='+{0}'.format(str(credit)), desc='Get {0} credits from {1}'.format(str(credit), sender.name))
 
