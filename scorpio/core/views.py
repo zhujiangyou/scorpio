@@ -573,12 +573,13 @@ def send_credits(request, me):
         receiver = User.objects.get(id=receiver_id)
         # 判断积分余额
         if credit > sender.credit:
-            return HttpResponse("积分余额不足!")
+            return render(request, 'present-failed.html', ctx)
         else:
             # 积分加减
             sender.credit = sender.credit - credit
             sender.save()
             receiver.credit = receiver.credit + credit
             receiver.save()
-            return redirect('/customer_profile/{0}/'.format(me.id))
+            return render(request, 'present-success.html', ctx)
+
     return render(request, 'customer-login.html', ctx)
