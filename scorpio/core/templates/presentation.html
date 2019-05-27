@@ -10,8 +10,9 @@
 <div class="page-presentation">
     <div class="card">
         <p class="title">Credits you want to present</p>
-        <form action="">
-            <input class="input" type="number" placeholder="type here" required oninvalid="alert('Please input credits you want to present!')">
+        <form action="/send_credits/" method="post">
+            <input class="input" type="number" placeholder="type here" name="credit"
+                   required oninvalid="alert('Please input credits you want to present!')">
             <button type="submit" class="button primary">Present Credits</button>
         </form>
     </div>

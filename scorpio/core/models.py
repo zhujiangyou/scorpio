@@ -19,6 +19,7 @@ class User(models.Model):
     credit = models.IntegerField(default=0)
     event = models.ForeignKey('Event', null=True, on_delete=models.CASCADE, blank=True)
     status = models.IntegerField(choices=USER_STATUS)
+    qrcode = models.ImageField(upload_to='user/qrcode')
 
     name = models.CharField(max_length=100, verbose_name='name', default='')
     hotel_name = models.CharField(max_length=100, verbose_name='hotel_name', default='')

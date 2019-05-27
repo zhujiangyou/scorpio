@@ -82,7 +82,9 @@ urlpatterns = [
 
     path('provider/save_message/', core_views.provider_save_message),
 
-    path('tea_break/', core_views.tea_break)
+    path('tea_break/', core_views.tea_break),
+    
+    path('send_credits/', core_views.send_credits)
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
