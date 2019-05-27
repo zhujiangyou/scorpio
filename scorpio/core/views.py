@@ -156,7 +156,6 @@ def wechat_login(request):
                 elif 'sendcredits' in full_path:
 
                     receiver_id = status.split('_')[2]
-
                     ctx = {
                         'receiver_id': receiver_id
                     }
@@ -584,7 +583,7 @@ def tea_break(request):
 def send_credits(request, me):
     ctx = {'me':me}
     if request.method == 'POST':
-        receiver_id = request.POST.get['receiver_id', '']
+        receiver_id = request.POST['receiver_id', '']
         sender_id = me.id
         credit = request.POST['credit']
         # 积分赠送者
