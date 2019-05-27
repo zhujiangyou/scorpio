@@ -95,7 +95,7 @@ body {
 }
 .button.primary {
   color: #FFFFFF;
-  background-color: #08194e;
+  background-color: #F56C6C;
   border: none;
 }
 .button.primary:active {
@@ -131,8 +131,6 @@ body {
   padding: 40px 0 30px 0;
   background: #606266;
   text-align: center;
-  background-image:url(../images/profile-banner.jpg);
-
 }
 .page-customer-profile .profile-avatar,
 .page-provider-profile .profile-avatar {
@@ -453,7 +451,14 @@ body {
   margin: 10px 0;
 }
 .page-topic .content {
-  font-size: 18px;
+  font-size: 14px;
   white-space: pre-wrap;
   word-break: keep-all;
+}
+.page-lunch-detail .blue-button {
+  display: block;
+  margin: 20px auto;
+  background-color: #071b4d;
+  color: #FFFFFF;
+  border-color: #071b4d;
 }
