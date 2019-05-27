@@ -591,7 +591,7 @@ def send_credits(request, me):
         # 积分接收者
         receiver = User.objects.get(id=receiver_id)
         # 判断积分余额
-        if credit > sender.credit:
+        if int(credit) > sender.credit:
             return render(request, 'present-failed.html', ctx)
         else:
             # 积分加减
