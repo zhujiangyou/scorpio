@@ -134,29 +134,33 @@ def wechat_login(request):
                     return redirect('/provider/save_message/')
             elif user.status == 0:
                 if 'purchase' in full_path:
-                    food_id = status.split('_')[2]
-                    food = Food.objects.filter(id=food_id).first()
-                    if user.credit >= food.credit:
-                        user.credit -= food.credit
-                        user.save()
-                        provider = food.provider
-                        provider.credit += food.credit
-                        provider.save()
+                    if user.name and user.hotel_name:
+                        food_id = status.split('_')[2]
+                        food = Food.objects.filter(id=food_id).first()
+                        if user.credit >= food.credit:
+                            user.credit -= food.credit
+                            user.save()
+                            provider = food.provider
+                            provider.credit += food.credit
+                            provider.save()
 
-                        History.objects.create(
-                            user=user, credit='-{0}'.format(str(food.credit)), desc='Buying Food')
-                        History.objects.create(
-                            user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food')
+                            History.objects.create(
+                                user=user, credit='-{0}'.format(str(food.credit)), desc='Buying Food')
+                            History.objects.create(
+                                user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food')
+                            return redirect('/pay_success')
+                        else:
+                            return redirect('/pay_failed')
 
-                        return redirect('/pay_success')
                     else:
-                        return redirect('/pay_failed')
+                        return redirect('/customer/save_message/')
+
                 elif 'sendcredits' in full_path:
+
                     receiver_id = status.split('_')[1]
                     ctx = {
                         'receiver_id': receiver_id
                     }
-
                     return render(request, 'presentation.html', ctx)
                 try:
                     credit = status.split('_')[2]
@@ -168,25 +172,29 @@ def wechat_login(request):
                 #      如果查得到就说明已经扫过了，返回`You have scanned the QR code`
                 #      如果查不到说明没扫过，在取出user_id并且在表中添加一条数据，最后将积分加上
                 if 'customeronce' in full_path:
-                    try:
-                        only_credit_id = status.split('_')[3]
-                    except BaseException:
-                        only_credit_id = None
+                    if user.name and user.hotel_name:
 
-                    user_scan = UserScan.objects.filter(credit=only_credit_id)
-                    if user_scan:
-                        # return HttpResponse('You have scanned the QR code')
-                        return redirect('/customer_profile/{0}/'.format(user.id))
-                    else:
                         try:
-                            # 在表中添加当前用户扫描某一个二维码的记录
-
-                            once_credit = OnlyOnceCredit.objects.get(
-                                pk=only_credit_id)
-                            UserScan.objects.create(
-                                user=user, credit=once_credit)
+                            only_credit_id = status.split('_')[3]
                         except BaseException:
-                            return HttpResponse('Please scan again')
+                            only_credit_id = None
+
+                        user_scan = UserScan.objects.filter(credit=only_credit_id)
+                        if user_scan:
+                            # return HttpResponse('You have scanned the QR code')
+                            return redirect('/customer_profile/{0}/'.format(user.id))
+                        else:
+                            try:
+                                # 在表中添加当前用户扫描某一个二维码的记录
+                                once_credit = OnlyOnceCredit.objects.get(
+                                    pk=only_credit_id)
+                                UserScan.objects.create(
+                                    user=user, credit=once_credit)
+                            except BaseException:
+                                return HttpResponse('Please scan again')
+
+                    else:
+                        return redirect('/customer/save_message/')
 
                 if user.name and user.hotel_name:
                     user.credit += int(credit)
@@ -223,11 +231,9 @@ def wechat_login(request):
                     # 在用户已经扫描的表中添加一条 新用户扫描该二维码的数据
                     once_credit = OnlyOnceCredit.objects.get(pk=only_credit_id)
                     UserScan.objects.create(credit=once_credit, user=user)
-
                 History.objects.create(user=user,
                                        credit='+{0}'.format(str(credit)),
                                        desc='Scanning QRCode')
-
                 request.session['uid'] = user.id
                 # 用户第一次登陆时生成赠送积分二维码
                 qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
@@ -249,7 +255,6 @@ def wechat_login(request):
                 # return redirect('/customer_profile/{0}/'.format(user.id))
 
             elif 'sendcredits' in full_path:
-
                 event_id = status.split('_')[2]
                 event = Event.objects.filter(id=int(event_id)).first()
                 user = User.objects.create(
@@ -271,7 +276,6 @@ def wechat_login(request):
                 _user.qrcode = qr_img
                 _user.save()
                 return redirect('/customer/save_message/')
-
 
             elif 'purchase' in full_path:
                 return HttpResponse(
