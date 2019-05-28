@@ -15,7 +15,7 @@ server {
     }
 
     location /MP_verify_32bbPORe0wz9RCC5.txt {
-        root /root/MP_verify_32bbPORe0wz9RCC5.txt;
+        root /root/;
     }
 
 }
