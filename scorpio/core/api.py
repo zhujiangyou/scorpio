@@ -1,6 +1,8 @@
 from restapi import api, APIError
 from .models import *
 import requests
+import json
+
 @api
 def mini_login(code):
     print(code)
@@ -9,6 +11,7 @@ def mini_login(code):
 
     url = 'https://api.weixin.qq.com/sns/jscode2session?appid={0}&secret={1}&js_code={2}&grant_type=authorization_code'.format(appid, secret, code)
     res = requests.get(url)
-    print(res)
+    res = json.loads(res.text)
 
+    print(res)
     # return code
