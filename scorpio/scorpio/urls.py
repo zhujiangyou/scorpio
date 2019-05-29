@@ -20,6 +20,8 @@ from django.conf import settings
 from core import views as core_views
 from team import views as team_views
 from home import views as home_views
+
+import restapi
 urlpatterns = [
 
     path('admin/', admin.site.urls),
@@ -83,8 +85,9 @@ urlpatterns = [
     path('provider/save_message/', core_views.provider_save_message),
 
     path('tea_break/', core_views.tea_break),
-    
-    path('send_credits/', core_views.send_credits)
 
+    path('send_credits/', core_views.send_credits),
+
+    path('api/', restapi.urls),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

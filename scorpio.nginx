@@ -15,7 +15,43 @@ server {
     }
 
     location /MP_verify_32bbPORe0wz9RCC5.txt {
-        root /root/MP_verify_32bbPORe0wz9RCC5.txt;
+        root /root/;
     }
 
+    location /Hgn9r92a3b.txt {
+        root /root/;
+    }
+
+}
+
+server {
+    listen 443;
+    server_name pinkslash.metatype.cn;
+    ssl on;
+    ssl_certificate   /etc/nginx/cert.pem;
+    ssl_certificate_key  /etc/nginx/cert.key;
+    ssl_session_timeout 5m;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
+
+    location /static {
+        root /var/scorpio;
+    }
+
+    location /media {
+        root /var/scorpio;
+    }
+
+    location / {
+        proxy_pass http://127.0.0.1:8023;
+    }
+
+    location /MP_verify_32bbPORe0wz9RCC5.txt {
+        root /root/;
+    }
+
+    location /Hgn9r92a3b.txt {
+        root /root/;
+    }
 }
