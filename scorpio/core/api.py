@@ -4,7 +4,7 @@ import requests
 import json
 
 @api
-def mini_login(code):
+def mini_login(code, userInfo):
     print(code)
     appid = 'wx8c822d6f747d1e6a'
     secret = '2419917cec1c48a0e421a9e3513f754e'
@@ -14,4 +14,5 @@ def mini_login(code):
     res = json.loads(res.text)
 
     print(res)
+    print(userInfo)
     # return code
