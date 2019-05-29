@@ -621,7 +621,8 @@ def send_credits(request, me):
 @csrf_exempt
 def mini_login(request):
     if request.method == 'POST':
-        code = request.POST['code']
+        params = request.data
+        code = params.get('code')
         print(111)
         print('code',code)
 
