@@ -616,3 +616,19 @@ def send_credits(request, me):
             return render(request, 'present-success.html', ctx)
 
     return render(request, 'customer-login.html', ctx)
+
+
+@csrf_exempt
+def mini_login(request):
+    if request.method == 'POST':
+        code = request.POST['code']
+        print(111)
+        print('code',code)
+
+    return {'union_id':'123'}
+
+
+
+
+
+
