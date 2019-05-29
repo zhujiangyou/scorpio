@@ -20,6 +20,8 @@ from django.conf import settings
 from core import views as core_views
 from team import views as team_views
 from home import views as home_views
+
+import restapi
 urlpatterns = [
 
     path('admin/', admin.site.urls),
@@ -86,6 +88,6 @@ urlpatterns = [
 
     path('send_credits/', core_views.send_credits),
 
-    path('mini_login/', core_views.mini_login)
+    path('api/', restapi.urls),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
