@@ -20,13 +20,8 @@
     <h1 class="header-title">{{room_amenity.name}}</h1>
 </div>
 <br>
-<br>
-<br>
-
 <div class="page-lunch-detail">
-
     <img style="width: 100%"  src="{{ room_amenity.img.url }}">
-
     {% if status == 0 %}
         <button  data-toggle="modal" class="button big blue-button" data-target="#myModal">Reserve</button></a>
     {% else %}
