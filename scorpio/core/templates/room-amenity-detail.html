@@ -20,14 +20,14 @@
     <h1 class="header-title">{{room_amenity.name}}</h1>
 </div>
 <br>
-<div class="page-pay-success">
+<div class="page-lunch-detail">
 
-    <img src="{{ room_amenity.img.url }}">
+    <img style="width: 100%"  src="{{ room_amenity.img.url }}">
 
     {% if status == 0 %}
-        <button  class="button big block" data-toggle="modal" data-target="#myModal">Reserve</button></a>
+        <button  data-toggle="modal" class="button big blue-button" data-target="#myModal">Reserve</button></a>
     {% else %}
-        <button  class="button big block">Reservations have been made.</button>
+        <button  class="button big blue-button">Reservations have been made.</button>
     {% endif %}
 
 </div>
