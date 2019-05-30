@@ -22,10 +22,30 @@ def mini_login(status, code, userInfo):
     event = Event.objects.all().first()
     if status == 'firstLogin':
         if user:
-            return {'url':'https://pinkslash.metatype.cn/customer_profile/{0}/'.format(user.id)}
+            if user.name and user.hotel_name:
+                return {'url':'https://pinkslash.metatype.cn/customer_profile/{0}/'.format(user.id)}
+            else:
+                return {'url':'https://pinkslash.metatype.cn/mini_customer/save_message/{0}/'.format(user.id)}
+
         else:
             head_img = userInfo['avatarUrl']
             user = User.objects.create(union_id=unionid, head_img=head_img, event=event,status=0)
+
+            qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event.id))
+                buf = BytesIO()
+                qr.save(buf)
+                qr_data = buf.getvalue()
+                buf.write(qr_data)
+                qr_img = InMemoryUploadedFile(file=buf,
+                                              field_name=None,
+                                              name='food.png',
+                                              content_type='image/png',
+                                              size=len(qr_data),
+                                              charset=None)
+            _user = User.objects.get(id=user.id)
+            _user.qrcode = qr_img
+            _user.save()
+
             return {'url':'https://pinkslash.metatype.cn/mini_customer/save_message/{0}/'.format(user.id)}
 
     else:
