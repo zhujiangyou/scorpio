@@ -65,7 +65,7 @@
 </div>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="{% static "/js/app.js" %}"></script>
-<script src="http://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+<script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 <script type="text/javascript">
 
 var btn = document.getElementById("scanQRCode");
@@ -73,7 +73,7 @@ btn.onclick = function () {
         var current_url = window.location.href
         $.ajax({
             type:"post",
-            url:"http://pinkslash.metatype.cn/getticket",
+            url:"https://pinkslash.metatype.cn/getticket",
             data:{'current_url':current_url},
             dataType : "json",
             success:function(result){
