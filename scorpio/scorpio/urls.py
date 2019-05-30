@@ -82,6 +82,8 @@ urlpatterns = [
 
     path('customer/save_message/', core_views.customer_save_message),
 
+    path('mini_customer/save_message/<str:user_id>/', core_views.mini_customer_save_message),
+
     path('provider/save_message/', core_views.provider_save_message),
 
     path('tea_break/', core_views.tea_break),

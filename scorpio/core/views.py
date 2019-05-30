@@ -208,7 +208,7 @@ def wechat_login(request):
                     return redirect('/customer/save_message/')
         else:
             event_id = status.split('_')[1]
-            event = Event.objects.filter(id=int(event_id)).first()
+            event = Event.objects.filter(id=int(event_id))
 
             if 'provider' in full_path:
                 user = User.objects.create(
@@ -303,7 +303,23 @@ def customer_save_message(request, me):
         me.hotel_name = hotel_name
         me.email = email
         me.save()
+        return redirect('/customer_profile/{0}/'.format(me.id))
 
+    return render(request, 'customer-login.html', ctx)
+
+
+def mini_customer_save_message(request, user_id):
+    ctx = {}
+    me = User.objects.filter(id=int(user_id)).first()
+    if request.method == 'POST':
+        real_name = request.POST.get('realName', '')
+        hotel_name = request.POST.get('hotelName', '')
+        email = request.POST.get('email', '')
+
+        me.name = real_name
+        me.hotel_name = hotel_name
+        me.email = email
+        me.save()
         return redirect('/customer_profile/{0}/'.format(me.id))
 
     return render(request, 'customer-login.html', ctx)
@@ -361,12 +377,12 @@ def wechat_api(code):
             url=get_user_info_url,
             params=user_info_params).text)
     print(res)
-    openid = res['openid']
+    unionid = res['unionid']
     nickname = res['nickname'].encode('raw_unicode_escape').decode()
     headimgurl = res['headimgurl']
     user_data = {
         'nickname': nickname,
-        'union_id': openid,
+        'union_id': unionid,
         'head_img': headimgurl,
     }
 
