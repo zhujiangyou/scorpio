@@ -1,7 +1,11 @@
 from restapi import api, APIError
 from .models import *
+from django.utils.six import BytesIO
+from django.core.files.uploadedfile import InMemoryUploadedFile
 import requests
 import json
+import qrcode
+
 
 @api
 def mini_login(status, code, userInfo):
@@ -32,16 +36,16 @@ def mini_login(status, code, userInfo):
             user = User.objects.create(union_id=unionid, head_img=head_img, event=event,status=0)
 
             qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event.id))
-                buf = BytesIO()
-                qr.save(buf)
-                qr_data = buf.getvalue()
-                buf.write(qr_data)
-                qr_img = InMemoryUploadedFile(file=buf,
-                                              field_name=None,
-                                              name='food.png',
-                                              content_type='image/png',
-                                              size=len(qr_data),
-                                              charset=None)
+            buf = BytesIO()
+            qr.save(buf)
+            qr_data = buf.getvalue()
+            buf.write(qr_data)
+            qr_img = InMemoryUploadedFile(file=buf,
+                                          field_name=None,
+                                          name='food.png',
+                                          content_type='image/png',
+                                          size=len(qr_data),
+                                          charset=None)
             _user = User.objects.get(id=user.id)
             _user.qrcode = qr_img
             _user.save()
