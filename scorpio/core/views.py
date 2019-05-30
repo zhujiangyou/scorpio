@@ -293,7 +293,6 @@ def wechat_login(request):
 @user_required
 def customer_save_message(request, me):
     ctx = {}
-
     if request.method == 'POST':
         real_name = request.POST.get('realName', '')
         hotel_name = request.POST.get('hotelName', '')
@@ -309,6 +308,7 @@ def customer_save_message(request, me):
 
 
 def mini_customer_save_message(request, user_id):
+    request.session['uid'] = int(user_id)
     ctx = {}
     me = User.objects.filter(id=int(user_id)).first()
     if request.method == 'POST':
