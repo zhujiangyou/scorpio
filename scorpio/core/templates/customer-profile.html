@@ -73,7 +73,7 @@ btn.onclick = function () {
         var current_url = window.location.href
         $.ajax({
             type:"post",
-            url:"https://pinkslash.metatype.cn/getticket",
+            url:"http://pinkslash.metatype.cn/getticket",
             data:{'current_url':current_url},
             dataType : "json",
             success:function(result){
