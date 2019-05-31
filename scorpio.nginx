@@ -22,6 +22,10 @@ server {
         root /root/;
     }
 
+    location /wechat_login/Hgn9r92a3b.txt {
+        root /root/;
+    }
+
 }
 
 server {
