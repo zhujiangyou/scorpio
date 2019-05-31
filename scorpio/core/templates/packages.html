@@ -15,6 +15,7 @@
 </div>
 <div class="page-reservation">
     <ul class="reservation-list">
+
         {% for package in packages %}
             {% if status == 'room_amenity' %}
                 <a href="/room_amenity/detail/{{ package.id }}" style="text-decoration:none;">
