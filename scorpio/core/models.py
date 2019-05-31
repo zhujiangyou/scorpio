@@ -20,7 +20,6 @@ class User(models.Model):
     event = models.ForeignKey('Event', null=True, on_delete=models.CASCADE, blank=True)
     status = models.IntegerField(choices=USER_STATUS)
     qrcode = models.ImageField(upload_to='user/qrcode', default='')
-
     name = models.CharField(max_length=100, verbose_name='name', default='')
     hotel_name = models.CharField(max_length=100, verbose_name='hotel_name', default='')
     email = models.CharField(max_length=100, verbose_name='email', default='')
@@ -51,6 +50,13 @@ class Food(models.Model):
 
     def __str__(self):
         return self.name
+
+class UserFood(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    food = models.ForeignKey(Food, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.name + '---' + self.food.name
 
 
 class Credit(models.Model):

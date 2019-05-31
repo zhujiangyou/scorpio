@@ -403,6 +403,7 @@ def add_only_once_credit(request, me):
         event_id=event_id,
         qrcode='a'
     )
+
     qr.add_data(
         'http://pinkslash.metatype.cn/wechat_login/?status=customeronce_{0}_{1}_{2}'.format(event_id, credit, s.id))
     img = qr.make_image()
