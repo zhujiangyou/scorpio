@@ -22,7 +22,7 @@ server {
         root /root/;
     }
 
-    location /wechat_login/Hgn9r92a3b.txt {
+    location /wechat_login/ {
         root /root/;
     }
 
@@ -59,7 +59,7 @@ server {
         root /root/;
     }
 
-    location /wechat_login/Hgn9r92a3b.txt {
+    location /wechat_login/ {
         root /root/;
     }
 }
