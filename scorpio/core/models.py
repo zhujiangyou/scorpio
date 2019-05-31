@@ -8,7 +8,6 @@ USER_STATUS = [
     (2, 'host'),
 ]
 
-
 class User(models.Model):
 
     username = models.CharField(max_length=100, verbose_name='username', default='')
@@ -51,18 +50,25 @@ class Food(models.Model):
     def __str__(self):
         return self.name
 
+#用户扫过的食物二维码
 class UserFood(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
+    create_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.user.name + '---' + self.food.name
-
 
 class Credit(models.Model):
     credit = models.IntegerField(default=0)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     qrcode = models.ImageField(upload_to='credit/qrcode')
+
+#用户扫过的积分二维码
+class UserCredit(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    credit = models.CharField(max_length=100, default='')
+    create_time = models.DateTimeField(auto_now=True)
 
 # 2019.5.20 by jiangyuwei
 class OnlyOnceCredit(models.Model):
@@ -71,17 +77,17 @@ class OnlyOnceCredit(models.Model):
     qrcode = models.ImageField(upload_to='credit/qrcode')
 
 # 2019.5.20 by jiangyuwei
+#用户扫过的一次性二维码
 class UserScan(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     credit = models.ForeignKey(OnlyOnceCredit, on_delete=models.CASCADE)
-
+    create_time = models.DateTimeField(auto_now=True)
 
 class History(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     create_time = models.DateTimeField(auto_now=True)
     credit = models.CharField(max_length=10)
     desc = models.CharField(max_length=100, default='')
-
 
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
