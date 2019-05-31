@@ -1,1 +1,1 @@
-<web-view src="http://pinkslash.metatype.cn/customer_profile/107/"></web-view>
+<web-view src="{{redirect_url}}"></web-view>

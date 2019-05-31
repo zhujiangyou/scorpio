@@ -1,20 +1,31 @@
 // pages/out.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    redirect_url: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if(options.q){
+      let scan_url = decodeURIComponent(options.q);
+      let index = scan_url.indexOf('?')
+      var redirect_url = scan_url.slice(0, index) + '/wechat_login/' + scan_url.slice(index)
+      this.setData({
+        redirect_url:redirect_url
+      })
+    }else{
+      this.setData({
+        redirect_url: app.globalData.redirect_url
+      })
+    }
   },
-
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
