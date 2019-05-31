@@ -19,4 +19,6 @@ admin.site.register(OnlyOnceCredit)
 admin.site.register(UserScan)
 admin.site.register(TeaBreak)
 
+admin.site.register(UserFood)
+
 

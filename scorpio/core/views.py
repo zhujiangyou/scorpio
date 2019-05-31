@@ -148,6 +148,10 @@ def wechat_login(request):
                                 user=user, credit='-{0}'.format(str(food.credit)), desc='Buying Food')
                             History.objects.create(
                                 user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food')
+
+                            UserFood.objects.create(user=user, food=food)
+
+
                             return redirect('/pay_success')
                         else:
                             return redirect('/pay_failed')
