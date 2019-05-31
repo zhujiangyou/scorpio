@@ -22,10 +22,6 @@ server {
         root /root/;
     }
 
-    location /wechat_login/ {
-        root /root/;
-    }
-
 }
 
 server {
@@ -59,7 +55,4 @@ server {
         root /root/;
     }
 
-    location /wechat_login/ {
-        root /root/;
-    }
 }
