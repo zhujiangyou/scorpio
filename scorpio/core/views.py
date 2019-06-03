@@ -449,7 +449,7 @@ def room_amenity(request, me):
         'status': 'room_amenity'
     }
 
-    return render(request, 'packages.html', ctx)
+    return render(request, 'room-amenity-package.html', ctx)
 
 
 @user_required

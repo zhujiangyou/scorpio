@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+    <link href="{% static "/css/base.css" %}">
+
+</head>
+<body>
+    <div class="items">
+        <div class="picture">
+            <img src="images/img1.jpeg" class="img1">
+        </div>
+        <div class="addImage">
+            <div>Add:</div>
+            <div class="addImage1">
+                <img src="images/orange1.jpg" class="image-item">
+                <div class="text-item">Juice</div>
+            </div>
+            <div class="addImage1">
+                <img src="images/orange2.jpg" class="image-item">
+                <div class="text-item">Champagne</div>
+            </div>
+        </div>
+
+        <div class="reserve">
+            <button class="btn-color" data-toggle="modal" data-target="#myModal">Reserve</button>
+        </div>
+        <div class="footer" id="footer">
+            <img src="../static/images/100years.png"" class="img2">
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" style="position: absolute;left: 0;right: 0; top: 400px;width: 60%;height: 500px;background-color: white;border-radius: 25px;">
+            <div class="modal-content money-modal">
+                <div class="money">
+                    <img src="images/积分.svg" style="width: 80px;height: 80px;margin:40px">
+                </div>
+                <div class="wenzi">Reservation needs you to purchase 30 credits. </div>
+                <div class="money-btn"><button class="confirm">Confirm</button></div>
+                <div class="money-btn"><button class="cancel" data-dismiss="modal">Cancel</button></div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="{% static "/js/footer.js" %}"></script>
