@@ -682,6 +682,8 @@ def agenda(request, me):
 
 @user_required
 def agenda_detail(request, me, agenda, agendatime):
+    print('agenda',agenda)
+    print('agendatime',agendatime)
     ctx = {}
     ctx['agenda'] = agenda = Agenda.objects.filter(name=agenda).first()
     if agenda.name == 'Welcome&CelebrationGatheringDinner':
@@ -700,6 +702,8 @@ def agenda_detail(request, me, agenda, agendatime):
         ctx['name'] = 'Working Lunch & Wrap up'
 
     ctx['agendatime'] = agendatime
+    print(ctx)
+
     return render(request, 'agenda_detail.html', ctx)
 
 
