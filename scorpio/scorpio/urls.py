@@ -98,7 +98,7 @@ urlpatterns = [
     path('countdown/', home_views.countdown),
 
     path('agenda/', core_views.agenda),
-    path('agenda/detail/<str:agenda>/', core_views.agenda_detail),
+    path('agenda/detail/<str:agenda>/<str:agendatime>/', core_views.agenda_detail),
 
 
 

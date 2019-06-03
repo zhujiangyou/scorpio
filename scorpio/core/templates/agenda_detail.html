@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+    <link href="{% static "/css/base.css" %}">
+    <style type="text/css">
+        .picture-title{
+            color: white;
+            font-size: 50px;
+            font-weight: 300;
+        }
+        .picture-time{
+            color: white;
+            font-size: 50px;
+            font-weight: 300;
+        }
+        .picture-text{
+            color: white;
+            font-size: 50px;
+            font-weight: 300;
+            line-height: 1.2;
+        }
+    </style>
+</head>
+<body>
+    <div class="items">
+        <div class="picture">
+            <img src="{{ agenda.img.url }}" class="img1">
+        </div>
+
+        <div class="picture-title">{{ name }}</div>
+
+        <div class="picture-time">{{ agendatime }}</div>
+        <div class="picture-text">{{ agenda.text }}</div>
+
+    </div>
+    <div class="footer" id="footer">
+        <img src="../static/images/100years.png" class="img2">
+    </div>
+</body>
+</html>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="{% static "/js/footer.js" %}"></script>

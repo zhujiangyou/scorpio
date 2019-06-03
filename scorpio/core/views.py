@@ -680,10 +680,24 @@ def agenda(request, me):
     return render(request, 'agenda.html')
 
 @user_required
-def agenda_detail(request, me, agenda):
-    ctx['agenda'] = Agenda.objects.filter(name=agenda).first()
+def agenda_detail(request, me, agenda, agendatime):
+    ctx['agenda'] = agenda = Agenda.objects.filter(name=agenda).first()
+    if agenda.name == 'Welcome&CelebrationGatheringDinner':
+        ctx['name'] = 'Welcome & Celebration Gathering Dinner'
+    elif agenda.name == 'Presentations':
+        ctx['name'] = 'Presentations'
+    elif agenda.name == 'CoffeeBreak':
+        ctx['name'] = 'Coffee Break'
+    elif agenda.name == 'GroupPhoto':
+        ctx['name'] = 'Group Photo'
+    elif agenda.name == 'Lunch':
+        ctx['name'] = 'Lunch'
+    elif agenda.name == 'GroupDinner':
+        ctx['name'] = 'Group Dinner'
+    elif agenda.name == 'WorkingLunch&Wrapup':
+        ctx['name'] = 'Working Lunch & Wrap up'
 
-
+    ctx['agendatime'] = agendatime
     return render(request, 'agenda_detail.html', ctx)
 
 
