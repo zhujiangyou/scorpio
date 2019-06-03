@@ -213,7 +213,7 @@ def wechat_login(request):
                     return redirect('/customer/save_message/')
         else:
             event_id = status.split('_')[1]
-            event = Event.objects.filter(id=int(event_id))
+            event = Event.objects.filter(id=int(event_id)).first()
 
             if 'provider' in full_path:
                 user = User.objects.create(
