@@ -655,27 +655,36 @@ def mini_login(request):
     return {'union_id':'123'}
 
 
+# @user_required
+# def agenda(request, me):
+#     ctx = {}
+#     agendaDates = AgendaDate.objects.all()
+
+#     ctx['agenda'] = []
+#     for _ in agendaDates:
+#         agendas = Agenda.objects.filter(agenda_date=_)
+#         ctx['agenda'].append(agendas)
+
+#     ctx['agendaDates'] = agendaDates
+
+#     return render(request, 'agenda.html', ctx)
+
+
+# @user_required
+# def agenda_detail(request, me, agenda_id):
+#     ctx['agenda'] =  agenda = Agenda.objects.filter(id=agenda_id).first()
+#     return render(request, 'agenda_detail.html', ctx)
+
 @user_required
 def agenda(request, me):
-    ctx = {}
-    agendaDates = AgendaDate.objects.all()
-
-    ctx['agenda'] = []
-    for _ in agendaDates:
-        agendas = Agenda.objects.filter(agenda_date=_)
-        ctx['agenda'].append(agendas)
-
-    ctx['agendaDates'] = agendaDates
-
-    return render(request, 'agenda.html', ctx)
-
+    return render(request, 'agenda.html')
 
 @user_required
-def agenda_detail(request, me, agenda_id):
-    ctx['agenda'] =  agenda = Agenda.objects.filter(id=agenda_id).first()
+def agenda_detail(request, me, agenda):
+    ctx['agenda'] = Agenda.objects.filter(name=agenda).first()
+
+
     return render(request, 'agenda_detail.html', ctx)
-
-
 
 
 

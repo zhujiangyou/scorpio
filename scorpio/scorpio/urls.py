@@ -95,9 +95,11 @@ urlpatterns = [
     path('dashborad/', home_views.data_report, name='report'),
     path('dashborad/user_detail/<int:user_id>/', home_views.user_detail, name='user_detail'),
     path('dashborad/food_detail/<int:food_id>/', home_views.food_detail, name='food_detail'),
-
-
     path('countdown/', home_views.countdown),
+
+    path('agenda/', home_views.agenda),
+    path('agenda/detail/<str:agenda>/', home_views.agenda_detail),
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
