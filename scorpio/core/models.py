@@ -128,22 +128,13 @@ class TeaBreak(models.Model):
     img = models.ImageField(upload_to='teaBreak')
     text = models.CharField(default='', max_length=5000)
 
-class AgendaDate(models.Model):
-    agenda_date = models.DateField(auto_now=True)
-
 
 class Agenda(models.Model):
-    agenda_date = models.ForeignKey(AgendaDate, on_delete=models.CASCADE)
     name = models.CharField(default='', max_length=100)
-    time_range = models.CharField(default='', max_length=100)
-    create_time = models.DateTimeField(auto_now=True)
-
-
-class AgendaDetail(models.Model):
-    agenda = models.ForeignKey(Agenda, on_delete=models.CASCADE)
     img = models.ImageField(upload_to='agenda')
     text = models.CharField(default='', max_length=5000)
 
+#选择完的附加选项
 class Attach(models.Model):
     name = models.CharField(default='', max_length=100)
     credit = models.IntegerField(default=0)
