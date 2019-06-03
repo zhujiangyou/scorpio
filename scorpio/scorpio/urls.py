@@ -97,7 +97,7 @@ urlpatterns = [
     path('dashborad/food_detail/<int:food_id>/', home_views.food_detail, name='food_detail'),
     path('countdown/', home_views.countdown),
 
-    path('agenda/', home_views.agenda),
+    path('agenda/', core_views.agenda),
     path('agenda/detail/<str:agenda>/', code_views.agenda_detail),
 
 
