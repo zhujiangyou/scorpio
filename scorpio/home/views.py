@@ -9,7 +9,7 @@ from team.decorators import user_required
 from core.models import *
 from django.core import serializers
 from django.core.paginator import Paginator
-
+import json
 
 @user_required
 def home(request, me):
@@ -177,6 +177,121 @@ def delete_last_food(request, me):
 
     return redirect('/last_foods/?eid={eid}&page={page}'.format(eid=eid, page=page))
 
+@user_required
+def data_report(request, me):
+    ctx = {
+        'me': me,
+        'menu': 'report', 'submenu': 'report',
+        'breadcrumb': [('DATA REPORT', 'report')],
+        'title': 'DATA REPORT', 'subtitle': 'report',
+    }
+
+    ctx['all_users'] = User.objects.filter(status=0)
+    users = User.objects.filter(status=0).order_by('credit')
+    if users.count() < 20:
+        ctx['top_user_names'] = json.dumps(list(users.values_list('name', flat=True)))
+        ctx['top_user_credits'] = json.dumps(list(users.values_list('credit', flat=True)))
+    else:
+        ctx['top_user_names'] = json.dumps(list(users[0:20].values_list('name', flat=True)))
+        ctx['top_user_credits'] = json.dumps(list(users[0:20].values_list('credit', flat=True)))
+
+
+    foods = Food.objects.all()
+
+    ctx['food_names'] = []
+    ctx['counts'] = []
+
+    for _ in foods:
+        count = UserFood.objects.filter(food=_).count()
+        ctx['food_names'].append(_.name)
+        ctx['counts'].append(count)
+
+    ctx['foods'] = foods
+
+
+    return render(request, 'team/dashboard.html', ctx)
+
+@user_required
+def countdown(request, me):
+    ctx = {
+        'me': me,
+        'menu': 'report', 'submenu': 'report',
+        'breadcrumb': [('DATA REPORT', 'report')],
+        'title': 'DATA REPORT', 'subtitle': 'report',
+    }
+
+    users = User.objects.filter(status=0).order_by('-credit')
+    ctx['all_users'] = User.objects.filter(status=0)
+    if users.count() < 20:
+        ctx['countdown_user_names'] = json.dumps(list(users.values_list('name', flat=True)))
+        ctx['countdown_user_credits'] = json.dumps(list(users.values_list('credit', flat=True)))
+    else:
+        ctx['countdown_user_names'] = json.dumps(list(users[0:20].values_list('name', flat=True)))
+        ctx['countdown_user_credits'] = json.dumps(list(users[0:20].values_list('credit', flat=True)))
+        # ctx['countdown'] = users[0:20]
+
+    return render(request, 'team/dashboard.html', ctx)
+
+
+@user_required
+def user_detail(request, me, user_id):
+    ctx = {
+        'me': me,
+        'menu': 'report', 'submenu': 'report',
+        'breadcrumb': [('DATA REPORT', 'report')],
+        'title': 'DATA REPORT', 'subtitle': 'report',
+    }
+
+    user = User.objects.filter(id=user_id).first()
+    userfoods = UserFood.objects.filter(user=user) #扫了食物生成的记录 desc:扫了食物二维码
+
+    usercredits = UserCredit.objects.filter(user=user) #该用户扫了积分二维码生成的记录
+
+    usersans = UserScan.objects.filter(user=user) #该用户扫了一次只能扫一次的二维码的记录
+
+    # ctx['user_report'] = []
+
+    # for _ in userfoods:
+    #     ctx['user_report'].append(_.create_time)
+    #     ctx['user_report'].append('扫了积分二维码')
+    #     ctx['user_report'].append(-(_.food.credit))
+
+    ctx['user_report'] = []
+
+    for _ in userfoods:
+        user_dict = {'create_time':_.create_time,'user_desc':'扫了积分二维码','user_credits':-(_.food.credit)}
+        ctx['user_report'].append(user_dict)
+
+    for _ in usercredits:
+        user_dict = {'create_time':_.create_time,'user_desc':'扫了积分二维码','user_credits':-(_.food.credit)}
+        ctx['user_report'].append(-(_.food.credit))
+
+    for _ in usersans:
+        user_dict = {'create_time':_.create_time,'user_desc':'扫了积分二维码','user_credits':-(_.food.credit)}
+        ctx['user_report'].append(-(_.food.credit))
+
+
+    return render(request, 'team/user_detail.html',ctx)
+
+
+@user_required
+def food_detail(request, me, food_id):
+    ctx = {
+        'me': me,
+        'menu': 'report', 'submenu': 'report',
+        'breadcrumb': [('DATA REPORT', 'report')],
+        'title': 'DATA REPORT', 'subtitle': 'report',
+    }
+
+
+    food = Food.objects.filter(id=food_id).first()
+    userfoods = UserFood.objects.filter(food=food)
+
+    ctx['food_report'] = []
+    for userfood in userfoods:
+        ctx['food_report'].append({'food_name':food.name,"buyer":userfood.user.name})
+
+    return render(request, 'team/food_detail.html', ctx)
 
 @user_required
 def delete_event(request, me):
@@ -426,4 +541,3 @@ def add_only_once_credit(request, me):
     s.save()
 
     return redirect('/event?eid={0}'.format(event_id))
-

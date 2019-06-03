@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
     <div class="box">
@@ -51,7 +50,6 @@
         </div>
         <!-- /.box-body -->
         {% include 'pager.html' %}
-
         <div class="modal modal-success fade" id="modal-addattachment">
             <form action="/add_event/" method="post" enctype="multipart/form-data">
                 {% csrf_token %}

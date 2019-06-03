@@ -127,7 +127,6 @@ def wechat_login(request):
             if user.status == 1:
                 if 'purchase' in full_path:
                     return HttpResponse("Food providers cannot buy food")
-
                 if user.name and user.username:
                     return redirect('/get_provider_info/{0}/'.format(user.id))
                 else:
@@ -150,7 +149,6 @@ def wechat_login(request):
                                 user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food')
 
                             UserFood.objects.create(user=user, food=food)
-
 
                             return redirect('/pay_success')
                         else:
@@ -177,7 +175,6 @@ def wechat_login(request):
                 #      如果查不到说明没扫过，在取出user_id并且在表中添加一条数据，最后将积分加上
                 if 'customeronce' in full_path:
                     if user.name and user.hotel_name:
-
                         try:
                             only_credit_id = status.split('_')[3]
                         except BaseException:
@@ -194,6 +191,7 @@ def wechat_login(request):
                                     pk=only_credit_id)
                                 UserScan.objects.create(
                                     user=user, credit=once_credit)
+
                             except BaseException:
                                 return HttpResponse('Please scan again')
 
@@ -203,9 +201,12 @@ def wechat_login(request):
                 if user.name and user.hotel_name:
                     user.credit += int(credit)
                     user.save()
+
                     History.objects.create(user=user,
                                            credit='+{0}'.format(str(credit)),
                                            desc='Scanning QRCode')
+
+                    UserCredit.objects.create(user=user, credit=credit)
 
                     return redirect('/customer_profile/{0}/'.format(user.id))
                 else:
@@ -238,6 +239,9 @@ def wechat_login(request):
                 History.objects.create(user=user,
                                        credit='+{0}'.format(str(credit)),
                                        desc='Scanning QRCode')
+
+                UserCredit.objects.create(user=user, credit=str(credit))
+
                 request.session['uid'] = user.id
                 # 用户第一次登陆时生成赠送积分二维码
                 qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
@@ -464,8 +468,12 @@ def room_amenity_detail(request, me, room_amenity_id):
     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
     roomAmenityReserve = RoomAmenityReservation.objects.filter(
         user=me, roomAmenity=room_amenity).first()
+
+    attachs = Attach.objects.filter(roomAmenity=room_amenity).first()
+
     ctx = {
-        'room_amenity': room_amenity
+        'room_amenity': room_amenity,
+        'attachs': attachs
     }
     if roomAmenityReserve:
         ctx['status'] = 1
@@ -638,7 +646,6 @@ def send_credits(request, me):
     return render(request, 'customer-login.html', ctx)
 
 
-
 def mini_login(request):
     if request.method == 'POST':
         code = request.POST.get('code', '')
@@ -646,6 +653,29 @@ def mini_login(request):
         print('code',code)
 
     return {'union_id':'123'}
+
+
+@user_required
+def agenda(request, me):
+    ctx = {}
+    agendaDates = AgendaDate.objects.all()
+
+    ctx['agenda'] = []
+    for _ in agendaDates:
+        agendas = Agenda.objects.filter(agenda_date=_)
+        ctx['agenda'].append(agendas)
+
+    ctx['agendaDates'] = agendaDates
+
+    return render(request, 'agenda.html', ctx)
+
+
+@user_required
+def agenda_detail(request, me, agenda_id):
+    ctx['agenda'] =  agenda = Agenda.objects.filter(id=agenda_id).first()
+    return render(request, 'agenda_detail.html', ctx)
+
+
 
 
 

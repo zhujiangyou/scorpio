@@ -98,7 +98,6 @@
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="{% if menu == 'home' %}active {% endif %}treeview">
@@ -106,7 +105,6 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-
         {% if me.status == 1 %}
 
         <li class="{% if menu == 'food' %}active {% endif %}treeview">
@@ -122,8 +120,20 @@
           </ul>
         </li>
 
-
         {% else %}
+
+        <li class="{% if menu == 'report' %}active {% endif %}treeview">
+          <a href="#">
+            <i class="fa fa-users"></i>
+            <span>DATA REPORT</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="{% if submenu == 'report' %}active {% endif %}"><a href="{% url 'report' %}"><i class="fa fa-circle-o"></i>report</a></li>
+          </ul>
+        </li>
 
         <li class="{% if menu == 'event' %}active {% endif %}treeview">
           <a href="#">
@@ -137,7 +147,6 @@
             <li class="{% if submenu == 'event' %}active {% endif %}"><a href="{% url 'events' %}"><i class="fa fa-circle-o"></i>events</a></li>
           </ul>
         </li>
-
 
         {% endif %}
       </ul>
