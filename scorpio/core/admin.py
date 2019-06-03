@@ -19,10 +19,8 @@ admin.site.register(UserScan)
 admin.site.register(TeaBreak)
 admin.site.register(UserFood)
 
-admin.site.register(AgendaDate)
 admin.site.register(Attach)
 admin.site.register(Agenda)
-admin.site.register(AgendaDetail)
 
 
 
