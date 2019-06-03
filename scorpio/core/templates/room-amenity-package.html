@@ -61,7 +61,8 @@
         {% for package in packages %}
             <a href="/room_amenity/detail/{{ package.id }}" style="text-decoration:none;">
                 <div class="item">
-                    <img src="{{ package.img.u11rl }}" class="img">
+                    {{package.img.url}}
+                    <img src="{{ package.img.url }}" class="img">
                     <div class="item1">{{package.name}}</div>
                 </div>
             </a>
