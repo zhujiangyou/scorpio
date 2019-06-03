@@ -677,10 +677,12 @@ def mini_login(request):
 
 @user_required
 def agenda(request, me):
+
     return render(request, 'agenda.html')
 
 @user_required
 def agenda_detail(request, me, agenda, agendatime):
+    ctx = {}
     ctx['agenda'] = agenda = Agenda.objects.filter(name=agenda).first()
     if agenda.name == 'Welcome&CelebrationGatheringDinner':
         ctx['name'] = 'Welcome & Celebration Gathering Dinner'
