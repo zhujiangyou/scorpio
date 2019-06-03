@@ -131,12 +131,12 @@ class TeaBreak(models.Model):
 
 class Agenda(models.Model):
     name = models.CharField(default='', max_length=100)
-    img = models.ImageField(upload_to='agenda')
+    img = models.ImageField(upload_to='agenda', null=True)
     text = models.CharField(default='', max_length=5000)
 
 #选择完的附加选项
 class Attach(models.Model):
     name = models.CharField(default='', max_length=100)
     credit = models.IntegerField(default=0)
-    img = models.ImageField(upload_to='Attach')
+    img = models.ImageField(upload_to='Attach',null=True)
     roomAmenity = models.ForeignKey(RoomAmenity, on_delete=models.CASCADE)
