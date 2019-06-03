@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="box">
+    <div class="box-header with-border">
+            user report
+    </div>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                  <th>time</th>
+                  <th>desc</th>
+                  <th>credits</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for report in user_report %}
+                <tr>
+                  <td>{{ report.create_time }}</td>
+                  <td>{{report.user_desc}}</td>
+                  <td>{{report.user_credits}}</td>
+                </tr>
+                {%  endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts-en.common.js" integrity="sha256-4omDrvG5ELofoBmmZnfzGAe2hzSzjiG2qHBXIZwuDXA=" crossorigin="anonymous"></script>
+{% endblock %}

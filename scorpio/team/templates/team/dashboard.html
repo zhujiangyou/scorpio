@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% block content %}
+<style type="text/css">
+    .table-hover>tbody>tr:hover {
+        background-color: #F9E79F  !important;
+    }
+</style>
+<div class="box">
+    <div class="box-header with-border">
+            User dimension
+    </div>
+    <button class="button btn btn-success" style="margin-left: 36%;">TOP 20</button>
+    <button class="button btn btn-success" style="margin-left: 15%;">Countdown 20</button>
+    <div id="main" style="width: 100%;height:400px;"></div>
+    <div style="overflow:auto;height: 300px;border: 15px ridge #57d68d;border-top-style:none;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in all_users %}
+                    <tr>
+                      <td><a href="/dashborad/user_detail/{{user.id}}/">{{user.name}}</a></td>
+                      <td>{{user.hotel_name}}</td>
+                      <td>{{user.email}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="box">
+    <div class="box-header with-border">
+            food dimension
+    </div>
+    <div id="food" style="width: 100%;height:400px;"></div>
+    <div style=" overflow:auto;height: 300px;border: 15px ridge #3398DB;border-top-style:ridge;border-top-style:none;">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                  <th>Food Name</th>
+                  <th>Credits</th>
+                  <th>Provider</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for food in foods %}
+                <tr>
+                  <td><a href="/dashborad/food_detail/{{food.id}}/">{{food.name}}</a></td>
+                  <td>{{food.credit}}</td>
+                  <td>{{food.provider.name}}</td>
+                </tr>
+                {%  endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class='box'>
+    <div class="box-header with-border">
+            Three days consumption
+    </div>
+    <div id="three" style="width: 100%;height:400px;"></div>
+
+</div>
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.2.1/echarts-en.common.js" integrity="sha256-4omDrvG5ELofoBmmZnfzGAe2hzSzjiG2qHBXIZwuDXA=" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var top_user_names = {{ top_user_names|safe }}
+    var top_user_credits = {{ top_user_credits|safe }}
+
+    var myChart = echarts.init(document.getElementById('main'));
+    // 指定图表的配置项和数据
+    var option = {
+        color:['#58D68D'],
+        title: {
+            text: 'User Credits Rank'
+        },
+        tooltip: {},
+        legend: {
+            data:['Credits']
+        },
+        xAxis: {
+            name:'user name',
+            // data: ["Joe","Yumi","Roy","Wilson","Wilson","Wilson","Joe","Yumi","Roy","Wilson","Wilson","Wilson","Joe","Yumi","Roy","Wilson","Wilson","Wilson","Wilson","Wilson"],
+            data: top_user_names,
+            axisLabel: {
+                interval:0,
+                rotate:40
+            }
+        },
+        yAxis: {
+            name:'credits'
+        },
+        series: [{
+            name: 'Credits',
+            type: 'bar',
+            // data: [980,960,940,910,860,830,800,700,622,610,599,588,533,522,511,488,411,344,322,100],
+            data: top_user_credits,
+            itemStyle: {
+                normal: {
+                    label: {
+                        show: true, //开启显示
+                        position: 'top', //在上方显示
+                        textStyle: { //数值样式
+                            color: 'black',
+                            fontSize: 14
+                        }
+                    }
+                }
+            },
+
+        }]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+<script type="text/javascript">
+
+    var foodnames = {{ food_names|safe }}
+    var counts = {{ counts }}
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('food'));
+    // 指定图表的配置项和数据
+    var option = {
+        color: ['#3398DB'],
+        title: {
+            text: 'Food Rank'
+        },
+        tooltip: {},
+        legend: {
+            data:['food']
+        },
+        xAxis: {
+            name:'food',
+            // data: ["Joe","Yumi","Roy","Wilson","Wilson","Wilson","Joe","Yumi","Roy","Wilson","Joe","Yumi","Roy","Wilson","Wilson","Wilson","Joe","Yumi","Roy","Wilson"],
+            data: foodnames,
+            axisLabel: {
+                interval:0,
+                rotate:40
+            }
+        },
+        yAxis: {
+            name:'count'
+        },
+        series: [{
+            name: 'food',
+            type: 'bar',
+            // data: [18,14,12,11,10,9,8,7,6,2,18,14,12,11,10,9,8,7,6,2],
+            data:counts
+            // itemStyle: {
+            //     normal: {
+            //         label: {
+            //             show: true, //开启显示
+            //             position: 'top', //在上方显示
+            //             textStyle: { //数值样式
+            //                 color: 'black',
+            //                 fontSize: 14
+            //             }
+            //         }
+            //     }
+            // },
+
+        }]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+</script>
+
+<script type="text/javascript">
+    var data = genData(50);
+
+    var myChart = echarts.init(document.getElementById('three'));
+
+option = {
+    title : {
+        text: '三天消费统计',
+        subtext: '',
+        x:'center'
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        type: 'scroll',
+        orient: 'vertical',
+        right: 10,
+        top: 20,
+        bottom: 20,
+        data: data.legendData,
+        selected: data.selected
+    },
+    series : [
+        {
+            name: '姓名',
+            type: 'pie',
+            radius : '55%',
+            center: ['40%', '50%'],
+            data: data.seriesData,
+            itemStyle: {
+                emphasis: {
+                    shadowBlur: 10,
+                    shadowOffsetX: 0,
+                    shadowColor: 'rgba(0, 0, 0, 0.5)'
+                }
+            }
+        }
+    ]
+};
+
+
+
+
+function genData(count) {
+    var nameList = ['第一天','第二天', '第三天'];
+    var legendData = [];
+    var seriesData = [];
+    var selected = {};
+    for (var i = 0; i < 3; i++) {
+
+        seriesData.push({
+            name: nameList[i],
+            value: Math.round(Math.random() * 100000)
+        });
+        selected[name] = i < 6;
+    }
+
+    return {
+        legendData: ['第一天','第二天', '第三天'],
+        seriesData: seriesData,
+        selected: selected
+    };
+
+}
+
+myChart.setOption(option);
+
+</script>
+
+{% endblock %}
