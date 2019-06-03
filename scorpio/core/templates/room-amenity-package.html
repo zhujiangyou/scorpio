@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link href="{% static "/css/base.css" %}">
+    <style type="text/css">
+
+        .items{
+            padding-top: 140px;
+        }
+        .item{
+            border-radius: 25px;
+            background-color: white;
+            margin:40px 5%;
+            width: 90%;
+            height: 450px;
+            position: relative;
+        }
+
+        .img{
+            border-top-left-radius: 25px;
+            border-top-right-radius: 25px;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .item1{
+            background-color: white;
+            position: absolute;
+            bottom: 0;
+            padding: 10px 0 10px 5%;
+            width: 95%;
+            height: 50px;
+            font-size: 40px;
+            font-weight: bold;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+        }
+
+        .footer{
+            text-align: center;
+            position: relative;
+        }
+        .img2{
+            height: 40px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 16px;
+            margin: auto;
+            width: auto;
+        }
+    </style>
+</head>
+<body id="body">
+    <div class="items">
+
+        {% for package in packages %}
+            <a href="/room_amenity/detail/{{ package.id }}" style="text-decoration:none;">
+                <div class="item">
+                    <img src="{{ package.img.u11rl }}" class="img">
+                    <div class="item1">{{package.name}}</div>
+                </div>
+            </a>
+        {% endfor %}
+
+        <div class="footer" id="footer">
+            <img src="../static/images/100years.png"" class="img2">
+        </div>
+    </div>
+</body>
+</html>
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<!-- <script type="text/javascript" src='js/footer.js'></script> -->
+<script src="{% static "/js/footer.js" %}"></script>
