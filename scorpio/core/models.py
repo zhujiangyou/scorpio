@@ -136,7 +136,9 @@ class Agenda(models.Model):
 
 #选择完的附加选项
 class Attach(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(default='', max_length=100)
-    credit = models.IntegerField(default=0)
-    img = models.ImageField(upload_to='Attach',null=True)
     roomAmenity = models.ForeignKey(RoomAmenity, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.name + '预订了' + self.roomAmenity.name + ',额外添加了' + self.name

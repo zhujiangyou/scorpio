@@ -1,44 +1,207 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title></title>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
-    <link href="{% static "/css/base.css" %}">
+    <style type="text/css">
+        *{
+        padding:0;
+        margin:0;
+        }
+        body{
+            /*background-color: #202837;*/
+            background-image: url(../static/images/bg.png);
+            background-size: 100% auto;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
 
+        button{
+            outline:none!important;
+        }
+
+        .picture{
+            width: 96%;
+            height: 320px;
+            margin:5px 2% 0 2%;
+        }
+
+        .img1{
+            border-radius: 10px;
+            width: 100%;
+            height: 320px;
+        }
+
+        .add-text{
+            padding:10px 20px;
+        }
+
+
+        .duigou{
+            position: absolute;
+            right: -5px;top: -5px;
+            width: 15px;height: 15px;
+            display: none;
+        }
+
+        .addImage{
+            width: 100%;
+            color: white;
+            font-size: 16px;
+        }
+
+        .addImage1{
+            position: relative;
+            border-radius: 2px;
+            display: inline-block;
+            width: 45%;
+            margin:5px 2%;
+            background-color: rgba(255,255,255,.1);
+            border-right: 5px;
+        }
+
+        .image-item{
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+            width: 40%;
+            height: auto;
+            display: inline-block;
+            vertical-align:middle;
+        }
+        .text-item{
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+            height: 100%;
+            width: 50%;
+            text-align: center;
+            margin: 0 auto;
+            font-size:12px;
+            display: inline-block;
+        }
+        .reserve{
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .btn-color{
+            background-color: #0c1d4a;
+            color: white;
+            font-size: 16px;
+            padding:5px 50px;
+            border:0;
+        }
+
+
+        /*modal开始*/
+        .submit-modal{
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .money{
+            background-color: #0c1d4a;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top:-40px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .money-modal{
+            border-radius: 5spx;
+        }
+
+        .wenzi{
+            text-align: left;
+            color: black;
+            padding:50px 10px 0 10px;
+            font-size: 17px;
+        }
+
+        .money-btn{
+            text-align: center;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+        .confirm{
+            background-color: #0c1d4a;
+            color:white;
+            font-size: 20px;
+            padding: 5px 40px;
+            border-radius: 5px;
+        }
+
+        .cancel{
+            color: #E6260F;
+            font-size: 20px;
+        }
+
+        /*modal结束*/
+
+        .footer{
+            text-align: center;
+            position: relative;
+            height: 25px;
+        }
+
+        .img2{
+            height: 25px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 16px;
+            margin: auto;
+            width: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="items">
         <div class="picture">
-            <img src="images/img1.jpeg" class="img1">
+            <img src="{{room_amenity.img.url}}" class="img1">
         </div>
         <div class="addImage">
-            <div>Add:</div>
+            <div class="add-text">Add:</div>
             <div class="addImage1">
-                <img src="images/orange1.jpg" class="image-item">
+                <img src="https://pinkslash.metatype.cn/static/images/orange1.jpg" class="image-item">
                 <div class="text-item">Juice</div>
+                <img src="https://pinkslash.metatype.cn/static/images/duigou.svg" class="duigou">
             </div>
             <div class="addImage1">
-                <img src="images/orange2.jpg" class="image-item">
+                <img src="https://pinkslash.metatype.cn/static/images/orange2.jpg" class="image-item">
                 <div class="text-item">Champagne</div>
+                <img src="https://pinkslash.metatype.cn/static/images/duigou.svg" class="duigou">
             </div>
         </div>
 
         <div class="reserve">
-            <button class="btn-color" data-toggle="modal" data-target="#myModal">Reserve</button>
+            <button class="btn-color" data-toggle="modal" data-target="#myModal" id="reserve">Reserve</button>
         </div>
-        <div class="footer" id="footer">
-            <img src="../static/images/100years.png"" class="img2">
-        </div>
+    </div>
+    <div class="footer" id="footer">
+        <img src="http://pinkslash.metatype.cn/static/images/100years.png"" class="img2">
     </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog" style="position: absolute;left: 0;right: 0; top: 400px;width: 60%;height: 500px;background-color: white;border-radius: 25px;">
+        <div class="modal-dialog" style="position: absolute;left: 0;right: 0; top: 180px;margin:auto;width: 60%;background-color: white;border-radius: 5px;">
             <div class="modal-content money-modal">
                 <div class="money">
-                    <img src="images/积分.svg" style="width: 80px;height: 80px;margin:40px">
+                    <img src="https://pinkslash.metatype.cn/static/images/credits.svg" style="width: 40px;height: 40px;margin:20px">
                 </div>
-                <div class="wenzi">Reservation needs you to purchase 30 credits. </div>
-                <div class="money-btn"><button class="confirm">Confirm</button></div>
+                <div class="wenzi"></div>
+                <div class="money-btn">
+
+                    <!-- <a href=""> -->
+                    <button class="confirm" id="confirm">Confirm</button>
+                    <!-- </a> -->
+                </div>
                 <div class="money-btn"><button class="cancel" data-dismiss="modal">Cancel</button></div>
             </div>
         </div>
@@ -49,4 +212,72 @@
 
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="{% static "/js/footer.js" %}"></script>
+<script type="text/javascript" >
+    function changefooter(){
+    footer.style.marginTop = '0px'
+    var height = $(this).height() - $(".items").height();
+    footer.style.height = height + 'px'
+    if(height<=0){
+        footer.style.marginTop = '200px'
+        }
+    }
+    changefooter()
+    $(window).resize(function(){
+        changefooter()
+    });
+
+    var choose = ''
+    $(".addImage1").click(function(){
+        if($(this).find(".duigou").css("display") == 'none'){
+            $(this).find(".duigou").css("display","block")
+
+            var choose
+
+        }else{
+            $(this).find(".duigou").css("display","none")
+        }
+    })
+
+
+    var credits = {{room_amenity.credits|safe}}
+    $("#reserve").click(function(){
+
+        var duigou1 = $(".duigou").eq(0).css("display")
+        var duigou2 = $(".duigou").eq(1).css("display")
+        var flag = 'false',flag2 = 'false';
+        if(duigou1 == 'block'){
+            flag = 'true'
+            credits += 100
+        }
+
+        if(duigou2 == 'block'){
+            flag2 = 'true'
+            credits += 100
+        }
+        $('.wenzi').text('Reservation needs you to purchase '+ credits.toString() +' credits.')
+
+
+    })
+
+    $("#confirm").click(function(){
+        var duigou1 = $(".duigou").eq(0).css("display")
+        var duigou2 = $(".duigou").eq(1).css("display")
+        var flag = 'false',flag2 = 'false';
+        if(duigou1 == 'block'){
+            flag = 'true'
+            credits += 100
+        }
+
+        if(duigou2 == 'block'){
+            flag2 = 'true'
+            credits += 100
+        }
+
+
+        // console.log(flag,flag2)
+
+
+        window.location.href = 'http://pinkslash.metatype.cn/room_amenity/reserve/{{ room_amenity.id }}/'+flag+'/'+flag2+'/'
+    })
+
+</script>

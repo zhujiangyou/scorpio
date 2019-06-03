@@ -475,12 +475,8 @@ def room_amenity_detail(request, me, room_amenity_id):
         'room_amenity': room_amenity,
         'attachs': attachs
     }
-    if roomAmenityReserve:
-        ctx['status'] = 1
-    else:
-        ctx['status'] = 0
 
-    return render(request, 'room-amenity-detail.html', ctx)
+    return render(request, 'room-amenity-detail2.html', ctx)
 
 
 @user_required
@@ -522,15 +518,32 @@ def lunch_reserve(request, me, lunch_id):
 
 
 @user_required
-def room_amenity_reserve(request, me, room_amenity_id):
+def room_amenity_reserve(request, me, room_amenity_id, flag1, flag2):
     RoomAmenityReservation.objects.filter(user=me).delete()
 
     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
     roomAmenityReserve = RoomAmenityReservation.objects.filter(
         user=me, roomAmenity=room_amenity).first()
+
     if not roomAmenityReserve:
-        RoomAmenityReservation.objects.create(
-            user=me, roomAmenity=room_amenity)
+
+        if flag1 == 'true':
+            attach = Attach.objects.filter(roomAmenity=room_amenity, name='Juice', user=me).first()
+            if attach:
+                me.credit -= 100
+            else:
+                me.credit -= 100
+                Attach.objects.create(roomAmenity=room_amenity, name='Juice', user=me)
+
+        if flag2 == 'true':
+            attach = Attach.objects.filter(roomAmenity=room_amenity, name='Champagne', user=me).first()
+            if attach:
+                me.credit -= 100
+            else:
+                me.credit -= 100
+                Attach.objects.create(roomAmenity=room_amenity, name='Champagne', user=me)
+
+        RoomAmenityReservation.objects.create(user=me, roomAmenity=room_amenity)
         if me.credit >= room_amenity.credit:
             me.credit -= room_amenity.credit
             me.save()
