@@ -136,7 +136,7 @@ class Agenda(models.Model):
 
 #选择完的附加选项
 class Attach(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(default='', max_length=100)
     roomAmenity = models.ForeignKey(RoomAmenity, on_delete=models.CASCADE)
 
