@@ -127,10 +127,12 @@
         {% endif %}
 
         {% for package in roomAmenityReservation %}
-        <div class="item">
-            <img src="{{ package.roomAmenity.img.url }}" class="img">
-            <div class="item1">{{ package.roomAmenity.name }}</div>
-        </div>
+        <a href="/room_amenity/detail/{{ package.roomAmenity.id }}" style="text-decoration:none;">
+            <div class="item">
+                <img src="{{ package.roomAmenity.img.url }}" class="img">
+                <div class="item1">{{ package.roomAmenity.name }}</div>
+            </div>
+        </a>
 
         {% endfor %}
 
@@ -140,16 +142,18 @@
         {% endif %}
 
         {% for package in lunchReservation %}
-            <div class="item">
-                <img src="{{ package.lunch.img.url }}" class="img">
-                <div class="item1">{{ package.lunch.name }}</div>
-            </div>
+            <a href="/lunch/detail/{{ package.lunch.id }}" style="text-decoration:none;">
+                <div class="item">
+                    <img src="{{ package.lunch.img.url }}" class="img">
+                    <div class="item1">{{ package.lunch.name }}</div>
+                </div>
+            </a>
         {% endfor %}
     </div>
 
 
 
-<divid="footer">
+<div id="footer">
     <img src="http://pinkslash.metatype.cn/static/images/100years.png" class="img2">
 </div>
 
