@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <title>Presentation Failure</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
@@ -47,13 +48,10 @@
     </style>
 </head>
 <body>
-<div class="header">
-    <span id="J_backBtn" class="header-back iconfont icon-arrow-left-s-line"></span>
-    <h1 class="header-title">Presentation Failure</h1>
-</div>
+
 <div class="page-pay-failed">
     <img src="../static/images/fail.png">
-    <p>Insufficient Credits</p>
+    <p style="color: white;">Insufficient Credits</p>
     <a href="/customer_profile/{{ me.id }}" style="text-decoration:none;"><button id="J_backBtn" class="button big block">Back</button></a>
 </div>
 
@@ -65,7 +63,7 @@
 <script type="text/javascript">
     function changefooter(){
         footer.style.marginBottom = '0px'
-        var height = $(this).height() - $(".page-pay-success").height()-80;
+        var height = $(this).height() - $(".page-pay-success").height()-120;
         footer.style.height = height + 'px'
         if(height<=0){
             footer.style.marginBottom = '50px'

@@ -49,15 +49,10 @@
     </style>
 </head>
 <body>
-<div class="header">
-    <span id="J_backBtn" class="header-back iconfont icon-arrow-left-s-line"></span>
-    <h1 class="header-title">Payment Successful</h1>
-</div>
+
 <div class="page-pay-success">
     <img src="../static/images/success.png">
-
-    <p>Payment Success</p>
-
+    <p style="color: white;">Payment Success</p>
     <a href="/customer_profile/{{ me.id }}" style="text-decoration:none;"><button id="J_backBtn" class="button big block">Back</button></a>
 
 </div>
@@ -70,7 +65,7 @@
 <script type="text/javascript">
     function changefooter(){
         footer.style.marginBottom = '0px'
-        var height = $(this).height() - $(".page-pay-success").height()-80;
+        var height = $(this).height() - $(".page-pay-success").height()-120;
         footer.style.height = height + 'px'
         if(height<=0){
             footer.style.marginBottom = '50px'
