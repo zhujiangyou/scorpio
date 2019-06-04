@@ -184,7 +184,7 @@
 <script type="text/javascript">
     function changefooter(){
         footer.style.marginBottom = '0px'
-        var height = $(this).height() - $(".page-pay-success").height();
+        var height = $(this).height() - $(".items").height()-80;
         footer.style.height = height + 'px'
         if(height<=0){
             footer.style.marginBottom = '50px'
