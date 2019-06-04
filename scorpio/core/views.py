@@ -473,7 +473,7 @@ def room_amenity_detail(request, me, room_amenity_id):
 
     ctx = {
         'room_amenity': room_amenity,
-        'attachs': attachs
+        'attachs': attachs,
     }
 
     return render(request, 'room-amenity-detail2.html', ctx)
@@ -690,8 +690,10 @@ def mini_login(request):
 
 @user_required
 def agenda(request, me):
+    ctx = {}
+    ctx['user'] = me
 
-    return render(request, 'agenda.html')
+    return render(request, 'agenda.html', ctx)
 
 @user_required
 def agenda_detail(request, me, agenda, agendatime):
@@ -715,7 +717,7 @@ def agenda_detail(request, me, agenda, agendatime):
         ctx['name'] = 'Working Lunch & Wrap up'
 
     ctx['agendatime'] = agendatime
-    print(ctx)
+    ctx['user'] = me
 
     return render(request, 'agenda_detail.html', ctx)
 
