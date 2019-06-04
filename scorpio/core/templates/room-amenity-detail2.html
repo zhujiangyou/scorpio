@@ -240,6 +240,8 @@
 
 
     var credits = {{room_amenity.credits|safe}}
+    console.log(credits)
+
     $("#reserve").click(function(){
 
         var duigou1 = $(".duigou").eq(0).css("display")
@@ -254,7 +256,8 @@
             flag2 = 'true'
             credits += 100
         }
-        $('.wenzi').text('Reservation needs you to purchase '+ credits.toString() +' credits.')
+
+        $('.wenzi').text('Reservation needs you to purchase '+ credits +' credits.')
 
 
     })
@@ -273,11 +276,9 @@
             credits += 100
         }
 
-
         // console.log(flag,flag2)
 
-
-        window.location.href = 'http://pinkslash.metatype.cn/room_amenity/reserve/{{ room_amenity.id }}/'+flag+'/'+flag2+'/'
+        window.location.href = 'http://pinkslash.metatype.cn/room_amenity/reserve/'+{{ room_amenity.id|safe }}+'/'+flag+'/'+flag2+'/'
     })
 
 </script>
