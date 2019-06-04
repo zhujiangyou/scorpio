@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title></title>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
     <style type="text/css">
         *{
             padding:0;
@@ -164,6 +165,11 @@
     </style>
 </head>
 <body>
+    <div class="header">
+        <span id="J_backBtn" class="header-back iconfont icon-arrow-left-s-line"></span>
+        <h1 class="header-title">{{room_amenity.name}}</h1>
+    </div>
+
     <div class="items">
         <div class="picture">
             <img src="{{room_amenity.img.url}}" class="img1">
