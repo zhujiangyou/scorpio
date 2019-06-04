@@ -6,7 +6,7 @@
     <title>June 27th Lunch Selection</title>
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
-    <link href="css/base.css" rel="stylesheet">
+    <!-- <link href="css/base.css" rel="stylesheet"> -->
     <style type="text/css">
         *{
             padding:0;
@@ -38,7 +38,7 @@
             border-radius: 10px;
         }
         .item-title{
-            padding:12px 20px;
+            padding:15px 20px;
             font-size: 21px;
             /*font-weight: 600;*/
             color: white;
@@ -50,7 +50,7 @@
         .item-button{
             border-radius: 50px;
             font-size: 13px;
-            padding: 8px 13px;
+            padding: 10px 15px;
             background: white;
         }
         .item-footer{
@@ -116,12 +116,10 @@
 <script type="text/javascript">
     function changefooter(){
         footer.style.marginBottom = '0px'
-        footer.style.height = '25px'
-        var height = $(this).height() - $(".items").height();
+        var height = $(this).height() - $(".items").height()-80;
+        footer.style.height = height + 'px'
         if(height<=0){
             footer.style.marginBottom = '50px'
-        }else{
-            footer.style.height = height + 'px'
         }
     }
     changefooter()
