@@ -5,144 +5,62 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title></title>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
-    <link href="{% static "/css/base.css" %}">
+    <!-- <link rel="stylesheet" type="text/css" href="css/base.css"> -->
     <style type="text/css">
-        .picture-title{
-            color: white;
-            font-size: 50px;
-            font-weight: 300;
-        }
-        .picture-time{
-            color: white;
-            font-size: 50px;
-            font-weight: 300;
-        }
-        .picture-text{
-            color: white;
-            font-size: 50px;
-            font-weight: 300;
-            line-height: 1.2;
-        }
         *{
             padding:0;
             margin:0;
         }
         body{
-            /*background-color: #202837;*/
-            background-image: url(http://pinkslash.metatype.cn/static/images/bg.png);
-            width:100%;
+            background-image: url(images/bg.png);
+            background-size: 100% auto;
+            width: 100%;
             height: 100%;
             position: relative;
         }
 
+        button{
+            outline:none!important;
+        }
         .items{
-            margin: 20px 40px 0 40px;
+            margin:10px 3% 0 3%;
         }
 
         .picture{
             width: 100%;
+            /*height: 320px;*/
         }
-
         .img1{
-            border-radius: 25px;
-            width: 100%;
-            height: auto;
-        }
-
-        .addImage{
-            width: 100%;
-            color: white;
-            font-size: 40px;
-            font-weight: bold;
-        }
-
-        .addImage1{
             border-radius: 10px;
-            display: inline-block;
-            width: 45%;
-            margin:5px 2%;
-            background-color: rgba(255,255,255,.1);
-            border-right: 5px;
-        }
-
-        .image-item{
-            border-radius: 10px;
-            width: 40%;
-            height: auto;
-            display: inline-block;
-            vertical-align:middle;
-        }
-        .text-item{
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-            height: 100%;
-            width: 55%;
-            text-align: center;
-            margin: 0 auto;
-            display: inline-block;
-        }
-        .reserve{
-            text-align: center;
-            margin-top: 150px;
-        }
-
-        .btn-color{
-            background-color: #0c1d4a;
-            color: white;
-            font-size: 40px;
-            padding:10px 50px;
-        }
-
-
-        /*modal开始*/
-        .submit-modal{
-            position: relative;
             width: 100%;
-            height: 100%;
+            height: 320px;
+        }
+        .picture-title{
+            padding:10px 10px 0 10px;
+            color: white;
+            font-size: 20px;
+            font-weight: 300;
+        }
+        .picture-time{
+            padding:5px 10px 0 10px;
+            color: white;
+            font-size: 20px;
+            font-weight: 300;
+        }
+        .picture-text{
+            padding:5px 10px 0 10px;
+            color: white;
+            font-size: 20px;
+            font-weight: 300;
+            line-height: 1.2;
         }
 
-        .money{
-            background-color: #0c1d4a;
-            border-radius: 50%;
-            width: 160px;
-            height: 160px;
-            position: absolute;
-            left: 0;
-            right: 0;
-            top:-80px;
-            margin: auto;
-            text-align: center;
-        }
-        .wenzi{
-            text-align: left;
-            color: black;
-            padding:150px 30px 0 30px;
-            font-size: 40px;
-        }
-
-        .money-btn{
-            text-align: center;
-            margin: 20px 0;
-        }
-        .confirm{
-            background-color: #0c1d4a;
-            color:white;
-            font-size: 40px;
-            padding: 10px 40px;
-        }
-
-        .cancel{
-            color: red;
-            font-size: 40px;
-        }
-
-        /*modal结束*/
-
-         #footer{
+        .footer{
             text-align: center;
             position: relative;
             height: 25px;
         }
+
         .img2{
             height: 25px;
             position: absolute;
@@ -152,8 +70,6 @@
             margin: auto;
             width: auto;
         }
-
-
     </style>
 </head>
 <body>
@@ -177,11 +93,11 @@
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
     function changefooter(){
-        footer.style.marginBottom = '0px'
-        var height = $(this).height() - $(".items").height()-40;
+        footer.style.marginTop = '0px'
+        var height = $(this).height() - $(".items").height()-10;
         footer.style.height = height + 'px'
         if(height<=0){
-            footer.style.marginBottom = '50px'
+            footer.style.marginTop = '200px'
         }
     }
     changefooter()
