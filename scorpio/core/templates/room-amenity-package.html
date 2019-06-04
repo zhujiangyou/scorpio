@@ -219,7 +219,8 @@
 </html>
 
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="{% static "/js/footer.js" %}">
+<script src="{% static "/js/app.js" %}"></script>
+<script>
     var height = $(this).height() - $(".items").height() - 170;
     footer.style.height = height + 'px'
     if(height<=0){
