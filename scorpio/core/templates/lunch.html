@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title></title>
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
+    <link href="css/base.css" rel="stylesheet">
+    <style type="text/css">
+        .items{
+            padding: 0 2%;
+            position: relative;
+        }
+        .item{
+            margin-top: 65px;
+            position: relative;
+            /*height: 400px;*/
+            border-radius: 10px;
+            background-size: 100% 100%;
+        }
+        .item-item{
+            /*background:rgba(0,0,255,.3);*/
+            background:linear-gradient(to right,#3f5081 0%, rgba(0,0,255,.3) 40%);
+            height: 100%;
+            border-radius: 10px;
+        }
+        .item-title{
+            padding:12px 20px;
+            font-size: 21px;
+            /*font-weight: 600;*/
+            color: white;
+        }
+        .item-div{
+            padding:0px 50px;
+            text-align: right;
+        }
+        .item-button{
+            border-radius: 50px;
+            font-size: 13px;
+            padding: 8px 13px;
+            background: white;
+        }
+        .item-footer{
+            padding: 18px;
+            font-size: 12px;
+            color: white;
+            font-weight: 300;
+        }
+
+        #footer{
+            text-align: center;
+            position: relative;
+            height: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span id="J_backBtn" class="header-back iconfont icon-arrow-left-s-line"></span>
+        <h1 class="header-title">June 27th Lunch Selection</h1>
+    </div>
+    <div class="items">
+
+        {% for package in packages %}
+            <div class="item" style="background-image: url({{package.img.url}});">
+                <div class="item-item">
+                <!-- <img src="" class="item-img"> -->
+                    {% if package.status == 0 %}
+                        <div class="item-title">Basic</div>
+                    {%  else %}
+                        <div class="item-title">Premium</div>
+                    {% endif %}
+
+                    <div class="item-div">
+                        <button class="item-button">Choose</button>
+                    </div>
+                    <div class="item-footer">{{package.credit}}</div>
+                </div>
+            </div>
+            <div style="height: 1px;width: 100%;"></div>
+        {% endfor %}
+
+    </div>
+
+    <div class="footer" id="footer">
+        <img src="http://pinkslash.metatype.cn/static/images/100years.png"" class="img2">
+    </div>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="{% static "/js/app.js" %}"></script>
+<script type="text/javascript">
+    function changefooter(){
+        footer.style.marginTop = '0px'
+        var height = $(this).height() - $(".items").height()-120;
+        footer.style.height = height + 'px'
+        if(height<=0){
+            footer.style.marginTop = '200px'
+        }
+    }
+    changefooter()
+    $(window).resize(function(){
+        changefooter()
+    });
+</script>

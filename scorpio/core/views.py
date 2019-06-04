@@ -460,7 +460,7 @@ def lunch(request, me):
         'packages': packages,
         'status': 'lunch'
     }
-    return render(request, 'packages.html', ctx)
+    return render(request, 'lunch.html', ctx)
 
 
 @user_required

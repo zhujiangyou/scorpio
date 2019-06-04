@@ -8,6 +8,11 @@ USER_STATUS = [
     (2, 'host'),
 ]
 
+LUNCH_STATUS = [
+    (0, 'Basic'),
+    (1, 'Premium'),
+]
+
 class User(models.Model):
 
     username = models.CharField(max_length=100, verbose_name='username', default='')
@@ -105,6 +110,7 @@ class Lunch(models.Model):
     img = models.ImageField(upload_to='lunch')
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     credit = models.IntegerField(default=0)
+    status = models.IntegerField(choices=LUNCH_STATUS)
 
 
 class RoomAmenity(models.Model):
