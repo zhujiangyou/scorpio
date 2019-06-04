@@ -182,19 +182,18 @@
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="{% static "/js/app.js" %}"></script>
 <script type="text/javascript">
-function changefooter(){
-    footer.style.marginTop = '0px'
-    var height = $(this).height() - $(".items").height()-40;
-    footer.style.height = height + 'px'
-    if(height<=0){
-        footer.style.marginTop = '200px'
+    function changefooter(){
+        footer.style.marginBottom = '0px'
+        var height = $(this).height() - $(".items").height()-80;
+        footer.style.height = height + 'px'
+        if(height<=0){
+            footer.style.marginBottom = '50px'
+        }
     }
-}
-changefooter()
-$(window).resize(function(){
     changefooter()
-});
-
+    $(window).resize(function(){
+        changefooter()
+    });
 </script>
 </body>
 </html>
