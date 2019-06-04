@@ -467,15 +467,18 @@ def lunch(request, me):
 @user_required
 def room_amenity_detail(request, me, room_amenity_id):
     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
+    ctx = {
+        'room_amenity': room_amenity,
+    }
     roomAmenityReserve = RoomAmenityReservation.objects.filter(
         user=me, roomAmenity=room_amenity).first()
 
-    attachs = Attach.objects.filter(roomAmenity=room_amenity).first()
+    if roomAmenityReserve:
+        ctx['status'] = 1
+    else:
+        ctx['status'] = 0
 
-    ctx = {
-        'room_amenity': room_amenity,
-        'attachs': attachs,
-    }
+
 
     return render(request, 'room-amenity-detail2.html', ctx)
 
