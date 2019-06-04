@@ -82,14 +82,13 @@
           justify-content: center;
         }
 
-
         *{
             padding:0;
             margin:0;
         }
         body{
             /*background-color: #202837;*/
-            background-image: url(../static/images/bg.png);
+            background-image: url(images/bg.png);
             background-size: 100% auto;
             width: 100%;
             height: 100%;
@@ -101,7 +100,7 @@
         }
 
         .items{
-            margin:20px 30px;
+            margin:18px 20px;
         }
         .item{
             background:rgba(255,255,255,.1);
@@ -118,21 +117,21 @@
             color: white;
             text-align: center;
             padding-top: 20px;
-            padding-bottom: 30px;
+            padding-bottom: 35px;
             font-size: 24px;
             font-weight: 500;
         }
 
         .item-history{
-            font-size: 12px;
-            margin:10px 0 10px 10px;
+            font-size: 14px;
+            margin:12px 0 12px 10px;
             color: white;
         }
 
         .item-chidren{
             position: relative;
             color: white;
-            padding:6px 0;
+            padding:10px 0;
         }
         .item-chidren::after{
             content:'';
@@ -143,7 +142,7 @@
         }
 
         .item-chidren-title{
-            font-size: 12px;
+            font-size: 14px;
         }
 
         .item-chidren-content{
@@ -153,7 +152,7 @@
 
         .item-chidren-money{
             display: table;
-            font-size: 12px;
+            font-size: 14px;
             position: absolute;
             right: 5px;
             top:0;bottom: 0;margin:auto;
@@ -161,7 +160,7 @@
         ::-webkit-scrollbar{display:none;}
 
 
-        .footer{
+        #footer{
             text-align: center;
             position: relative;
             height: 25px;
@@ -172,7 +171,7 @@
             position: absolute;
             left: 0;
             right: 0;
-            bottom: 16px;
+            bottom: 0px;
             margin: auto;
             width: auto;
         }
@@ -191,7 +190,7 @@
             <div class="item-value">{{ me.credit }}</div>
         </div>
         <div class="item-history">Credits History</div>
-        <div class="item" style="padding:0 10px;overflow: auto;height: 330px;">
+        <div class="item" style="padding:0 10px;overflow: auto;">
             {% for history in histories %}
                 <div class="item-chidren">
                     <div class="item-chidren-title">{{ history.desc }}</div>
@@ -202,8 +201,8 @@
 
         </div>
     </div>
-    <div class="footer" id="footer">
-        <img src="../static/images/100years.png" class="img2">
+    <div id="footer">
+        <img src="http://pinkslash.metatype.cn/static/images/100years.png" class="img2">
     </div>
 </body>
 </html>
