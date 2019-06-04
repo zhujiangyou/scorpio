@@ -38,7 +38,7 @@
             border-radius: 10px;
         }
         .item-title{
-            padding:15px 20px;
+            padding:20px 20px;
             font-size: 21px;
             /*font-weight: 600;*/
             color: white;
@@ -50,11 +50,11 @@
         .item-button{
             border-radius: 50px;
             font-size: 13px;
-            padding: 10px 15px;
+            padding: 8px 15px;
             background: white;
         }
         .item-footer{
-            padding: 18px;
+            padding: 20px;
             font-size: 12px;
             color: white;
             font-weight: 300;
@@ -84,7 +84,7 @@
     <div class="items">
 
         {% for package in packages %}
-            <div class="item" style="background-image: url({{package.img.url}});">
+            <div class="item" style="background-image: url({{package.img.url}});;background-size: 100% auto">
                 <div class="item-item">
                 <!-- <img src="" class="item-img"> -->
                     {% if package.status == 0 %}
