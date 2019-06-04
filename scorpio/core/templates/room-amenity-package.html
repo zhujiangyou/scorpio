@@ -8,6 +8,37 @@
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <style type="text/css">
+
+        .header {
+          position: fixed;
+          width: 100%;
+          height: 44px;
+          left: 0;
+          top: 0;
+          z-index: 100;
+          background: #FFFFFF;
+        }
+        .header-title {
+          height: 100%;
+          font-size: 20px;
+          border-bottom: 1px solid #f4f4f4;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .header-back {
+          position: absolute;
+          width: 44px;
+          height: 44px;
+          left: 0;
+          top: 0;
+          font-size: 30px !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
         *{
             padding:0;
             margin:0;
