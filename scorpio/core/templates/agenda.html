@@ -217,13 +217,13 @@
         }
         .meta-time{
             width: 25%;
-            padding:2px 0;
+            padding:6px 0;
             display: inline-block;
             color: white;
         }
         .meta-event{
             min-width: 25%;
-            padding:2px 0;
+            padding:6px 0;
             display: inline-block;
             text-align: left;
             color: white;
@@ -327,4 +327,17 @@
 </html>
 
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="{% static "/js/footer.js" %}"></script>
+<script type="text/javascript">
+    function changefooter(){
+        footer.style.marginBottom = '0px'
+        var height = $(this).height() - $(".items").height()-80;
+        footer.style.height = height + 'px'
+        if(height<=0){
+            footer.style.marginBottom = '50px'
+        }
+    }
+    changefooter()
+    $(window).resize(function(){
+        changefooter()
+    });
+</script>
