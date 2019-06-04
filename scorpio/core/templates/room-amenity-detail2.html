@@ -1,9 +1,11 @@
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title></title>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
+    <link href="{% static "/css/base.css" %}">
     <style type="text/css">
         *{
         padding:0;
@@ -281,4 +283,11 @@
         window.location.href = 'http://pinkslash.metatype.cn/room_amenity/reserve/'+{{ room_amenity.id|safe }}+'/'+flag+'/'+flag2+'/'
     })
 
+</script>
+<script type="text/javascript">
+    var height = $(this).height() - $(".items").height() - 170;
+    footer.style.height = height + 'px'
+    if(height<=0){
+        footer.style.marginTop = '200px'
+    }
 </script>
