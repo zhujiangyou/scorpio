@@ -110,7 +110,7 @@ class Lunch(models.Model):
     img = models.ImageField(upload_to='lunch')
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     credit = models.IntegerField(default=0)
-    status = models.IntegerField(choices=LUNCH_STATUS)
+    status = models.IntegerField(choices=LUNCH_STATUS, default=0)
 
 
 class RoomAmenity(models.Model):
