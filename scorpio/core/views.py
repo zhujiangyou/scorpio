@@ -136,7 +136,8 @@ def wechat_login(request):
                     if user.name and user.hotel_name:
                         food_id = status.split('_')[2]
                         food = Food.objects.filter(id=food_id).first()
-                        if user.credit >= food.credit:
+                        # if user.credit >= food.credit:
+                        if (user.credit-food.credit) >= (-1800):
                             user.credit -= food.credit
                             user.save()
                             provider = food.provider
@@ -504,7 +505,7 @@ def lunch_reserve(request, me, lunch_id):
         user=me, lunch=lunch).first()
     if not lunchReservation:
         LunchReservation.objects.create(user=me, lunch=lunch)
-        if me.credit >= lunch.credit:
+        if (me.credit-lunch.credit) >= (-1800):
             me.credit -= lunch.credit
             me.save()
             History.objects.create(user=me,
@@ -526,8 +527,9 @@ def room_amenity_reserve(request, me, room_amenity_id, flag1, flag2):
         user=me, roomAmenity=room_amenity).first()
 
     if not roomAmenityReserve:
-
+        ewai = 0
         if flag1 == 'true':
+            ewai += 100
             attach = Attach.objects.filter(roomAmenity=room_amenity, name='Juice', user=me).first()
             if attach:
                 me.credit -= 100
@@ -536,6 +538,8 @@ def room_amenity_reserve(request, me, room_amenity_id, flag1, flag2):
                 Attach.objects.create(roomAmenity=room_amenity, name='Juice', user=me)
 
         if flag2 == 'true':
+
+            ewai += 100
             attach = Attach.objects.filter(roomAmenity=room_amenity, name='Champagne', user=me).first()
             if attach:
                 me.credit -= 100
@@ -544,11 +548,13 @@ def room_amenity_reserve(request, me, room_amenity_id, flag1, flag2):
                 Attach.objects.create(roomAmenity=room_amenity, name='Champagne', user=me)
 
         RoomAmenityReservation.objects.create(user=me, roomAmenity=room_amenity)
-        if me.credit >= room_amenity.credit:
+
+        if (me.credit-room_amenity.credit) >= (-1800):
             me.credit -= room_amenity.credit
             me.save()
+
             History.objects.create(user=me,
-                                   credit='-{0}'.format(str(room_amenity.credit)),
+                                   credit='-{0}'.format(str(room_amenity.credit+ewai)),
                                    desc='Room Amenity Reservation')
             return redirect('/reserve_success')
         else:
