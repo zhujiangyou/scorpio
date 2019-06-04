@@ -1,11 +1,11 @@
-{% load staticfiles %}
+<!-- {% load staticfiles %}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>{{lunch.name}}</title> -->
+    <title>{{lunch.name}}</title>
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
 
@@ -23,7 +23,6 @@
 <br>
 <div class="page-lunch-detail">
     <img style="width: 100%" src="{{ lunch.img.url }}">
-    <!-- <p>Payment Success</p> -->
     {% if status == 0 %}
         <button data-toggle="modal" data-target="#myModal" class="button big blue-button">Reserve</button></a>
     {% else %}
@@ -35,18 +34,15 @@
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
-        <!-- 模态框头部 -->
         <div class="modal-header">
           <h4 class="modal-title">Reservation</h4>
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
 
-        <!-- 模态框主体 -->
         <div class="modal-body">
          {{ lunch.credit }} credits will be deducted from the reservation. Are you sure?
         </div>
 
-        <!-- 模态框底部 -->
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             <a href="/lunch/reserve/{{ lunch.id }}" style="text-decoration:none;">
@@ -65,3 +61,119 @@
 <script src="{% static "/js/app.js" %}"></script>
 </body>
 </html>
+ -->
+
+ {% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{lunch.name}}</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+        }
+        body{
+            /*background-color: #202837;*/
+            background-image: url(http://pinkslash.metatype.cn/static/images/bg.png);
+            background-size: 100% auto;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        button{
+            outline:none!important;
+        }
+
+        .page-lunch-detail{
+            width: 100%;
+            padding:10px;
+        }
+
+        .lunch-picture{
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+        }
+
+        #footer{
+            text-align: center;
+            position: relative;
+            height: 25px;
+        }
+
+        .img2{
+            height: 25px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0px;
+            margin: auto;
+            width: auto;
+        }
+
+    </style>
+</head>
+<body>
+<br>
+<br>
+<div class="page-lunch-detail">
+    <img src="{{ lunch.img.url }}" class="lunch-picture">
+    {% if status == 0 %}
+        <button data-toggle="modal" data-target="#myModal" class="button big blue-button">Reserve</button></a>
+    {% else %}
+        <button class="button big blue-button">Reserved</button>
+    {% endif %}
+</div>
+<div id="footer">
+    <img src="http://pinkslash.metatype.cn/static/images/100years.png"" class="img2">
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="position: absolute;left: 0;right: 0; top: 180px;margin:auto;width: 60%;background-color: white;border-radius: 5px;">
+        <div class="modal-content money-modal">
+            <div class="money">
+                <img src="https://pinkslash.metatype.cn/static/images/credits.svg" style="width: 40px;height: 40px;margin:20px">
+            </div>
+            <div class="wenzi"></div>
+            <div class="money-btn">
+                <a href="http://pinkslash.metatype.cn/lunch/reserve/{{lunch.id}}/">
+                    <button class="confirm" id="confirm">Confirm</button>
+                </a>
+            </div>
+            <div class="money-btn"><button class="cancel" data-dismiss="modal">Cancel</button></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static "/js/app.js" %}"></script>
+</body>
+</html>
+<script type="text/javascript">
+    function changefooter(){
+        footer.style.marginBottom = '0px'
+        footer.style.height = '25px'
+        var height = $(this).height() - $(".page-lunch-detail").height()-100;
+        if(height<=25){
+            footer.style.marginBottom = '50px'
+        }else{
+            footer.style.height = height + 'px'
+        }
+    }
+    changefooter()
+    $(window).resize(function(){
+        changefooter()
+    });
+</script>
