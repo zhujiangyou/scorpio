@@ -178,7 +178,7 @@
 
         /*modal结束*/
 
-        .footer{
+        #footer{
             text-align: center;
             position: relative;
             height: 25px;
@@ -201,7 +201,7 @@
             background-color: white;
             margin:20px 2%;
             width: 96%;
-            height: 170px;
+            height: 200px;
             position: relative;
         }
 
@@ -254,9 +254,16 @@
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script src="{% static "/js/app.js" %}"></script>
 <script>
-    var height = $(this).height() - $(".items").height() - 170;
-    footer.style.height = height + 'px'
-    if(height<=0){
-        footer.style.marginTop = '200px'
+    function changefooter(){
+        footer.style.marginTop = '0px'
+        var height = $(this).height() - $(".items").height()-80;
+        footer.style.height = height + 'px'
+        if(height<=0){
+            footer.style.marginTop = '200px'
+        }
     }
+    changefooter()
+    $(window).resize(function(){
+        changefooter()
+    });
 </script>
