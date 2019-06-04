@@ -434,7 +434,9 @@ def user_reservation(request, me):
 
     ctx = {
         'roomAmenityReservation': roomAmenityReservation,
-        'lunchReservation': lunchReservation
+        'lunchReservation': lunchReservation,
+        'user':me
+
     }
 
     return render(request, 'user_reservation.html', ctx)

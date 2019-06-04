@@ -4,22 +4,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <title>My Reservation</title> -->
+    <title>My Reservation</title>
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
-</head>
-<body>
-<div class="header">
-    <span id="J_backBtn" class="header-back iconfont icon-arrow-left-s-line"></span>
-    <h1 class="header-title">My Reservation</h1>
-</div>
-<br>
-<div class="page-reservation">
-    {% if not roomAmenityReservation %}
+    <link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">
+        <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+        }
+        body{
+            /*background-color: #202837;*/
+            background-image: url(http://pinkslash.metatype.cn/static/images/bg.png);
+            background-size: 100% auto;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
 
+        button{
+            outline:none!important;
+        }
+        .items{
+            margin-top: 30px
+        }
+        .item{
+            border-radius: 10px;
+            background-color: white;
+            margin:15px 2%;
+            width: 96%;
+            height: 200px;
+            position: relative;
+        }
+
+        .img{
+            border-radius: 10px;
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .item1{
+            background-color: white;
+            position: absolute;
+            bottom: 0;
+            padding: 10px 0 10px 5%;
+            width: 95%;
+            height: 16px;
+            font-size: 16px;
+            font-weight: bold;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .food-title{
+            color: white;
+            margin:0 0 0 20px;
+            font-size: 20px;
+        }
+        #footer{
+            text-align: center;
+            position: relative;
+            height: 25px;
+        }
+
+        .img2{
+            height: 25px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 16px;
+            margin: auto;
+            width: auto;
+        }
+    </style>
+</head>
+<body  id="body">
+<!-- <div class="page-reservation"> -->
+    <!-- {% if not roomAmenityReservation %}
     {% else %}
         <h2 class="header-title">Room Amenity Reservation</h2>
     {% endif %}
+
+
     <ul class="reservation-list">
         {% for package in roomAmenityReservation %}
             <a href="/room_amenity/detail/{{ package.roomAmenity.id }}" style="text-decoration:none;">
@@ -30,9 +97,9 @@
                     </div>
                 </li>
             </a>
-        {% endfor %}
+        {% endfor %} -->
 
-    </ul>
+<!--     </ul>
     <br>
     {% if not lunchReservation %}
     {% else %}
@@ -50,13 +117,79 @@
             </a>
         {% endfor %}
     </ul>
+</div>
+ -->
 
+    <div class="items">
+        {% if not roomAmenityReservation %}
+        {% else %}
+            <div class="food-title">Room Amenities Reservation</div>
+        {% endif %}
+
+        {% for package in roomAmenityReservation %}
+        <div class="item">
+            <img src="{{ package.roomAmenity.img.url }}" class="img">
+            <div class="item1">{{ package.roomAmenity.name }}</div>
+        </div>
+
+        {% endfor %}
+
+        {% if not lunchReservation %}
+        {% else %}
+            <div class="food-title">Lunch Reservation</div>
+        {% endif %}
+
+        {% for package in lunchReservation %}
+            <div class="item">
+                <img src="{{ package.lunch.img.url }}" class="img">
+                <div class="item1">{{ package.lunch.name }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+
+<divid="footer">
+    <img src="http://pinkslash.metatype.cn/static/images/100years.png" class="img2">
 </div>
 
-
-
+<div class="footer">
+    <div class="footer-item active" >
+        <a href="https://pinkslash.metatype.cn/user_reservation">
+            <span class="iconfont icon-food"></span>
+            <p class="footer-item-label" >My Res</p>
+        </a>
+    </div>
+    <div class="footer-item">
+        <a href="https://pinkslash.metatype.cn/agenda/">
+            <!-- <span class="iconfont icon-calendar"></span> -->
+            <i class="fas fa-calendar"></i>
+            <p class="footer-item-label">Agenda</p>
+        </a>
+    </div>
+    <div class="footer-item ">
+        <a href="https://pinkslash.metatype.cn/customer_profile/{{ user.id }}">
+            <span class="iconfont icon-yonghu"></span>
+            <p class="footer-item-label">Profile</p>
+        </a>
+    </div>
+</div>
 
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="{% static "/js/app.js" %}"></script>
+<script type="text/javascript">
+    function changefooter(){
+        footer.style.marginBottom = '0px'
+        var height = $(this).height() - $(".page-pay-success").height()-120;
+        footer.style.height = height + 'px'
+        if(height<=0){
+            footer.style.marginBottom = '50px'
+        }
+    }
+    changefooter()
+    $(window).resize(function(){
+        changefooter()
+    });
+</script>
 </body>
 </html>
