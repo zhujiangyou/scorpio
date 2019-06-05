@@ -9,12 +9,26 @@
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
     <link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">
     <style type="text/css">
-        .page-customer-profile{
+        
+        *{
+            padding:0;
+            margin:0;
+        }
+        body{
+            /*background-color: #202837;*/
             background-image: url(http://pinkslash.metatype.cn/static/images/bg.png);
-            background-size: 100% 100%;
+            background-size: 100% auto;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .page-customer-profile{
+            /*background-image: url(http://pinkslash.metatype.cn/static/images/bg.png);
+            background-size: 100% 100%;*/
         }
         .page-customer-profile .profile{
             background:rgba(0,0,0,0);
+            padding: 20px 0 10px 0;
         }
         .menu .menu-item {
             background: rgba(255,255,255,.1);
@@ -85,7 +99,7 @@
             </a>
         </li>
     </ul>
-    <div style="margin:0 auto; width:150px;height:150px; padding-top: 20px">
+    <div style="margin: 20px auto 0; width:150px;height:150px;">
         <img src="{{ user.qrcode.url}}" style="width: 100%; height: 100%">
     </div>
     <button class="scan-button button primary" id='scanQRCode'>Scan QR</button>

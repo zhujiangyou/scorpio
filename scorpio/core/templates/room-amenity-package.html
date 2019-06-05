@@ -44,8 +44,8 @@
         }
         body{
             /*background-color: #202837;*/
-            background-image: url(../static/images/bg.png);
-            background-size: 100% auto;
+            background-image: url(http://pinkslash.metatype.cn/static/images/bg.png);
+            background-size: 100% 100%;
             width: 100%;
             height: 100%;
             position: relative;
@@ -178,7 +178,7 @@
 
         /*modal结束*/
 
-        .footer{
+        #footer{
             text-align: center;
             position: relative;
             height: 25px;
@@ -232,7 +232,7 @@
         <h1 class="header-title">Room Amenities Selection</h1>
     </div> -->
 
-    <br>
+    <!-- <br> -->
     <div class="items">
 
         {% for package in packages %}
@@ -243,20 +243,26 @@
                     <div class="item1">{{package.name}}</div>
                 </div>
         {% endfor %}
-
-        <div class="footer" id="footer">
-            <img src="http://pinkslash.metatype.cn/static/images/100years.png"" class="img2">
-        </div>
     </div>
+    <div class="footer" id="footer">
+            <img src="http://pinkslash.metatype.cn/static/images/100years.png" class="img2">
+        </div>
 </body>
 </html>
 
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script src="{% static "/js/app.js" %}"></script>
 <script>
-    var height = $(this).height() - $(".items").height() - 170;
-    footer.style.height = height + 'px'
-    if(height<=0){
-        footer.style.marginTop = '200px'
+    function changefooter(){
+        footer.style.marginTop = '0px'
+        var height = $(this).height() - $(".items").height()-80;
+        footer.style.height = height + 'px'
+        if(height<=0){
+            footer.style.marginTop = '200px'
+        }
     }
+    changefooter()
+    $(window).resize(function(){
+        changefooter()
+    });
 </script>
