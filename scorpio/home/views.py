@@ -189,11 +189,11 @@ def data_report(request, me):
     ctx['all_users'] = User.objects.filter(status=0)
     users = User.objects.filter(status=0).order_by('credit')
     if users.count() < 20:
-        ctx['top_user_names'] = json.dumps(list(users.values_list('name', flat=True)))
-        ctx['top_user_credits'] = json.dumps(list(users.values_list('credit', flat=True)))
+        ctx['top_user_names'] = json.dumps(list(users.values_list('name', flat=True))[::-1])
+        ctx['top_user_credits'] = json.dumps(list(users.values_list('credit', flat=True))[::-1])
     else:
-        ctx['top_user_names'] = json.dumps(list(users[0:20].values_list('name', flat=True)))
-        ctx['top_user_credits'] = json.dumps(list(users[0:20].values_list('credit', flat=True)))
+        ctx['top_user_names'] = json.dumps(list(users[0:20].values_list('name', flat=True))[::-1])
+        ctx['top_user_credits'] = json.dumps(list(users[0:20].values_list('credit', flat=True))[::-1])
 
 
     foods = Food.objects.all()
@@ -220,15 +220,30 @@ def countdown(request, me):
         'title': 'DATA REPORT', 'subtitle': 'report',
     }
 
+
     users = User.objects.filter(status=0).order_by('-credit')
     ctx['all_users'] = User.objects.filter(status=0)
     if users.count() < 20:
-        ctx['countdown_user_names'] = json.dumps(list(users.values_list('name', flat=True)))
-        ctx['countdown_user_credits'] = json.dumps(list(users.values_list('credit', flat=True)))
+        ctx['top_user_names'] = json.dumps(list(users.values_list('name', flat=True))[::-1])
+        ctx['top_user_credits'] = json.dumps(list(users.values_list('credit', flat=True))[::-1])
     else:
-        ctx['countdown_user_names'] = json.dumps(list(users[0:20].values_list('name', flat=True)))
-        ctx['countdown_user_credits'] = json.dumps(list(users[0:20].values_list('credit', flat=True)))
+        ctx['top_user_names'] = json.dumps(list(users[0:20].values_list('name', flat=True))[::-1])
+        ctx['top_user_credits'] = json.dumps(list(users[0:20].values_list('credit', flat=True))[::-1])
         # ctx['countdown'] = users[0:20]
+
+
+    foods = Food.objects.all()
+
+    ctx['food_names'] = []
+    ctx['counts'] = []
+
+    for _ in foods:
+        count = UserFood.objects.filter(food=_).count()
+        ctx['food_names'].append(_.name)
+        ctx['counts'].append(count)
+
+    ctx['foods'] = foods
+
 
     return render(request, 'team/dashboard.html', ctx)
 
