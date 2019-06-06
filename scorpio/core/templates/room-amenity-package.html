@@ -194,7 +194,8 @@
             width: auto;
         }
         .items{
-            margin-top: 60px
+            padding-top: 60px;
+            min-height: 1px;
         }
         .item{
             border-radius: 10px;
@@ -255,7 +256,7 @@
 <script>
     function changefooter(){
         footer.style.marginTop = '0px'
-        var height = $(this).height() - $(".items").height() - 60;
+        var height = $(this).height() - $(".items").height() - 75;
         footer.style.height = height + 'px'
         if(height<=82){
             footer.style.height = '82px'
