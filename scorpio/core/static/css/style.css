@@ -73,6 +73,15 @@ body {
 .footer .footer-item a p {
   font-size: 12px;
 }
+.footer-img{
+    height: 23px;
+    width: auto;
+}
+.footer-active{
+    -webkit-filter: drop-shadow(#0b1b4b 80px 0px);
+    filter: drop-shadow(#0b1b4b 80px 0);
+    transform: translateX(-80px);
+}
 .division {
   height: 8px;
   border: none;
