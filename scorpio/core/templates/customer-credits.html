@@ -148,7 +148,7 @@
         }
 
         .item-chidren-content{
-            font-size: 8px;
+            font-size: 10px;
             font-weight: 300;
         }
 
@@ -208,25 +208,30 @@
     </div>
 
 
-    <div class="footer">
-    <div class="footer-item">
+<div class="footer">
+    <div class="footer-item active">
         <a href="https://pinkslash.metatype.cn/user_reservation">
-            <span class="iconfont icon-food"></span>
-            <p class="footer-item-label">My Reservation</p>
+            <!-- <span class="iconfont icon-food"></span> -->
+            <img src="http://pinkslash.metatype.cn/static/images/szxdf.svg" class="footer-img">
+            <p class="footer-item-label" >My Res</p>
         </a>
     </div>
-    <div class="footer-item ">
+    <div class="footer-item">
         <a href="https://pinkslash.metatype.cn/agenda/">
-            <i class="fas fa-calendar"></i>
+            <!-- <span class="iconfont icon-calendar"></span> -->
+            <!-- <i class="fas fa-calendar"></i> -->
+            <img src="http://pinkslash.metatype.cn/static/images/rili.svg" class="footer-img">
             <p class="footer-item-label">Agenda</p>
         </a>
     </div>
-    <div class="footer-item ">
-        <a href="https://pinkslash.metatype.cn/customer_profile/{{ me.id }}">
-            <span class="iconfont icon-yonghu"></span>
+    <div class="footer-item"  style="overflow:hidden;">
+        <a href="https://pinkslash.metatype.cn/customer_profile/{{ user.id }}">
+            <!-- <span class="iconfont icon-yonghu"></span> -->
+            <img src="http://pinkslash.metatype.cn/static/images/usercenter.svg" class="footer-img footer-active">
             <p class="footer-item-label">Profile</p>
         </a>
     </div>
+</div>
 </div>
 </body>
 </html>
