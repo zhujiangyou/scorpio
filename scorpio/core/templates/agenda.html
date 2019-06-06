@@ -47,7 +47,7 @@
         body{
             /*background-color: #202837;*/
             background-image: url(../static/images/bg.png);
-            background-size: 100% auto;
+            background-size: 100% 100%;
             width: 100%;
             height: 100%;
             position: relative;
@@ -334,10 +334,10 @@
 <script type="text/javascript">
 function changefooter(){
     footer.style.marginTop = '0px'
-    var height = $(this).height() - $(".items").height()-40;
+    var height = $(this).height() - $(".items").height();
     footer.style.height = height + 'px'
-    if(height<=0){
-        footer.style.marginTop = '200px'
+    if(height<=82){
+        footer.style.height = '82px'
     }
 }
 changefooter()

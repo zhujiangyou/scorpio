@@ -54,7 +54,8 @@ body {
   color: #606266;
 }
 .footer .footer-item.active {
-  color: #F56C6C;
+  /*color: #F56C6C;*/
+  color: #0b1b4b;
 }
 .footer .footer-item a {
   padding-top: 2px;
