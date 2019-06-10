@@ -221,7 +221,7 @@
             width: 95%;
             height: 16px;
             font-size: 16px;
-            /*font-weight: bold;*/
+            font-weight: bold;
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
         }
@@ -241,7 +241,7 @@
                     <a href="/room_amenity/detail/{{ package.id }}" style="text-decoration:none;">
                         <img src="{{ package.img.url }}" class="img">
                     </a>
-                    <div class="item1">{{package.name}}</div>
+                    <div class="item1" style="font-family: pingfang-fc">{{package.name}}</div>
                 </div>
         {% endfor %}
     </div>
