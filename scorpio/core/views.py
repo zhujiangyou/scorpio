@@ -446,7 +446,7 @@ def user_reservation(request, me):
 def room_amenity(request):
 
     # packages = RoomAmenity.objects.filter(event=me.event)
-    packages = RoomAmenity.objects.filter().first()
+    packages = RoomAmenity.objects.filter()
     print(packages)
     ctx = {
         'packages': packages,
