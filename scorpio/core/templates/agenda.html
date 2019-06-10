@@ -47,7 +47,7 @@
         body{
             /*background-color: #202837;*/
             background-image: url(../static/images/bg.png);
-            background-size: 100% auto;
+            background-size: 100% 100%;
             width: 100%;
             height: 100%;
             position: relative;
@@ -189,7 +189,7 @@
             position: absolute;
             left: 0;
             right: 0;
-            bottom: 16px;
+            bottom: 44px;
             margin: auto;
             width: auto;
         }
@@ -310,19 +310,22 @@
     <div class="footer">
         <div class="footer-item">
             <a href="https://pinkslash.metatype.cn/user_reservation">
-                <span class="iconfont icon-food"></span>
+                <!-- <span class="iconfont icon-food"></span> -->
+                <img src="http://pinkslash.metatype.cn/static/images/szxdf.svg" class="footer-img">
                 <p class="footer-item-label">My Res</p>
             </a>
         </div>
-        <div class="footer-item active">
+        <div class="footer-item active" style="overflow: hidden;">
             <a href="https://pinkslash.metatype.cn/agenda/">
-                <i class="fas fa-calendar"></i>
+                <!-- <i class="fas fa-calendar"></i> -->
+                <img src="http://pinkslash.metatype.cn/static/images/rili.svg" class="footer-img footer-active">
                 <p class="footer-item-label">Agenda</p>
             </a>
         </div>
         <div class="footer-item ">
             <a href="https://pinkslash.metatype.cn/customer_profile/{{ user.id }}">
-                <span class="iconfont icon-yonghu"></span>
+                <!-- <span class="iconfont icon-yonghu"></span> -->
+                <img src="http://pinkslash.metatype.cn/static/images/usercenter.svg" class="footer-img">
                 <p class="footer-item-label">Profile</p>
             </a>
         </div>
@@ -334,10 +337,10 @@
 <script type="text/javascript">
 function changefooter(){
     footer.style.marginTop = '0px'
-    var height = $(this).height() - $(".items").height()-40;
+    var height = $(this).height() - $(".items").height();
     footer.style.height = height + 'px'
-    if(height<=0){
-        footer.style.marginTop = '200px'
+    if(height<=82){
+        footer.style.height = '82px'
     }
 }
 changefooter()

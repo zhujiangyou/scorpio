@@ -17,7 +17,7 @@
         body{
             /*background-color: #202837;*/
             background-image: url(http://pinkslash.metatype.cn/static/images/bg.png);
-            background-size: 100% auto;
+            background-size: 100% 100%;
             width: 100%;
             height: 100%;
             position: relative;
@@ -25,6 +25,7 @@
         .page-customer-profile{
             /*background-image: url(http://pinkslash.metatype.cn/static/images/bg.png);
             background-size: 100% 100%;*/
+            padding-bottom: 0px;
         }
         .page-customer-profile .profile{
             background:rgba(0,0,0,0);
@@ -45,17 +46,22 @@
             color: #8c9198;
         }
 
+        .page-customer-profile .scan-button{
+            margin: 20px auto 0px;
+        }
+
         #footer{
             text-align: center;
             position: relative;
             height: 25px;
         }
+
         .img2{
             height: 25px;
             position: absolute;
             left: 0;
             right: 0;
-            bottom: 0px;
+            bottom: 44px;
             margin: auto;
             width: auto;
         }
@@ -103,27 +109,30 @@
         <img src="{{ user.qrcode.url}}" style="width: 100%; height: 100%">
     </div>
     <button class="scan-button button primary" id='scanQRCode'>Scan QR</button>
-    <div id="footer">
-        <img src="http://pinkslash.metatype.cn/static/images/100years.png" class="img2">
-    </div>
+</div>
+<div id="footer">
+    <img src="http://pinkslash.metatype.cn/static/images/100years.png" class="img2">
 </div>
 <div class="footer">
     <div class="footer-item">
         <a href="https://pinkslash.metatype.cn/user_reservation">
-            <span class="iconfont icon-food"></span>
+            <!-- <span class="iconfont icon-food"></span> -->
+            <img src="http://pinkslash.metatype.cn/static/images/szxdf.svg" class="footer-img">
             <p class="footer-item-label">My Reservation</p>
         </a>
     </div>
     <div class="footer-item">
         <a href="https://pinkslash.metatype.cn/agenda/">
             <!-- <span class="iconfont icon-calendar"></span> -->
-            <i class="fas fa-calendar"></i>
+            <!-- <i class="fas fa-calendar"></i> -->
+            <img src="http://pinkslash.metatype.cn/static/images/rili.svg" class="footer-img">
             <p class="footer-item-label">Agenda</p>
         </a>
     </div>
-    <div class="footer-item active">
+    <div class="footer-item active" style="overflow: hidden;">
         <a href="https://pinkslash.metatype.cn/customer_profile/{{ user.id }}">
-            <span class="iconfont icon-yonghu"></span>
+            <!-- <span class="iconfont icon-yonghu"></span> -->
+            <img src="http://pinkslash.metatype.cn/static/images/usercenter.svg" class="footer-img footer-active">
             <p class="footer-item-label">Profile</p>
         </a>
     </div>
@@ -131,6 +140,20 @@
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="{% static "/js/app.js" %}"></script>
 <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+<script type="text/javascript">
+    function changefooter(){
+        footer.style.marginTop = '0px'
+        var height = $(this).height() - $(".page-customer-profile").height();
+        footer.style.height = height + 'px'
+        if(height<=82){
+            footer.style.height = '82px'
+        }
+    }
+    changefooter()
+    $(window).resize(function(){
+        changefooter()
+    });
+</script>
 <script type="text/javascript">
 
 var btn = document.getElementById("scanQRCode");
