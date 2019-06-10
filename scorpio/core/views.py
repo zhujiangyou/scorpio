@@ -442,10 +442,11 @@ def user_reservation(request, me):
     return render(request, 'user_reservation.html', ctx)
 
 
-@user_required
-def room_amenity(request, me):
+# @user_required
+def room_amenity(request):
 
-    packages = RoomAmenity.objects.filter(event=me.event)
+    # packages = RoomAmenity.objects.filter(event=me.event)
+    packages = RoomAmenity.objects.filter().first()
     print(packages)
     ctx = {
         'packages': packages,
