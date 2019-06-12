@@ -99,7 +99,7 @@
         text-align: left;
         color: black;
         padding:150px 30px 0 30px;
-        font-size: 40px;
+        font-size: 17px;
     }
 
     .money-btn{
@@ -144,7 +144,11 @@
               <img src="https://pinkslash.metatype.cn/static/images/credits.svg" style="width: 40px;height: 40px;margin:20px">
              </div>
              <div class="wenzi">Are you sure you want to buy this food?</div>
-             <div class="money-btn"><button class="confirm">Confirm</button></div>
+             <div class="money-btn">
+                <a href="https://pinkslash.metatype.cn/purchase_food/{{ food.id }}">
+                    <button class="confirm">Confirm</button>
+                </a>
+            </div>
              <div class="money-btn">
                 <a href="https://pinkslash.metatype.cn/customer_profile/{{ me.id }}">
                     <button class="cancel" data-dismiss="modal">Cancel</button>
@@ -159,11 +163,4 @@
 
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript">
-
-    $("#confirm").click(function(){
-        // console.log(flag,flag2)
-        window.location.href = 'https://pinkslash.metatype.cn/purchase_food/'+{{ food.id|safe }}+'/'
-
-    })
-
 </script>
