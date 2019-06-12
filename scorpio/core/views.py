@@ -136,24 +136,26 @@ def wechat_login(request):
                     if user.name and user.hotel_name:
                         food_id = status.split('_')[2]
                         food = Food.objects.filter(id=food_id).first()
+
+                        return redirect('/food_purchase/{0}/'.format(food.id))
+
                         # if user.credit >= food.credit:
-                        if (user.credit-food.credit) >= (-1800):
-                            user.credit -= food.credit
-                            user.save()
-                            provider = food.provider
-                            provider.credit += food.credit
-                            provider.save()
+                        # if (user.credit-food.credit) >= (-1800):
+                        #     user.credit -= food.credit
+                        #     user.save()
+                        #     provider = food.provider
+                        #     provider.credit += food.credit
+                        #     provider.save()
 
-                            History.objects.create(
-                                user=user, credit='-{0}'.format(str(food.credit)), desc='Buying Food')
-                            History.objects.create(
-                                user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food')
+                        #     History.objects.create(
+                        #         user=user, credit='-{0}'.format(str(food.credit)), desc='Buying Food')
+                        #     History.objects.create(
+                        #         user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food')
+                        #     UserFood.objects.create(user=user, food=food)
 
-                            UserFood.objects.create(user=user, food=food)
-
-                            return redirect('/pay_success')
-                        else:
-                            return redirect('/pay_failed')
+                        #     return redirect('/pay_success')
+                        # else:
+                        #     return redirect('/pay_failed')
 
                     else:
                         return redirect('/customer/save_message/')
@@ -748,6 +750,36 @@ def agenda_detail(request, me, agenda, agendatime):
 
 
 
+@user_required
+def food_purchase(request, me, food_id):
+    food = Food.objects.filter(id=food_id).first()
+
+    ctx = {
+        'food':food,
+        'me':me
+    }
+
+    return render(request, 'food-confirm.html', ctx)
 
 
+@user_required
+def purchase_food(request, me, food_id):
+    food = Food.objects.filter(id=food_id).first()
+    user = me
+    if (user.credit-food.credit) >= (-1800):
+        user.credit -= food.credit
+        user.save()
+        provider = food.provider
+        provider.credit += food.credit
+        provider.save()
+
+        History.objects.create(
+            user=user, credit='-{0}'.format(str(food.credit)), desc='Buying Food')
+        History.objects.create(
+            user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food')
+        UserFood.objects.create(user=user, food=food)
+
+        return redirect('/pay_success')
+    else:
+        return redirect('/pay_failed')
 
