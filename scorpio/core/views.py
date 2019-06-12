@@ -237,6 +237,7 @@ def wechat_login(request):
                     # 在用户已经扫描的表中添加一条 新用户扫描该二维码的数据
                     once_credit = OnlyOnceCredit.objects.get(pk=only_credit_id)
                     UserScan.objects.create(credit=once_credit, user=user)
+
                 History.objects.create(user=user,
                                        credit='+{0}'.format(str(credit)),
                                        desc='Scanning QRCode')
@@ -252,7 +253,7 @@ def wechat_login(request):
                 buf.write(qr_data)
                 qr_img = InMemoryUploadedFile(file=buf,
                                               field_name=None,
-                                              name='food.png',
+                                              name='user.png',
                                               content_type='image/png',
                                               size=len(qr_data),
                                               charset=None)
@@ -277,7 +278,7 @@ def wechat_login(request):
                 buf.write(qr_data)
                 qr_img = InMemoryUploadedFile(file=buf,
                                               field_name=None,
-                                              name='food.png',
+                                              name='user.png',
                                               content_type='image/png',
                                               size=len(qr_data),
                                               charset=None)
@@ -442,11 +443,10 @@ def user_reservation(request, me):
     return render(request, 'user_reservation.html', ctx)
 
 
-# @user_required
-def room_amenity(request):
+@user_required
+def room_amenity(request, me):
 
-    # packages = RoomAmenity.objects.filter(event=me.event)
-    packages = RoomAmenity.objects.filter()
+    packages = RoomAmenity.objects.filter(event=me.event)
     print(packages)
     ctx = {
         'packages': packages,
@@ -468,6 +468,20 @@ def lunch(request, me):
 
 
 @user_required
+def lunch_packages(request, me, lunch_type):
+    if lunch_type == 'Basic':
+        packages = Lunch.objects.filter(event=me.event, status=0)
+    else:
+        packages = Lunch.objects.filter(event=me.event, status=1)
+
+    ctx = {
+        'packages': packages,
+    }
+
+    return render(request, 'lunch-package.html', ctx)
+
+
+@user_required
 def room_amenity_detail(request, me, room_amenity_id):
     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
     ctx = {
@@ -480,7 +494,6 @@ def room_amenity_detail(request, me, room_amenity_id):
         ctx['status'] = 1
     else:
         ctx['status'] = 0
-
 
 
     return render(request, 'room-amenity-detail2.html', ctx)

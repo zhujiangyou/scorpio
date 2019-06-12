@@ -83,28 +83,40 @@
     </div> -->
     <div class="items">
 
-        {% for package in packages %}
+        <!-- {% for package in packages %} -->
             <div class="item" style="background-image: url({{package.img.url}});;background-size: 100% auto">
                 <div class="item-item">
                 <!-- <img src="" class="item-img"> -->
-                    {% if package.status == 0 %}
-                        <div class="item-title">Basic</div>
-                    {%  else %}
-                        <div class="item-title">Premium</div>
-                    {% endif %}
-                    <a href="/lunch/detail/{{ package.id }}" style="text-decoration:none;">
+                    <div class="item-title">Basic</div>
+                    <a href="/lunch/packages/Basic" style="text-decoration:none;">
                         <div class="item-div">
                             <button class="item-button">Choose</button>
                         </div>
                     </a>
-                    <div class="item-footer">{{package.credit}}</div>
+
+                    <div class="item-footer">10</div>
                 </div>
             </div>
             <div style="height: 1px;width: 100%;"></div>
-        {% endfor %}
+
+        <!-- {% endfor %} -->
+
+            <div class="item" style="background-image: url({{package.img.url}});;background-size: 100% auto">
+                <div class="item-item">
+                <!-- <img src="" class="item-img"> -->
+                    <div class="item-title">Premium</div>
+                    <a href="/lunch/packages/Premium" style="text-decoration:none;">
+                        <div class="item-div">
+                            <button class="item-button">Choose</button>
+                        </div>
+                    </a>
+                    <div class="item-footer">20</div>
+                </div>
+            </div>
+            <div style="height: 1px;width: 100%;"></div>
+
 
     </div>
-
     <div id="footer">
         <img src="http://pinkslash.metatype.cn/static/images/100years.png"" class="img2">
     </div>

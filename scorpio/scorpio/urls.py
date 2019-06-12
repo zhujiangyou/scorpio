@@ -100,6 +100,8 @@ urlpatterns = [
     path('agenda/', core_views.agenda),
     path('agenda/detail/<str:agenda>/<str:agendatime>/', core_views.agenda_detail),
 
+    path('lunch/packages/<str:lunch_type>/', core_views.lunch_packages),
+
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
