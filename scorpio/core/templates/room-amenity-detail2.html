@@ -210,15 +210,15 @@
         </div>
         <div class="addImage">
             <div class="add-text">Add:</div>
-            <div class="addImage1">
+            <div class="addImage1" {% if Juice != 'true' %}  onclick="addImage(this)" {% endif %}>
                 <img src="https://pinkslash.metatype.cn/static/images/orange1.jpg" class="image-item">
                 <div class="text-item">Juice</div>
-                <img src="https://pinkslash.metatype.cn/static/images/duigou.svg" class="duigou">
+                <img src="https://pinkslash.metatype.cn/static/images/duigou.svg" class="duigou" style="{% if Juice == 'true' %} display: block {% else %} display: none {% endif %}">
             </div>
-            <div class="addImage1">
+            <div class="addImage1" {% if Champagne != 'true' %} onclick="addImage(this)" {% endif %}>
                 <img src="https://pinkslash.metatype.cn/static/images/orange2.jpg" class="image-item">
                 <div class="text-item">Champagne</div>
-                <img src="https://pinkslash.metatype.cn/static/images/duigou.svg" class="duigou">
+                <img src="https://pinkslash.metatype.cn/static/images/duigou.svg" class="duigou" style="{% if Champagne == 'true' %} display: block {% else %} display: none {% endif %}>
             </div>
         </div>
 
@@ -273,16 +273,28 @@
     });
 
     var choose = ''
-    $(".addImage1").click(function(){
-        if($(this).find(".duigou").css("display") == 'none'){
-            $(this).find(".duigou").css("display","block")
+
+    function addImage(obj){
+        if($(obj).find(".duigou").css("display") == 'none'){
+            $(obj).find(".duigou").css("display","block")
 
             var choose
 
         }else{
-            $(this).find(".duigou").css("display","none")
+            $(obj).find(".duigou").css("display","none")
         }
-    })
+    }
+
+    // $(".addImage1").click(function(){
+    //     if($(this).find(".duigou").css("display") == 'none'){
+    //         $(this).find(".duigou").css("display","block")
+
+    //         var choose
+
+    //     }else{
+    //         $(this).find(".duigou").css("display","none")
+    //     }
+    // })
 
 
 

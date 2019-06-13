@@ -449,7 +449,6 @@ def user_reservation(request, me):
 def room_amenity(request, me):
 
     packages = RoomAmenity.objects.filter(event=me.event)
-    print(packages)
     ctx = {
         'packages': packages,
         'status': 'room_amenity'
@@ -461,7 +460,6 @@ def room_amenity(request, me):
 @user_required
 def lunch(request, me):
     packages = Lunch.objects.filter(event=me.event)
-    print(packages)
     ctx = {
         'packages': packages,
         'status': 'lunch'
@@ -497,6 +495,15 @@ def room_amenity_detail(request, me, room_amenity_id):
     else:
         ctx['status'] = 0
 
+    attachs = Attach.objects.filter(roomAmenity=room_amenity,user=me)
+    ctx['Juice'] = 'false'
+    ctx['Champagne'] = 'false'
+    if attachs:
+        for _ in attachs:
+            if _.name == 'Juice':
+                ctx['Juice'] = 'true'
+            if _.name == 'Champagne':
+                ctx['Champagne'] = 'true'
 
     return render(request, 'room-amenity-detail2.html', ctx)
 
