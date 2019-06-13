@@ -541,9 +541,11 @@ def lunch_reserve(request, me, lunch_id):
 
 @user_required
 def room_amenity_reserve(request, me, room_amenity_id, flag1, flag2):
-    RoomAmenityReservation.objects.filter(user=me).delete()
+
+    # RoomAmenityReservation.objects.filter(user=me).delete()
 
     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
+
     roomAmenityReserve = RoomAmenityReservation.objects.filter(
         user=me, roomAmenity=room_amenity).first()
 
