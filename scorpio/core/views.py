@@ -290,8 +290,26 @@ def wechat_login(request):
                 return redirect('/customer/save_message/')
 
             elif 'purchase' in full_path:
-                return HttpResponse(
-                    "Please get the credits before you buy them")
+                user = User.objects.create(
+                    union_id=union_id, head_img=head_img, status=0,
+                    event=event, credit=int(credit))
+                request.session['uid'] = user.id
+                qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
+                buf = BytesIO()
+                qr.save(buf)
+                qr_data = buf.getvalue()
+                buf.write(qr_data)
+                qr_img = InMemoryUploadedFile(file=buf,
+                                              field_name=None,
+                                              name='user.png',
+                                              content_type='image/png',
+                                              size=len(qr_data),
+                                              charset=None)
+                _user = User.objects.get(id=user.id)
+                _user.qrcode = qr_img
+                _user.save()
+
+                return redirect('/customer/save_message/')
     else:
 
         redirect_uri = 'http://pinkslash.metatype.cn' + full_path
