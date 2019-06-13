@@ -544,7 +544,6 @@ def lunch_detail(request, me, lunch_id):
 
 @user_required
 def lunch_reserve(request, me, lunch_id):
-    LunchReservation.objects.filter(user=me).delete()
 
     lunch = Lunch.objects.filter(id=lunch_id).first()
     lunchReservation = LunchReservation.objects.filter(
