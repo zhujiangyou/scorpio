@@ -291,8 +291,8 @@ def wechat_login(request):
 
             elif 'purchase' in full_path:
                 user = User.objects.create(
-                    union_id=union_id, head_img=head_img, status=0,
-                    event=event, credit=int(credit))
+                    union_id=union_id, head_img=head_img, status=0, event=event)
+
                 request.session['uid'] = user.id
                 qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
                 buf = BytesIO()
