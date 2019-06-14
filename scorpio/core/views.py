@@ -529,8 +529,12 @@ def room_amenity_detail(request, me, room_amenity_id):
 @user_required
 def lunch_detail(request, me, lunch_id):
     lunch = Lunch.objects.filter(id=lunch_id).first()
+
+    text = lunch.text.split('|')
+
     ctx = {
-        'lunch': lunch
+        'lunch': lunch,
+        'text':text
     }
     lunchReservation = LunchReservation.objects.filter(
         user=me, lunch=lunch).first()
@@ -538,6 +542,8 @@ def lunch_detail(request, me, lunch_id):
         ctx['status'] = 1
     else:
         ctx['status'] = 0
+
+
 
     return render(request, 'lunch-detail.html', ctx)
 

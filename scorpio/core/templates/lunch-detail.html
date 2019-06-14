@@ -194,10 +194,10 @@
     <img src="{{ lunch.img.url }}" class="lunch-picture">
 
     <div class="main-text">
-        <p>Tea crispy chicken </p>
-        <p>Wok-fried farm egg with dried local turnip</p>
-        <p>Sautéed seasonal vegetables</p>
-        <p>Steam rice</p>
+        {{for t in text}}
+            <p>t</p>
+        {{ endfor }}
+
     </div>
 
     {% if status == 0 %}
