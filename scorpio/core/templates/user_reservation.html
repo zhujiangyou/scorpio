@@ -37,14 +37,12 @@
             height: 200px;
             position: relative;
         }
-
         .img{
             border-radius: 10px;
             position: relative;
             width: 100%;
             height: 100%;
         }
-
         .item1{
             background-color: white;
             position: absolute;
@@ -79,58 +77,9 @@
             width: auto;
         }
 
-        /*.footer-img{
-            height: 23px;
-            width: auto;
-        }
-        .footer-active{
-            -webkit-filter: drop-shadow(#0b1b4b 80px 0px);
-            filter: drop-shadow(#0b1b4b 80px 0);
-            transform: translateX(-80px);
-        }*/
     </style>
 </head>
 <body  id="body">
-<!-- <div class="page-reservation"> -->
-    <!-- {% if not roomAmenityReservation %}
-    {% else %}
-        <h2 class="header-title">Room Amenity Reservation</h2>
-    {% endif %}
-
-
-    <ul class="reservation-list">
-        {% for package in roomAmenityReservation %}
-            <a href="/room_amenity/detail/{{ package.roomAmenity.id }}" style="text-decoration:none;">
-                <li class="reservation-item">
-                    <div class="reservation-item-image" style="background-image: url({{ package.roomAmenity.img.url }})"></div>
-                    <div class="reservation-item-info">
-                        <h3 class="reservation-item-title">{{ package.roomAmenity.name }}</h3>
-                    </div>
-                </li>
-            </a>
-        {% endfor %} -->
-
-<!--     </ul>
-    <br>
-    {% if not lunchReservation %}
-    {% else %}
-        <h2 class="header-title">Lunch Reservation</h2>
-    {% endif %}
-    <ul class="reservation-list">
-        {% for package in lunchReservation %}
-                <a href="/lunch/detail/{{ package.lunch.id }}" style="text-decoration:none;">
-                <li class="reservation-item">
-                    <div class="reservation-item-image" style="background-image: url({{ package.lunch.img.url }})"></div>
-                    <div class="reservation-item-info">
-                        <h3 class="reservation-item-title">{{ package.lunch.name }}</h3>
-                    </div>
-                </li>
-            </a>
-        {% endfor %}
-    </ul>
-</div>
- -->
-
     <div class="items">
         {% if not roomAmenityReservation %}
         {% else %}
@@ -138,7 +87,7 @@
         {% endif %}
 
         {% for package in roomAmenityReservation %}
-        <a href="/room_amenity/detail/{{ package.roomAmenity.id }}" style="text-decoration:none;">
+        <a href="/room_amenity/detail/{{ package.roomAmenity.id }}" style="text-decoration:none;color: black;">
             <div class="item">
                 <img src="{{ package.roomAmenity.img.url }}" class="img">
                 <div class="item1">{{ package.roomAmenity.name }}</div>
@@ -153,7 +102,7 @@
         {% endif %}
 
         {% for package in lunchReservation %}
-            <a href="/lunch/detail/{{ package.lunch.id }}" style="text-decoration:none;">
+            <a href="/lunch/detail/{{ package.lunch.id }}" style="text-decoration:none;color: black;">
                 <div class="item">
                     <img src="{{ package.lunch.img.url }}" class="img">
                     <div class="item1">{{ package.lunch.name }}</div>
@@ -161,7 +110,6 @@
             </a>
         {% endfor %}
     </div>
-
 
 
 <div id="footer">
