@@ -806,9 +806,9 @@ def purchase_food(request, me, food_id):
         provider.save()
 
         History.objects.create(
-            user=user, credit='-{0}'.format(str(food.credit)), desc='Buying Food')
+            user=user, credit='-{0}'.format(str(food.credit)), desc='Buying Food:{0}'.format(food.name))
         History.objects.create(
-            user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food')
+            user=provider, credit='+{0}'.format(str(food.credit)), desc='Selling Food:{0}'.format(food.name))
         UserFood.objects.create(user=user, food=food)
 
         return redirect('/pay_success')
