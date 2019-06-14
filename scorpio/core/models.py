@@ -111,7 +111,7 @@ class Lunch(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     credit = models.IntegerField(default=0)
     status = models.IntegerField(choices=LUNCH_STATUS, default=0)
-
+    text = models.CharField(max_length=5000, default='')
 
 class RoomAmenity(models.Model):
     name = models.CharField(max_length=100, default='')
