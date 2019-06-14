@@ -118,6 +118,7 @@ class RoomAmenity(models.Model):
     img = models.ImageField(upload_to='roomAmenity')
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     credit = models.IntegerField(default=0)
+    text = models.CharField(max_length=5000, default='')
 
 
 class RoomAmenityReservation(models.Model):
