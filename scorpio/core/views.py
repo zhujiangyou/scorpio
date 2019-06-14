@@ -758,22 +758,30 @@ def agenda(request, me):
 def agenda_detail(request, me, agenda, agendatime):
     print('agenda',agenda)
     print('agendatime',agendatime)
+
     ctx = {}
     ctx['agenda'] = agenda = Agenda.objects.filter(name=agenda).first()
-    if agenda.name == 'Welcome&CelebrationGatheringDinner':
-        ctx['name'] = 'Welcome & Celebration Gathering Dinner'
-    elif agenda.name == 'Presentations':
-        ctx['name'] = 'Presentations'
-    elif agenda.name == 'CoffeeBreak':
-        ctx['name'] = 'Coffee Break'
+
+    if agenda.name == 'GatheringDinner':
+        ctx['name'] = '25th Gathering Dinner'
+
+    elif agenda.name == 'CoffeeBreak1':
+        ctx['name'] = '26th Coffee Break'
+
+    elif agenda.name == 'CoffeeBreak2':
+        ctx['name'] = 'Coffee Break Solution'
+
+
+
     elif agenda.name == 'GroupPhoto':
         ctx['name'] = 'Group Photo'
     elif agenda.name == 'Lunch':
         ctx['name'] = 'Lunch'
+
     elif agenda.name == 'GroupDinner':
         ctx['name'] = 'Group Dinner'
-    elif agenda.name == 'WorkingLunch&Wrapup':
-        ctx['name'] = 'Working Lunch & Wrap up'
+
+
 
     ctx['agendatime'] = agendatime
     ctx['user'] = me
