@@ -193,6 +193,29 @@
             margin: auto;
             width: auto;
         }
+
+        .add-text2{
+            text-align: center;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+
+        .addImage1{
+            display: table;
+            width: 46%;
+            float: left;
+        }
+
+        .image-item{
+            display: table-cell;
+            vertical-align: middle;
+            width: 100%;
+        }
+
+        .text-item{
+            display: table-cell;
+            vertical-align: middle;
+        }
     </style>
 </head>
 <body>
@@ -209,15 +232,16 @@
             <img src="{{room_amenity.img.url}}" class="img1">
         </div>
         <div class="addImage">
+            <!-- <div class="add-text2">Fenghua Peach, Green Bean Cake and Fried Dough Twist</div> -->
             <div class="add-text">Add:</div>
             <div class="addImage1" {% if status == 0 %}  onclick="addImage(this)" {% endif %}>
                 <img src="https://pinkslash.metatype.cn/static/images/orange1.jpg" class="image-item">
-                <div class="text-item">Juice</div>
+                <div class="text-item">Chysanthemum Hawthorn Drink</div>
                 <img src="https://pinkslash.metatype.cn/static/images/duigou.svg" class="duigou" style="{% if Juice == 'true' %} display: block {% else %} display: none {% endif %}">
             </div>
             <div class="addImage1" {% if status == 0 %} onclick="addImage(this)" {% endif %}>
                 <img src="https://pinkslash.metatype.cn/static/images/orange2.jpg" class="image-item">
-                <div class="text-item">Champagne</div>
+                <div class="text-item">Special Passion Fruit Drink</div>
                 <img src="https://pinkslash.metatype.cn/static/images/duigou.svg" class="duigou" style="{% if Champagne == 'true' %} display: block {% else %} display: none {% endif %}">
             </div>
         </div>
