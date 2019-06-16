@@ -139,7 +139,7 @@ class TeaBreak(models.Model):
 class Agenda(models.Model):
     name = models.CharField(default='', max_length=100)
     img = models.ImageField(upload_to='agenda', null=True)
-    text = models.CharField(default='', max_length=5000)
+    text = models.CharField(default='', max_length=5000, blank=True,null=True)
 
     def __str__(self):
         return self.name
