@@ -495,7 +495,6 @@ def lunch_packages(request, me, lunch_type):
     ctx = {
         'packages': packages,
     }
-
     return render(request, 'lunch-package.html', ctx)
 
 
@@ -542,7 +541,6 @@ def lunch_detail(request, me, lunch_id):
         ctx['status'] = 1
     else:
         ctx['status'] = 0
-
 
 
     return render(request, 'lunch-detail.html', ctx)
@@ -768,19 +766,24 @@ def agenda_detail(request, me, agenda, agendatime):
     elif agenda.name == 'CoffeeBreak1':
         ctx['name'] = '26th Coffee Break'
 
+    elif agenda.name == 'Presentations':
+        ctx['name'] = 'Presentations'
+
     elif agenda.name == 'CoffeeBreak2':
         ctx['name'] = 'Coffee Break Solution'
 
-
+    elif agenda.name == 'Welcome&CelebrationGatheringDinner':
+        ctx['name'] = 'Welcome & Celebration Gathering Dinner'
 
     elif agenda.name == 'GroupPhoto':
         ctx['name'] = 'Group Photo'
     elif agenda.name == 'Lunch':
         ctx['name'] = 'Lunch'
+    elif agenda.name == 'WorkingLunch&Wrapup':
+        ctx['name'] = 'Working Lunch & Wrap up'
 
     elif agenda.name == 'GroupDinner':
         ctx['name'] = 'Group Dinner'
-
 
 
     ctx['agendatime'] = agendatime
