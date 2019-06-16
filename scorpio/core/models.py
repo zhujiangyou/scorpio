@@ -141,6 +141,9 @@ class Agenda(models.Model):
     img = models.ImageField(upload_to='agenda', null=True)
     text = models.CharField(default='', max_length=5000)
 
+    def __str__(self):
+        return self.name
+
 #选择完的附加选项
 class Attach(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
