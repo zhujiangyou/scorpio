@@ -112,6 +112,20 @@
 
         }
 
+        .img3 {
+            border-radius: 10px;
+            position: absolute;
+            /* width: 100%; */
+            /* height: 100%; */
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: block;
+            top: -60%;
+            transform: rotate(90deg);
+        }
+
+
     </style>
 </head>
 <body  id="body">
@@ -137,9 +151,15 @@
         {% endif %}
 
         {% for package in lunchReservation %}
+
+
             <a href="/lunch/detail/{{ package.lunch.id }}" style="text-decoration:none;color: black;">
                 <div class="item">
-                    <img src="{{ package.lunch.img.url }}" class="img">
+                    {% if package.name == 'Package 1' and package.status == 1 %}
+                        <img src="{{ package.img.url }}" class="img3">
+                    {% else %}
+                        <img src="{{ package.lunch.img.url }}" class="img">
+                    {% endif %}
                     <div class="item1">{{ package.lunch.name }}</div>
                 </div>
             </a>
