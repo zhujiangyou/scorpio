@@ -100,6 +100,15 @@
             display: inline-block;
             vertical-align:middle;
         }
+
+        .image-item2{
+            border-top-left-radius: 2px;
+            border-bottom-left-radius: 2px;
+            width: 40%;
+            height: auto;
+            display: inline-block;
+            vertical-align:middle;
+        }
         .text-item{
             border-top-right-radius: 2px;
             border-bottom-right-radius: 2px;
@@ -200,6 +209,20 @@
             display: table-cell;
             vertical-align: middle;
         }
+
+
+        .text-item2{
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+            height: 100%;
+            width: 70%;
+            text-align: center;
+            margin: 0 auto;
+            font-size:12px;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
     </style>
 </head>
 <body>
@@ -224,8 +247,8 @@
                 <img src="https://pinkslash.metatype.cn/static/images/duigou.svg" class="duigou" style="{% if Juice == 'true' %} display: block {% else %} display: none {% endif %}">
             </div>
             <div class="addImage1" {% if status == 0 %} onclick="addImage(this)" {% endif %}>
-                <img src="https://pinkslash.metatype.cn/static/images/orange2.jpg" class="image-item" style="width: 60%;">
-                <div class="text-item" style="margin-left: 20%;">Special Passion Fruit Drink</div>
+                <img src="https://pinkslash.metatype.cn/static/images/orange2.jpg" class="image-item">
+                <div class="text-item2" >Special Passion Fruit Drink</div>
                 <img src="https://pinkslash.metatype.cn/static/images/duigou.svg" class="duigou" style="{% if Champagne == 'true' %} display: block {% else %} display: none {% endif %}">
             </div>
         </div>
