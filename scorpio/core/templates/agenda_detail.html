@@ -50,7 +50,7 @@
         .picture-text{
             padding:5px 10px 0 10px;
             color: white;
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 300;
             line-height: 1.2;
             text-align: justify;
@@ -82,7 +82,7 @@
         <div class="picture-time">{{ agendatime }}</div>
         <div class="picture-title">{{ name }}</div>
 
-        <div class="picture-text">{{ agenda.text }}</div>
+        <div class="picture-text">{{ agenda.text|safe }}</div>
 
     </div>
     <div id="footer">
