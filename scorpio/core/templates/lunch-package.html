@@ -127,7 +127,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room Amenities Selection</title>
+    <title>Lunch Selection</title>
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
     <link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">
@@ -215,7 +215,7 @@
     <div class="items">
         {% for package in packages %}
                 <div class="item">
-                    <a href="/room_amenity/detail/{{ package.id }}" style="text-decoration:none;color: black;">
+                    <a href="/lunch/detail/{{ package.id }}" style="text-decoration:none;color:black;  ">
                         <img src="{{ package.img.url }}" class="img">
                         <div class="item1">{{ package.name }}</div>
                     </a>
