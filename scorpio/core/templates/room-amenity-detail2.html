@@ -217,7 +217,7 @@
         </div>
         <div class="addImage">
             <div class="add-text2">{{room_amenity.text|safe}}</div>
-            <div class="add-text">Add:</div>
+            <div class="add-text">Premier Treatment:</div>
             <div class="addImage1" {% if status == 0 %}  onclick="addImage(this)" {% endif %}>
                 <img src="https://pinkslash.metatype.cn/static/images/orange1.jpg" class="image-item">
                 <div class="text-item">Chysanthemum Hawthorn Drink</div>
@@ -279,7 +279,6 @@
     $(window).resize(function(){
         changefooter()
     });
-
 
     function addImage(obj){
         if($(obj).find(".duigou").css("display") == 'none'){
