@@ -160,7 +160,12 @@
                     {% else %}
                         <img src="{{ package.lunch.img.url }}" class="img">
                     {% endif %}
-                    <div class="item1">{{ package.lunch.name }}</div>
+
+                    {% if package.status == 1 %}
+                        <div class="item1">Premium-{{ package.lunch.name }}</div>
+                    {% else %}
+                        <div class="item1">Basic-{{ package.lunch.name }}</div>
+                    {% endif %}
                 </div>
             </a>
         {% endfor %}
