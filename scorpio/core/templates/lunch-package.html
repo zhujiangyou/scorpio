@@ -175,6 +175,19 @@
         }
 
 
+        .img3 {
+            border-radius: 10px;
+            position: absolute;
+            /* width: 100%; */
+            /* height: 100%; */
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            display: block;
+            top: -70%;
+            transform: rotate(90deg);
+        }
+
         .item1{
             background-color: white;
             position: absolute;
@@ -216,7 +229,13 @@
         {% for package in packages %}
                 <div class="item">
                     <a href="/lunch/detail/{{ package.id }}" style="text-decoration:none;color:black;  ">
-                        <img src="{{ package.img.url }}" class="img">
+                        {% if package.status == 1 %}
+                            <img src="{{ package.img.url }}" class="img3">
+                        {% else %}
+                            <img src="{{ package.img.url }}" class="img">
+                        {% endif %}
+
+
                         <div class="item1">{{ package.name }}</div>
                     </a>
                 </div>
