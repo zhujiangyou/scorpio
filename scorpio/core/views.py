@@ -706,10 +706,10 @@ def send_credits(request, me):
             receiver.save()
 
             History.objects.create(
-                user=sender, credit='-{0}'.format(str(credit)), desc='Give to {0} {1} credits'.format(receiver.name, str(credit)))
+                user=sender, credit='-{0}'.format(str(credit)), desc='Transferring {1} credits to {0}'.format(receiver.name, str(credit)))
 
             History.objects.create(
-                user=receiver, credit='+{0}'.format(str(credit)), desc='Get {0} credits from {1}'.format(str(credit), sender.name))
+                user=receiver, credit='+{0}'.format(str(credit)), desc='Receiving {0} credits from {1}'.format(str(credit), sender.name))
 
             return render(request, 'present-success.html', ctx)
 
