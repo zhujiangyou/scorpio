@@ -555,7 +555,12 @@ def lunch_reserve(request, me, lunch_id):
     if not lunchReservation:
         LunchReservation.objects.create(user=me, lunch=lunch)
         if (me.credit-lunch.credit) >= (-1800):
-            me.credit -= lunch.credit
+
+            if lunch.status == 0:
+                me.credit -= (lunch.credit + 200)
+            else:
+                me.credit -= (lunch.credit + 300)
+
             me.save()
             History.objects.create(user=me,
                                    credit='-{0}'.format(str(lunch.credit)),
