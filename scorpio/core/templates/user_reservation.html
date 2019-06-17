@@ -156,7 +156,7 @@
             <a href="/lunch/detail/{{ package.lunch.id }}" style="text-decoration:none;color: black;">
                 <div class="item">
                     {% if '2' in package.lunch.name and package.lunch.status == 1 %}
-                        <img src="{{ package.img.url }}" class="img3">
+                        <img src="{{ package.lunch.img.url }}" class="img3">
                     {% else %}
                         <img src="{{ package.lunch.img.url }}" class="img">
                     {% endif %}
