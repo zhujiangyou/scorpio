@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title></title>
-    <!-- <link rel="stylesheet" href="{% static '/css/style.css' %}"> -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
     <!-- <link rel="stylesheet" type="text/css" href="css/base.css"> -->
     <style type="text/css">
@@ -85,6 +85,7 @@
             /* border-top: 1px solid #f4f4f4; */
         }
 
+
         /*p{margin:7px; auto}*/
     </style>
 </head>
@@ -107,8 +108,8 @@
 
     <div class="footer">
             <div style="margin-left:40%;font-size:25px;">
-                <a href="https://pinkslash.metatype.cn/customer_profile/23">
-                <span style="color:white;">Back to home</span>
+                <a href="https://pinkslash.metatype.cn/customer_profile/{{me.id}}">
+                    <span style="color:white;font-size: 14px;">Back to home</span>
                 </a>
             </div>
         </div>
