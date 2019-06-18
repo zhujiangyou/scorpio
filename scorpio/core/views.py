@@ -507,6 +507,7 @@ def room_amenity_detail(request, me, room_amenity_id):
     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
     ctx = {
         'room_amenity': room_amenity,
+        'me':me
     }
     roomAmenityReserve = RoomAmenityReservation.objects.filter(
         user=me, roomAmenity=room_amenity).first()
@@ -537,7 +538,8 @@ def lunch_detail(request, me, lunch_id):
 
     ctx = {
         'lunch': lunch,
-        'text':text
+        'text':text,
+        'me':me
     }
     lunchReservation = LunchReservation.objects.filter(
         user=me, lunch=lunch).first()
