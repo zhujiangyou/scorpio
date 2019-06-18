@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Amenities Selection</title>
-    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <!-- <link rel="stylesheet" href="{% static "/css/style.css" %}"> -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
     <link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">
     <style type="text/css">
@@ -30,6 +31,7 @@
             padding-top: 30px;
             min-height: 1px;
         }
+
         .item{
             border-radius: 10px;
             background-color: white;
@@ -104,6 +106,31 @@
 <div id="footer">
     <img src="http://pinkslash.metatype.cn/static/images/100years.png" class="img2">
 </div>
+
+    <div class="footer">
+        <div class="footer-item active">
+            <a href="https://pinkslash.metatype.cn/user_reservation">
+                <!-- <span class="iconfont icon-food"></span> -->
+                <img src="http://pinkslash.metatype.cn/static/images/szxdf.svg" class="footer-img">
+                <p class="footer-item-label" >My Res</p>
+            </a>
+        </div>
+        <div class="footer-item">
+            <a href="https://pinkslash.metatype.cn/agenda/">
+                <!-- <span class="iconfont icon-calendar"></span> -->
+                <!-- <i class="fas fa-calendar"></i> -->
+                <img src="http://pinkslash.metatype.cn/static/images/rili.svg" class="footer-img">
+                <p class="footer-item-label">Agenda</p>
+            </a>
+        </div>
+        <div class="footer-item"  style="overflow:hidden;">
+            <a href="https://pinkslash.metatype.cn/customer_profile/{{ me.id }}">
+                <!-- <span class="iconfont icon-yonghu"></span> -->
+                <img src="http://pinkslash.metatype.cn/static/images/usercenter.svg" class="footer-img footer-active">
+                <p class="footer-item-label">Profile</p>
+            </a>
+        </div>
+    </div>
 
 
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
