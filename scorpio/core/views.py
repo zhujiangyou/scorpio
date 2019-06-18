@@ -469,7 +469,8 @@ def room_amenity(request, me):
     packages = RoomAmenity.objects.filter(event=me.event)
     ctx = {
         'packages': packages,
-        'status': 'room_amenity'
+        'status': 'room_amenity',
+        'me':me
     }
 
     return render(request, 'room-amenity-package.html', ctx)
