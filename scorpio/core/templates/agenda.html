@@ -10,6 +10,36 @@
     <link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">
     <style type="text/css">
 
+        .header {
+          position: fixed;
+          width: 100%;
+          height: 44px;
+          left: 0;
+          top: 0;
+          z-index: 100;
+          background: #FFFFFF;
+        }
+        .header-title {
+          height: 100%;
+          font-size: 20px;
+          border-bottom: 1px solid #f4f4f4;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .header-back {
+          position: absolute;
+          width: 44px;
+          height: 44px;
+          left: 0;
+          top: 0;
+          font-size: 30px !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
         *{
             padding:0;
             margin:0;
@@ -25,6 +55,46 @@
 
         button{
             outline:none!important;
+        }
+
+        .picture{
+            width: 96%;
+            height: 320px;
+            margin:5px 2% 0 2%;
+        }
+
+        .img1{
+            border-radius: 10px;
+            width: 100%;
+            height: 320px;
+        }
+
+        .add-text{
+            padding:10px 20px;
+        }
+
+
+        .duigou{
+            position: absolute;
+            right: -5px;top: -5px;
+            width: 15px;height: 15px;
+            display: none;
+        }
+
+        .addImage{
+            width: 100%;
+            color: white;
+            font-size: 16px;
+        }
+
+        .addImage1{
+            position: relative;
+            border-radius: 2px;
+            display: inline-block;
+            width: 45%;
+            margin:5px 2%;
+            background-color: rgba(255,255,255,.1);
+            border-right: 5px;
         }
 
         .image-item{
@@ -59,12 +129,70 @@
         }
 
 
+        /*modal开始*/
+        .submit-modal{
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .money{
+            background-color: #0c1d4a;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top:-40px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .money-modal{
+            border-radius: 5spx;
+        }
+
+        .wenzi{
+            text-align: left;
+            color: black;
+            padding:50px 10px 0 10px;
+            font-size: 17px;
+        }
+
+        .money-btn{
+            text-align: center;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+        .confirm{
+            background-color: #0c1d4a;
+            color:white;
+            font-size: 20px;
+            padding: 5px 40px;
+            border-radius: 5px;
+        }
+
+        .cancel{
+            color: #E6260F;
+            font-size: 20px;
+        }
+
+        /*modal结束*/
          #footer{
             text-align: center;
             position: relative;
             height: 25px;
         }
-
+        .img2{
+            height: 25px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 44px;
+            margin: auto;
+            width: auto;
+        }
         .meta-title{
             padding-top: 20px;
             font-size: 24px;
@@ -74,14 +202,14 @@
         }
         .meta-date{
             padding-top: 10px;
-            font-size: 18px;
+            font-size: 15px;
             color:white;
             /*text-align: center;*/
             font-weight: 500;
             margin-left: 20px;
         }
         .meta-div{
-            margin-top:2px;
+            margin-top:1px;
             font-size: 10px;
             font-weight: 300;
         }
