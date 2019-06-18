@@ -488,14 +488,17 @@ def lunch(request, me):
 @user_required
 def lunch_packages(request, me, lunch_type):
     if lunch_type == 'Basic':
-        packages = Lunch.objects.filter(event=me.event, status=0)
+        packages = Lunch.objects.filter(event=me.event, status=0).first()
     else:
-        packages = Lunch.objects.filter(event=me.event, status=1)
+        packages = Lunch.objects.filter(event=me.event, status=1).first()
 
-    ctx = {
-        'packages': packages,
-    }
-    return render(request, 'lunch-package.html', ctx)
+    # ctx = {
+    #     'packages': packages,
+    # }
+
+    return redirect('/lunch/detail/{0}'.format(packages.id))
+
+    # return render(request, 'lunch-package.html', ctx)
 
 
 @user_required
