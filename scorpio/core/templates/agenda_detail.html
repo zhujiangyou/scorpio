@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title></title>
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
     <!-- <link rel="stylesheet" type="text/css" href="css/base.css"> -->
     <style type="text/css">
@@ -89,6 +90,30 @@
     </div>
     <div id="footer">
         <img src="http://pinkslash.metatype.cn/static/images/100years.png" class="img2">
+    </div>
+
+    <div class="footer">
+        <div class="footer-item">
+            <a href="https://pinkslash.metatype.cn/user_reservation">
+                <!-- <span class="iconfont icon-food"></span> -->
+                <img src="http://pinkslash.metatype.cn/static/images/szxdf.svg" class="footer-img">
+                <p class="footer-item-label">My Res</p>
+            </a>
+        </div>
+        <div class="footer-item active" style="overflow: hidden;">
+            <a href="https://pinkslash.metatype.cn/agenda/">
+                <!-- <i class="fas fa-calendar"></i> -->
+                <img src="http://pinkslash.metatype.cn/static/images/rili.svg" class="footer-img footer-active">
+                <p class="footer-item-label">Agenda</p>
+            </a>
+        </div>
+        <div class="footer-item ">
+            <a href="https://pinkslash.metatype.cn/customer_profile/{{ user.id }}">
+                <!-- <span class="iconfont icon-yonghu"></span> -->
+                <img src="http://pinkslash.metatype.cn/static/images/usercenter.svg" class="footer-img">
+                <p class="footer-item-label">Profile</p>
+            </a>
+        </div>
     </div>
 </body>
 </html>
