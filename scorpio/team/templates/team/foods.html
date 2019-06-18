@@ -29,8 +29,8 @@
                         <td>{{ food.name }}</td>
                         <td>{{ food.credit }}</td>
                         <td>{{ food.provider_id }}</td>
-                        <td><img src="{{ food.food_img.url }}" style="width: 150px;height: 100px;"></td>
-                        <td><img src="{{ food.qrcode.url }}" style="width: 150px;height: 100px;"></td>
+                        <td><img src="{{ food.food_img.url }}" style="width: 100px;height: 100px;"></td>
+                        <td><img src="{{ food.qrcode.url }}" style="width: 100px;height: 100px;"></td>
                         <td>
                             <a href="/delete_food/?fid={{ food.id }}&page={{ pager.number }}&eid={{ eid }}">
                                 <button type="button" class="btn btn-danger" >
