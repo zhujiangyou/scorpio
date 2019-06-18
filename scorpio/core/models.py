@@ -47,7 +47,7 @@ class Event(models.Model):
 class Food(models.Model):
     provider = models.ForeignKey(User, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    food_img = models.ImageField(upload_to='food')
+    food_img = models.ImageField(upload_to='food',default='')
     name = models.CharField(max_length=100)
     credit = models.IntegerField(default=0)
     qrcode = models.ImageField(upload_to='food/qrcode')
