@@ -799,6 +799,7 @@ def agenda_detail(request, me, agenda, agendatime):
 
     ctx['agendatime'] = agendatime
     ctx['user'] = me
+    ctx['me'] = me
 
     return render(request, 'agenda_detail.html', ctx)
 
