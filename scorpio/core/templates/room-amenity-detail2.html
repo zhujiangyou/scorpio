@@ -4,6 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>{{room_amenity.name}}</title>
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
     <style type="text/css">
@@ -198,7 +199,7 @@
             vertical-align: middle;
         }
 
-
+        /*
         .footer1 {
           position: fixed;
           width: 100%;
@@ -215,7 +216,6 @@
           color: #606266;
         }
         .footer1 .footer-item.active {
-          /*color: #F56C6C;*/
           color: #0b1b4b;
         }
         .footer1 .footer-item a {
@@ -242,7 +242,7 @@
             -webkit-filter: drop-shadow(#0b1b4b 80px 0px);
             filter: drop-shadow(#0b1b4b 80px 0);
             transform: translateX(-80px);
-        }
+        }*/
 
     </style>
 </head>
@@ -284,13 +284,12 @@
         </div>
 
     </div>
-    <div class="footer" id="footer">
+    <div class="footer1" id="footer">
         <img src="https://pinkslash.metatype.cn/static/images/100years.png"" class="img2">
     </div>
 
 
-
-    <div class="footer1">
+    <div class="footer">
         <div class="footer-item">
             <a href="https://pinkslash.metatype.cn/user_reservation">
                 <!-- <span class="iconfont icon-food"></span> -->
@@ -314,7 +313,6 @@
             </a>
         </div>
     </div>
-
 
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
