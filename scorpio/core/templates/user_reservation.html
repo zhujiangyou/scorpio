@@ -199,7 +199,8 @@
                 </div>
             {% endfor %}
             {% for package in lunchReservation %}
-                <div class="item" style="background-image: url({{package.lunch.img.url}});">
+                <!-- <div class="item" style="background-image: url({{package.lunch.img.url}});"> -->
+                <div class="item" style="background:url({{package.lunch.img.url}}) center center no-repeat;  background-size:cover;">
                     <a href="/lunch/detail/{{package.lunch.name }}"style="text-decoration: none;">
                         <div class="item-item">
                             {% if package.lunch.name == 's1' %}
