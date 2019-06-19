@@ -532,9 +532,7 @@ def room_amenity_detail(request, me, room_amenity_id):
 
 @user_required
 def lunch_detail(request, me, lunch_id):
-    lunch = Lunch.objects.filter(id=lunch_id).first()
-
-    text = lunch.text.split('|')
+    lunch = Lunch.objects.filter(name=lunch_id).first()
 
     ctx = {
         'lunch': lunch,
