@@ -111,8 +111,6 @@
             font-weight: 300;
         }
 
-
-
         .food-title{
             color: white;
             margin:0 0 0 20px;
@@ -179,43 +177,46 @@
         <div class="items" style="overflow: auto;height: 600px;">
             {% for package in roomAmenityReservation %}
                 <div class="item" style="background-image: url({{package.roomAmenity.img.url}});">
-                    <div class="item-item">
 
-                        {% if package.roomAmenity.name == 's1' %}
-                        <div class="item-title">Eat Seasonally, Eat Locally</div>
-                        {% elif package.roomAmenity.name == 'p1' %}
-                        <div class="item-title">Local Twist</div>
-                        {% elif package.roomAmenity.name == 'p2' %}
-                        <div class="item-title">Special Passion Fruit Drink</div>
-                        {% else %}
-                        <div class="item-title">Chrysanthemum Hawthorn Drink</div>
-                        {% endif %}
-                        <div class="item-div">
-                            <br>
+                    <a href="/room_amenity/detail/{{package.roomAmenity.name }}">
+                        <div class="item-item">
+                            {% if package.roomAmenity.name == 's1' %}
+                            <div class="item-title">Eat Seasonally, Eat Locally</div>
+                            {% elif package.roomAmenity.name == 'p1' %}
+                            <div class="item-title">Local Twist</div>
+                            {% elif package.roomAmenity.name == 'p2' %}
+                            <div class="item-title">Special Passion Fruit Drink</div>
+                            {% else %}
+                            <div class="item-title">Chrysanthemum Hawthorn Drink</div>
+                            {% endif %}
+                            <div class="item-div">
+                                <br>
+                            </div>
+                            <div class="item-footer">{{package.roomAmenity.credit}}</div>
                         </div>
-                        <div class="item-footer">{{package.roomAmenity.credit}}</div>
-                    </div>
+                    </a>
                 </div>
             {% endfor %}
             {% for package in lunchReservation %}
                 <div class="item" style="background-image: url({{package.lunch.img.url}});">
-                    <div class="item-item">
+                    <a href="/lunch/detail/{{package.lunch.name }}">
+                        <div class="item-item">
+                            {% if package.lunch.name == 's1' %}
+                            <div class="item-title">Crispy chicken, green vegetable, steamed rice</div>
+                            {% elif package.lunch.name == 's2' %}
+                            <div class="item-title">Cheese baked pork, salad, steamed rice</div>
+                            {% elif package.lunch.name == 'p1' %}
+                            <div class="item-title">Roasted goose, veg. bun, sautéed egg, fried rice</div>
+                            {% else %}
+                            <div class="item-title">Japanese sashimi rice, mixed salad</div>
+                            {% endif %}
+                            <div class="item-div">
+                                <br>
+                            </div>
+                            <div class="item-footer">{{package.lunch.credit}}</div>
 
-                        {% if package.lunch.name == 's1' %}
-                        <div class="item-title">Crispy chicken, green vegetable, steamed rice</div>
-                        {% elif package.lunch.name == 's2' %}
-                        <div class="item-title">Cheese baked pork, salad, steamed rice</div>
-                        {% elif package.lunch.name == 'p1' %}
-                        <div class="item-title">Roasted goose, veg. bun, sautéed egg, fried rice</div>
-                        {% else %}
-                        <div class="item-title">Japanese sashimi rice, mixed salad</div>
-                        {% endif %}
-                        <div class="item-div">
-                            <br>
                         </div>
-                        <div class="item-footer">{{package.lunch.credit}}</div>
-
-                    </div>
+                    </a>
                 </div>
             {% endfor %}
         </div>
