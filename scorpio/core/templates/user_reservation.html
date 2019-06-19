@@ -176,7 +176,8 @@
 
         <div class="items" style="overflow: auto;height: 600px;">
             {% for package in roomAmenityReservation %}
-                <div class="item" style="background-image: url({{package.roomAmenity.img.url}});">
+                <!-- <div class="item" style="background-image: url({{package.roomAmenity.img.url}});"> -->
+                    <div class="item" style="background:url({{package.roomAmenity.img.url}}) center center no-repeat;  background-size:cover;">
 
                     <a href="/room_amenity/detail/{{package.roomAmenity.name }}" style="text-decoration: none;">
                         <div class="item-item">
