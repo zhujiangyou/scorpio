@@ -408,6 +408,7 @@
             height: auto;
             max-height: 500px;
             border-radius: 10px;
+            vertical-align: middle;
             /*transform: rotate(90deg);*/
         }
 
@@ -505,9 +506,7 @@
 <br>
 <div class="page-lunch-detail">
     <img src="{{ lunch.img.url }}" class="lunch-picture">
-
     {% if lunch.name == 's1' %}
-
     {% else %}
         {% if lunch.count < 1 %}
             <button class="button big blue-button">Sold out</button></a>
