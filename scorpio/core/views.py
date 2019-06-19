@@ -506,7 +506,7 @@ def lunch_packages(request, me, lunch_type):
 def room_amenity_detail(request, me, room_amenity_id):
     room_amenity = RoomAmenity.objects.filter(name=room_amenity_id).first()
     ctx = {
-        'room_amenity': room_amenity,
+        'lunch': room_amenity,
         'me':me
     }
     roomAmenityReserve = RoomAmenityReservation.objects.filter(
