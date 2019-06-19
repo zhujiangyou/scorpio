@@ -145,23 +145,23 @@
 <div class="page-lunch-detail">
     <img src="{{ lunch.img.url }}" class="lunch-picture">
 
-    <div class="main-text">
+<!--     <div class="main-text">
         {% for t in text %}
             <p>{{t}}</p>
         {% endfor %}
 
     </div>
-
+ -->
     {% if status == 0 %}
         <button data-toggle="modal" data-target="#myModal" class="button big blue-button">Reserve</button></a>
     {% else %}
         <button  class="button big blue-button">The package has been reserved.</button>
     {% endif %}
+
 </div>
 <div id="footer">
     <img src="http://pinkslash.metatype.cn/static/images/100years.png"" class="img2">
 </div>
-
 
     <div class="footer">
             <div style="margin-left:40%;font-size:25px;">
@@ -171,7 +171,6 @@
             </div>
         </div>
     </div>
-
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog" style="position: absolute;left: 0;right: 0; top: 180px;margin:auto;width: 60%;background-color: white;border-radius: 5px;">
