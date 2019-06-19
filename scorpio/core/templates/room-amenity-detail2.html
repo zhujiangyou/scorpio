@@ -506,22 +506,17 @@
 <div class="page-lunch-detail">
     <img src="{{ lunch.img.url }}" class="lunch-picture">
 
-<!--     <div class="main-text">
-        {% for t in text %}
-            <p>{{t}}</p>
-        {% endfor %}
-
-    </div>
- -->
-    {% if status == 0 %}
-        <button data-toggle="modal" data-target="#myModal" class="button big blue-button">Reserve</button></a>
+    {% if lunch.name == 's1' %}
     {% else %}
-        <button  class="button big blue-button">The package has been reserved.</button>
+        {% if status == 0 %}
+            <button data-toggle="modal" data-target="#myModal" class="button big blue-button">Reserve</button></a>
+        {% else %}
+            <button  class="button big blue-button">The package has been reserved.</button>
+        {% endif %}
     {% endif %}
-
 </div>
 <div id="footer">
-    <img src="http://pinkslash.metatype.cn/static/images/100years.png"" class="img2">
+    <img src="https://pinkslash.metatype.cn/static/images/100years.png" class="img2">
 </div>
 
     <div class="footer">
