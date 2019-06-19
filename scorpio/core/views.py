@@ -470,8 +470,24 @@ def room_amenity(request, me):
     ctx = {
         'packages': packages,
         'status': 'room_amenity',
-        'me':me
+        'me':me,
+        'p1':'true',
+        'p2':'true',
+        'p3':'true',
     }
+
+
+    for p in packages:
+        if p.name == 'p1':
+            if p.count < 0:
+                ctx['p1'] = 'false'
+        if p.name == 'p2':
+            if p.count < 0:
+                ctx['p2'] = 'false'
+        if p.name == 'p3':
+            if p.count < 0:
+                ctx['p3'] = 'false'
+
 
     return render(request, 'room-amenity-package.html', ctx)
 
@@ -583,6 +599,9 @@ def room_amenity_reserve(request, me, lunch_id):
         user=me, roomAmenity=room_amenity).first()
     if not lunchReservation:
         RoomAmenityReservation.objects.create(user=me, roomAmenity=room_amenity)
+
+        room_amenity.count -= 1
+        room_amenity.save()
 
         if (me.credit-room_amenity.credit) >= (-1800):
             me.credit -= (room_amenity.credit)
@@ -860,7 +879,6 @@ def purchase_food(request, me, food_id):
 
 @user_required
 def turndown(request, me):
-
     ctx = {
         'me':me
     }
