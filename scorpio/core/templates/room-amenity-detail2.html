@@ -1,10 +1,9 @@
-{% load staticfiles %}
+<!-- {% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>{{room_amenity.name}}</title>
-    <!-- <link rel="stylesheet" href="{% static "/css/style.css" %}"> -->
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
     <style type="text/css">
@@ -16,7 +15,6 @@
 
         }
         body{
-            /*background-color: #202837;*/
             background-image: url(http://pinkslash.metatype.cn/static/images/bg.png);
             background-size: 100% auto;
             width: 100%;
@@ -41,9 +39,6 @@
         }
         .img1{
             border-radius: 10px;
-            /*width: 100%;
-            height: 320px;*/
-            /*position: absolute;*/
             width: 100%;
             height: auto;
             max-width: 100%;
@@ -111,7 +106,6 @@
             padding:5px 50px;
             border:0;
         }
-        /*modal开始*/
         .submit-modal{
             position: relative;
             width: 100%;
@@ -154,7 +148,6 @@
             color: #E6260F;
             font-size: 20px;
         }
-        /*modal结束*/
         #footer{
             text-align: center;
             position: relative;
@@ -211,9 +204,7 @@
             left: 0;
             bottom: 0;
             z-index: 100;
-            /* display: flex; */
             background:#0c1d4a;
-            /* border-top: 1px solid #f4f4f4; */
         }
     </style>
 </head>
@@ -225,7 +216,7 @@
         <div class="picture">
             <img src="{{room_amenity.img.url}}" class="img1">
         </div>
-<!--
+
         <div class="addImage">
             <div class="add-text2">{{room_amenity.text|safe}}</div>
             <div class="add-text">Premier Treatment:</div>
@@ -239,7 +230,7 @@
                 <div class="text-item2" >Special Passion Fruit Drink</div>
                 <img src="https://pinkslash.metatype.cn/static/images/duigou.svg" class="duigou" style="{% if Champagne == 'true' %} display: block {% else %} display: none {% endif %}">
             </div>
-        </div> -->
+        </div>
         <br>
         <br>
         <div class="reserve">
@@ -274,9 +265,7 @@
                 </div>
                 <div class="wenzi"></div>
                 <div class="money-btn">
-                    <!-- <a href=""> -->
                     <button class="confirm" id="confirm">Confirm</button>
-                    <!-- </a> -->
                 </div>
                 <div class="money-btn"><button class="cancel" data-dismiss="modal">Cancel</button></div>
             </div>
@@ -315,19 +304,6 @@
         }
     }
 
-    // $(".addImage1").click(function(){
-    //     if($(this).find(".duigou").css("display") == 'none'){
-    //         $(this).find(".duigou").css("display","block")
-
-    //         var choose
-
-    //     }else{
-    //         $(this).find(".duigou").css("display","none")
-    //     }
-    // })
-
-
-
     $("#reserve").click(function(){
         var credits = {{room_amenity.credit|safe}}
 
@@ -364,9 +340,225 @@
             credits += 100
         }
 
-        // console.log(flag,flag2)
 
         window.location.href = 'https://pinkslash.metatype.cn/room_amenity/reserve/'+{{ room_amenity.id|safe }}+'/'+flag+'/'+flag2+'/'
     })
 
+</script>
+ -->
+
+
+
+
+
+
+
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{lunch.name}}</title>
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="https://at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/popper.js/1.12.5/umd/popper.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+            font-family:'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        body{
+            /*background-color: #202837;*/
+            background-image: url(http://pinkslash.metatype.cn/static/images/bg.png);
+            background-size: 100% 100%;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        button{
+            outline:none!important;
+        }
+
+        .page-lunch-detail{
+            width: 100%;
+            /*height: 380px;*/
+            padding:10px;
+            border-radius: 10px;
+        }
+
+        .lunch-picture{
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            border-radius: 10px;
+            /*transform: rotate(90deg);*/
+        }
+
+        #footer{
+            text-align: center;
+            position: relative;
+            height: 25px;
+        }
+
+        .img2{
+            height: 25px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom:16px;
+            margin: auto;
+            width: auto;
+        }
+
+        /*modal开始*/
+        .submit-modal{
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .money{
+            background-color: #0c1d4a;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top:-40px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .money-modal{
+            border-radius: 5px;
+        }
+
+        .wenzi{
+            text-align: left;
+            color: black;
+            padding:50px 10px 0 10px;
+            font-size: 17px;
+        }
+
+        .money-btn{
+            text-align: center;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+        .confirm{
+            background-color: #0c1d4a;
+            color:white;
+            font-size: 20px;
+            padding: 5px 40px;
+            border-radius: 5px;
+        }
+
+        .cancel{
+            color: #E6260F;
+            font-size: 20px;
+        }
+
+        .main-text{
+            color: white;
+            font-size: 10px;
+            padding:0 10px;
+            text-align: center;
+        }
+        .main-text p{
+            margin-bottom: 3px;
+        }
+
+
+        .footer {
+            position: fixed;
+            width: 100%;
+            height: 44px;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+            /* display: flex; */
+            background:#0c1d4a;
+            border-top: 0px solid #f4f4f4;
+        }
+
+
+    </style>
+</head>
+<body>
+<br>
+<br>
+<div class="page-lunch-detail">
+    <img src="{{ lunch.img.url }}" class="lunch-picture">
+
+<!--     <div class="main-text">
+        {% for t in text %}
+            <p>{{t}}</p>
+        {% endfor %}
+
+    </div>
+ -->
+    {% if status == 0 %}
+        <button data-toggle="modal" data-target="#myModal" class="button big blue-button">Reserve</button></a>
+    {% else %}
+        <button  class="button big blue-button">The package has been reserved.</button>
+    {% endif %}
+
+</div>
+<div id="footer">
+    <img src="http://pinkslash.metatype.cn/static/images/100years.png"" class="img2">
+</div>
+
+    <div class="footer">
+            <div style="margin-left:40%;font-size:25px;">
+                <a href="https://pinkslash.metatype.cn/customer_profile/{{me.id}}">
+                    <span style="color:white;font-size: 14px;">Back to home</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" style="position: absolute;left: 0;right: 0; top: 180px;margin:auto;width: 60%;background-color: white;border-radius: 5px;">
+        <div class="modal-content money-modal">
+            <div class="money">
+                <img src="https://pinkslash.metatype.cn/static/images/credits.svg" style="width: 40px;height: 40px;margin:20px">
+            </div>
+            <div class="wenzi">Reservation needs you to purchase {{lunch.credit}} credits.</div>
+            <div class="money-btn">
+                <a href="/lunch/reserve/{{lunch.id}}">
+                    <button class="confirm" id="confirm">Confirm</button>
+                </a>
+            </div>
+            <div class="money-btn"><button class="cancel" data-dismiss="modal">Cancel</button></div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="{% static "/js/app.js" %}"></script>
+</body>
+</html>
+<script type="text/javascript">
+    function changefooter(){
+        footer.style.marginTop = '0px'
+        var height = $(this).height() - $(".page-lunch-detail").height() - 10;
+        footer.style.height = height + 'px'
+        if(height<=82){
+            footer.style.height = '82px'
+        }
+    }
+    changefooter()
+    $(window).resize(function(){
+        changefooter()
+    });
 </script>

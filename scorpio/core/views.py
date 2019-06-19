@@ -576,50 +576,72 @@ def lunch_reserve(request, me, lunch_id):
 
 
 @user_required
-def room_amenity_reserve(request, me, room_amenity_id, flag1, flag2):
+def room_amenity_reserve(request, me, lunch_id):
 
-    # RoomAmenityReservation.objects.filter(user=me).delete()
-
-    room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
-
-    roomAmenityReserve = RoomAmenityReservation.objects.filter(
+    room_amenity = RoomAmenity.objects.filter(id=lunch_id).first()
+    lunchReservation = RoomAmenityReservation.objects.filter(
         user=me, roomAmenity=room_amenity).first()
-
-    if not roomAmenityReserve:
-        ewai = 0
-        if flag1 == 'true':
-            ewai += 100
-            attach = Attach.objects.filter(roomAmenity=room_amenity, name='Juice', user=me).first()
-            if attach:
-                me.credit -= 100
-            else:
-                me.credit -= 100
-                Attach.objects.create(roomAmenity=room_amenity, name='Juice', user=me)
-
-        if flag2 == 'true':
-
-            ewai += 100
-            attach = Attach.objects.filter(roomAmenity=room_amenity, name='Champagne', user=me).first()
-            if attach:
-                me.credit -= 100
-            else:
-                me.credit -= 100
-                Attach.objects.create(roomAmenity=room_amenity, name='Champagne', user=me)
-
+    if not lunchReservation:
         RoomAmenityReservation.objects.create(user=me, roomAmenity=room_amenity)
 
         if (me.credit-room_amenity.credit) >= (-1800):
-            me.credit -= room_amenity.credit
+            me.credit -= (room_amenity.credit)
             me.save()
 
             History.objects.create(user=me,
-                                   credit='-{0}'.format(str(room_amenity.credit+ewai)),
+                                   credit='-{0}'.format(str(room_amenity.credit)),
                                    desc='Room Amenity Reservation')
             return redirect('/reserve_success')
         else:
             return redirect('/reserve_failed')
 
     return redirect('/room_amenity')
+
+# @user_required
+# def room_amenity_reserve(request, me, room_amenity_id, flag1, flag2):
+
+#     # RoomAmenityReservation.objects.filter(user=me).delete()
+
+#     room_amenity = RoomAmenity.objects.filter(id=room_amenity_id).first()
+
+#     roomAmenityReserve = RoomAmenityReservation.objects.filter(
+#         user=me, roomAmenity=room_amenity).first()
+
+#     if not roomAmenityReserve:
+#         ewai = 0
+#         if flag1 == 'true':
+#             ewai += 100
+#             attach = Attach.objects.filter(roomAmenity=room_amenity, name='Juice', user=me).first()
+#             if attach:
+#                 me.credit -= 100
+#             else:
+#                 me.credit -= 100
+#                 Attach.objects.create(roomAmenity=room_amenity, name='Juice', user=me)
+
+#         if flag2 == 'true':
+
+#             ewai += 100
+#             attach = Attach.objects.filter(roomAmenity=room_amenity, name='Champagne', user=me).first()
+#             if attach:
+#                 me.credit -= 100
+#             else:
+#                 me.credit -= 100
+#                 Attach.objects.create(roomAmenity=room_amenity, name='Champagne', user=me)
+
+#         RoomAmenityReservation.objects.create(user=me, roomAmenity=room_amenity)
+
+#         if (me.credit-room_amenity.credit) >= (-1800):
+#             me.credit -= room_amenity.credit
+#             me.save()
+
+#             History.objects.create(user=me,
+#                                    credit='-{0}'.format(str(room_amenity.credit+ewai)),
+#                                    desc='Room Amenity Reservation')
+#             return redirect('/reserve_success')
+#         else:
+#             return redirect('/reserve_failed')
+
+#     return redirect('/room_amenity')
 
 
 @user_required
