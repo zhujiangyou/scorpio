@@ -69,7 +69,7 @@ urlpatterns = [
     path('room_amenity/', core_views.room_amenity),
     path('lunch/', core_views.lunch),
 
-    path('room_amenity/detail/<int:room_amenity_id>', core_views.room_amenity_detail),
+    path('room_amenity/detail/<str:room_amenity_id>', core_views.room_amenity_detail),
     path('lunch/detail/<str:lunch_id>', core_views.lunch_detail),
 
     path('lunch/reserve/<int:lunch_id>', core_views.lunch_reserve),
