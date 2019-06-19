@@ -560,9 +560,9 @@ def lunch_reserve(request, me, lunch_id):
         if (me.credit-lunch.credit) >= (-1800):
 
             if lunch.status == 0:
-                me.credit -= (lunch.credit + 200)
+                me.credit -= (lunch.credit)
             else:
-                me.credit -= (lunch.credit + 300)
+                me.credit -= (lunch.credit)
 
             me.save()
             History.objects.create(user=me,
