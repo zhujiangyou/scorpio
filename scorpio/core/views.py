@@ -806,7 +806,7 @@ def agenda_detail(request, me, agenda, agendatime):
         ctx['name'] = 'Welcome & Celebration Gathering Dinner'
 
     elif agenda.name == 'GroupPhoto':
-        ctx['name'] = 'Group Photo'
+        ctx['name'] = 'Lunch'
     elif agenda.name == 'Lunch':
         ctx['name'] = 'Lunch'
     elif agenda.name == 'WorkingLunch&Wrapup':
