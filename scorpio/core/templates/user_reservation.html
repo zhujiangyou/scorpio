@@ -178,7 +178,7 @@
             {% for package in roomAmenityReservation %}
                 <div class="item" style="background-image: url({{package.roomAmenity.img.url}});">
 
-                    <a href="/room_amenity/detail/{{package.roomAmenity.name }}">
+                    <a href="/room_amenity/detail/{{package.roomAmenity.name }}" style="text-decoration: none;">
                         <div class="item-item">
                             {% if package.roomAmenity.name == 's1' %}
                             <div class="item-title">Eat Seasonally, Eat Locally</div>
@@ -199,7 +199,7 @@
             {% endfor %}
             {% for package in lunchReservation %}
                 <div class="item" style="background-image: url({{package.lunch.img.url}});">
-                    <a href="/lunch/detail/{{package.lunch.name }}">
+                    <a href="/lunch/detail/{{package.lunch.name }}"style="text-decoration: none;">
                         <div class="item-item">
                             {% if package.lunch.name == 's1' %}
                             <div class="item-title">Crispy chicken, green vegetable, steamed rice</div>
