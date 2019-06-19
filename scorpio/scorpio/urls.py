@@ -74,7 +74,7 @@ urlpatterns = [
 
     path('lunch/reserve/<int:lunch_id>', core_views.lunch_reserve),
     # path('room_amenity/reserve/<int:room_amenity_id>/<str:flag1>/<str:flag2>/', core_views.room_amenity_reserve),
-    path('room_amenity/reserve/<int:lunch_id>', core_views.lunch_reserve),
+    path('room_amenity/reserve/<int:lunch_id>', core_views.room_amenity_reserve),
 
     path('reserve_success', core_views.reserve_success),
     path('reserve_failed', core_views.reserve_failed),
