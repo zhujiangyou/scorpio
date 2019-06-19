@@ -175,7 +175,7 @@
 </head>
 <body  id="body">
 
-        <div class="items" style="overflow: auto;height: 400px;">
+        <div class="items" style="overflow: auto;height: 600px;">
             {% for package in roomAmenityReservation %}
                 <div class="item" style="background-image: url({{package.roomAmenity.img.url}});">
                     <div class="item-item">
@@ -190,6 +190,7 @@
                         <div class="item-title">Chrysanthemum Hawthorn Drink</div>
                         {% endif %}
                         <div class="item-div">
+                            <button></button>
                         </div>
                         <div class="item-footer">{{package.roomAmenity.credit}}</div>
                     </div>
