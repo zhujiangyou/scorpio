@@ -106,5 +106,7 @@ urlpatterns = [
     path('food_purchase/<int:food_id>/', core_views.food_purchase),
     path('purchase_food/<int:food_id>/', core_views.purchase_food),
 
+    path('turndown/', core_views.turndown)
+
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

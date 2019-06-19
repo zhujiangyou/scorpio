@@ -857,3 +857,12 @@ def purchase_food(request, me, food_id):
     else:
         return redirect('/pay_failed')
 
+
+@user_required
+def turndown(request, me):
+
+    ctx = {
+        'me':me
+    }
+    return render(request, 'turndown.html', ctx)
+
