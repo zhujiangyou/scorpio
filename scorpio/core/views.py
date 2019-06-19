@@ -479,13 +479,13 @@ def room_amenity(request, me):
 
     for p in packages:
         if p.name == 'p1':
-            if p.count < 0:
+            if p.count < 1:
                 ctx['p1'] = 'false'
         if p.name == 'p2':
-            if p.count < 0:
+            if p.count < 1:
                 ctx['p2'] = 'false'
         if p.name == 'p3':
-            if p.count < 0:
+            if p.count < 1:
                 ctx['p3'] = 'false'
 
 
