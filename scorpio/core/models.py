@@ -119,6 +119,7 @@ class RoomAmenity(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     credit = models.IntegerField(default=0)
     text = models.CharField(max_length=5000, default='')
+    count = models.IntegerField(default=0)
 
 
 class RoomAmenityReservation(models.Model):
