@@ -536,7 +536,6 @@ def lunch_detail(request, me, lunch_id):
 
     ctx = {
         'lunch': lunch,
-        'text':text,
         'me':me
     }
     lunchReservation = LunchReservation.objects.filter(

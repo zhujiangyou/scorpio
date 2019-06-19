@@ -152,3 +152,4 @@ class Attach(models.Model):
 
     def __str__(self):
         return self.user.name + '预订了' + self.roomAmenity.name + ',额外添加了' + self.name
+
