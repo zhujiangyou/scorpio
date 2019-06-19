@@ -360,7 +360,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{lunch.name}}</title>
+    {% if lunch.name == 's1' %}
+    <title>Eat Seasonally, Eat Locally</title>
+    {% elif lunch.name == 'p1' %}
+    <title>Local Twist</title>
+    {% elif lunch.name == 'p2' %}
+    <title>Special Passion Fruit Drink</title>
+    {% else %}
+    <title>Chrysanthemum Hawthorn Drink</title>
+    {% endif %}
+
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
 
@@ -489,8 +498,6 @@
             background:#0c1d4a;
             border-top: 0px solid #f4f4f4;
         }
-
-
     </style>
 </head>
 <body>

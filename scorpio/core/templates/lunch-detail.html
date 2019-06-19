@@ -6,7 +6,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{lunch.name}}</title>
+    {% if lunch.name == 's1' %}
+    <title>Crispy chicken, green vegetable, steamed rice</title>
+    {% elif lunch.name == 's2' %}
+    <title>Cheese baked pork, salad, steamed rice</title>
+    {% elif lunch.name == 'p1' %}
+    <title>Roasted goose, veg. bun, sautéed egg, fried rice</title>
+    {% else %}
+    <title>Japanese sashimi rice, mixed salad</title>
+    {% endif %}
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
 
