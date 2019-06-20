@@ -106,7 +106,7 @@
     </div>
 
 
-    <div class="footer">
+<!--     <div class="footer">
             <div style="margin-left:40%;font-size:25px;">
                 <a href="https://pinkslash.metatype.cn/customer_profile/{{me.id}}">
                     <span style="color:white;font-size: 14px;">Back to home</span>
@@ -114,7 +114,12 @@
             </div>
         </div>
     </div>
-
+ -->
+    <a href="https://pinkslash.metatype.cn/customer_profile/{{me.id}}">
+        <div style="bottom: 10px;right: 0px;width: 50px;height: 50px;background: url(); border-radius: 10px;position: fixed;">
+            <img src="https://pinkslash.metatype.cn/static/images/home.svg" style="width:50px;height:50px;">
+        </div>
+    </a>
 
 </body>
 </html>
@@ -129,7 +134,15 @@
             footer.style.height = '82px'
         }
     }
-    changefooter()
+
+    $(document).ready(function(){
+        changefooter()
+    })
+
+    setTimeout(function(){
+        changefooter()
+    },1000)
+
     $(window).resize(function(){
         changefooter()
     });
