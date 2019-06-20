@@ -240,7 +240,11 @@
             footer.style.height = '82px'
         }
     }
-    changefooter()
+
+    $(document).ready(function(){
+        changefooter()
+    })
+    
     $(window).resize(function(){
         changefooter()
     });
