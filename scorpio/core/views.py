@@ -248,7 +248,7 @@ def wechat_login(request):
 
                 request.session['uid'] = user.id
                 # 用户第一次登陆时生成赠送积分二维码
-                qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
+                qr = qrcode.make('https://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
                 buf = BytesIO()
                 qr.save(buf)
                 qr_data = buf.getvalue()
@@ -273,7 +273,7 @@ def wechat_login(request):
                     union_id=union_id, head_img=head_img, status=0,
                     event=event)
                 request.session['uid'] = user.id
-                qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
+                qr = qrcode.make('https://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
                 buf = BytesIO()
                 qr.save(buf)
                 qr_data = buf.getvalue()
@@ -294,7 +294,7 @@ def wechat_login(request):
                     union_id=union_id, head_img=head_img, status=0, event=event)
 
                 request.session['uid'] = user.id
-                qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
+                qr = qrcode.make('https://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
                 buf = BytesIO()
                 qr.save(buf)
                 qr_data = buf.getvalue()
@@ -312,7 +312,7 @@ def wechat_login(request):
                 return redirect('/customer/save_message/')
     else:
 
-        redirect_uri = 'http://pinkslash.metatype.cn' + full_path
+        redirect_uri = 'https://pinkslash.metatype.cn' + full_path
         get_code_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc7594d7d49e0235f&redirect_uri=" + \
                        redirect_uri + "&response_type=code&scope=snsapi_userinfo"
         return redirect(get_code_url)
