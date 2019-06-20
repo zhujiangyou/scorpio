@@ -514,6 +514,9 @@
     {% else %}
         {% if lunch.count < 1 %}
             <button class="button big blue-button">Sold out</button></a>
+
+        {% elif chongfu == 'true' %}
+            <button  class="button big blue-button">You have already reserved</button></a>
         {% elif status == 0 %}
             <button data-toggle="modal" data-target="#myModal" class="button big blue-button">Reserve</button></a>
         {% else %}

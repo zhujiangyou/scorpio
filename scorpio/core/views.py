@@ -523,7 +523,9 @@ def room_amenity_detail(request, me, room_amenity_id):
     room_amenity = RoomAmenity.objects.filter(name=room_amenity_id).first()
     ctx = {
         'lunch': room_amenity,
-        'me':me
+        'me':me,
+        'congfu':'false'
+
     }
     roomAmenityReserve = RoomAmenityReservation.objects.filter(
         user=me, roomAmenity=room_amenity).first()
@@ -532,6 +534,13 @@ def room_amenity_detail(request, me, room_amenity_id):
         ctx['status'] = 1
     else:
         ctx['status'] = 0
+
+
+    r = RoomAmenityReservation.objects.filter(user=me)
+    for _ in r:
+        if _.roomAmenity.id != room_amenity_id:
+            if 'p' in _.roomAmenity.name:
+                ctx['chongfu'] = 'true'
 
     # attachs = Attach.objects.filter(roomAmenity=room_amenity,user=me)
     # ctx['Juice'] = 'false'
