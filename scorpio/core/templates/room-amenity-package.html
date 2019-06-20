@@ -1,11 +1,12 @@
-<!-- {% load static %}
+<!--
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<html>
 <head>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Room Amenities Selection</title>
+    <link rel="stylesheet" href="{% static '/css/style.css' %}">
     <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
     <link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">
     <style type="text/css">
@@ -24,262 +25,28 @@
         button{
             outline:none!important;
         }
-
-        .picture{
-            width: 96%;
-            height: 320px;
-            margin:5px 2% 0 2%;
-        }
-
-        .img1{
-            border-radius: 10px;
-            width: 100%;
-            height: 320px;
-        }
-
-        .add-text{
-            padding:10px 20px;
-        }
-
-        .duigou{
-            position: absolute;
-            right: -5px;top: -5px;
-            width: 15px;height: 15px;
-            display: none;
-        }
-
-        .addImage{
-            width: 100%;
-            color: white;
-            font-size: 16px;
-        }
-
-        .addImage1{
-            position: relative;
-            border-radius: 2px;
-            display: inline-block;
-            width: 45%;
-            margin:5px 2%;
-            background-color: rgba(255,255,255,.1);
-            border-right: 5px;
-        }
-
-        .image-item{
-            border-top-left-radius: 2px;
-            border-bottom-left-radius: 2px;
-            width: 40%;
-            height: auto;
-            display: inline-block;
-            vertical-align:middle;
-        }
-        .text-item{
-            border-top-right-radius: 2px;
-            border-bottom-right-radius: 2px;
-            height: 100%;
-            width: 50%;
-            text-align: center;
-            margin: 0 auto;
-            font-size:12px;
-            display: inline-block;
-        }
-        .reserve{
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .btn-color{
-            background-color: #0c1d4a;
-            color: white;
-            font-size: 16px;
-            padding:5px 50px;
-            border:0;
-        }
-
-
-        .submit-modal{
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        .money{
-            background-color: #0c1d4a;
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
-            position: absolute;
-            left: 0;
-            right: 0;
-            top:-40px;
-            margin: auto;
-            text-align: center;
-        }
-
-        .money-modal{
-            border-radius: 5px;
-        }
-
-        .wenzi{
-            text-align: left;
-            color: black;
-            padding:50px 10px 0 10px;
-            font-size: 17px;
-        }
-
-        .money-btn{
-            text-align: center;
-            margin-top: 15px;
-            border-radius: 5px;
-        }
-        .confirm{
-            background-color: #0c1d4a;
-            color:white;
-            font-size: 20px;
-            padding: 5px 40px;
-            border-radius: 5px;
-        }
-
-        .cancel{
-            color: #E6260F;
-            font-size: 20px;
-        }
-
-
-        #footer{
-            text-align: center;
-            position: relative;
-            height: 25px;
-        }
-
-        .img2{
-            height: 25px;
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 44px;
-            margin: auto;
-            width: auto;
-        }
-        .items{
-            padding-top: 60px;
-            min-height: 1px;
-        }
-        .item{
-            border-radius: 10px;
-            background-color: white;
-            margin:20px 2%;
-            width: 96%;
-            height: 170px;
-            position: relative;
-        }
-
-        .img{
-            border-radius: 10px;
-            position: relative;
-            width: 100%;
-            height: 100%;
-        }
-
-        .item1{
-            background-color: white;
-            position: absolute;
-            bottom: 0;
-            padding: 10px 0 10px 5%;
-            width: 95%;
-            height: 16px;
-            font-size: 16px;
-            font-weight: bold;
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-        }
-    </style>
-</head>
-<body id="body">
-    <div class="items">
-        {% for package in packages %}
-                <div class="item">
-                    <a href="/room_amenity/detail/{{ package.id }}" style="text-decoration:none;">
-                        <img src="{{ package.img.url }}" class="img">
-                        <div class="item1">{{ package.name }}</div>
-                    </a>
-                </div>
-        {% endfor %}
-    </div>
-    <div class="footer" id="footer">
-        <img src="http://pinkslash.metatype.cn/static/images/100years.png" class="img2">
-    </div>
-</body>
-</html>
-
-<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-<script src="{% static "/js/app.js" %}"></script>
-<script>
-    function changefooter(){
-        footer.style.marginTop = '0px'
-        var height = $(this).height() - $(".items").height() - 80;
-        footer.style.height = height + 'px'
-        if(height<=82){
-            footer.style.height = '82px'
-        }
-    }
-    changefooter()
-    $(window).resize(function(){
-        changefooter()
-    });
-</script>
-
- -->
-
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room Amenities Selection</title>
-    <link rel="stylesheet" href="{% static "/css/style.css" %}">
-    <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
-    <link href="https://cdn.bootcss.com/font-awesome/5.8.2/css/all.min.css" rel="stylesheet">
-        <style type="text/css">
-        *{
-            padding:0;
-            margin:0;
-        }
-        body{
-            /*background-color: #202837;*/
-            background-image: url(http://pinkslash.metatype.cn/static/images/bg.png);
-            background-size: 100% 100%;
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-
-        button{
-            outline:none!important;
-        }
         .items{
             padding-top: 30px;
             min-height: 1px;
         }
+
         .item{
             border-radius: 10px;
             background-color: white;
             margin:15px 2%;
             width: 96%;
-            height: 200px;
+            height: 300px;
             position: relative;
             overflow: hidden;
         }
         .img{
             border-radius: 10px;
             position: absolute;
-            /*width: 100%;*/
-            /*height: 100%;*/
             width: 100%;
             height: auto;
             max-width: 100%;
             display: block;
-            top:-50%;
+            top:-20%;
 
         }
 
@@ -292,7 +59,6 @@
             width: 100%;
             height: 36px;
             font-size: 16px;
-            font-weight: bold;
             border-bottom-left-radius: 10px;
             border-bottom-right-radius: 10px;
         }
@@ -337,6 +103,28 @@
 </div>
 
 
+    <div class="footer">
+        <div class="footer-item active">
+            <a href="https://pinkslash.metatype.cn/user_reservation">
+                <img src="http://pinkslash.metatype.cn/static/images/szxdf.svg" class="footer-img">
+                <p class="footer-item-label" >My Res</p>
+            </a>
+        </div>
+        <div class="footer-item">
+            <a href="https://pinkslash.metatype.cn/agenda/">
+                <img src="http://pinkslash.metatype.cn/static/images/rili.svg" class="footer-img">
+                <p class="footer-item-label">Agenda</p>
+            </a>
+        </div>
+        <div class="footer-item"  style="overflow:hidden;">
+            <a href="https://pinkslash.metatype.cn/customer_profile/{{ me.id }}">
+                <img src="http://pinkslash.metatype.cn/static/images/usercenter.svg" class="footer-img footer-active">
+                <p class="footer-item-label">Profile</p>
+            </a>
+        </div>
+    </div>
+
+
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="{% static "/js/app.js" %}"></script>
 <script type="text/javascript">
@@ -355,4 +143,157 @@
 </script>
 
 </body>
+</html> -->
+
+
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Room Amenities Selection</title>
+    <link rel="stylesheet" href="{% static "/css/style.css" %}">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
+    <!-- <link href="css/base.css" rel="stylesheet"> -->
+    <style type="text/css">
+        *{
+            padding:0;
+            margin:0;
+            word-break:break-word;
+        }
+        body{
+            /*background-color: #202837;*/
+            background-image: url(http://pinkslash.metatype.cn/static/images/bg.png);
+            background-size: 100% auto;
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        .items{
+            padding: 0 2%;
+            position: relative;
+        }
+        .item{
+            margin-top: 65px;
+            position: relative;
+            /*height: 400px;*/
+            border-radius: 10px;
+            background-size: 100% 100%;
+        }
+        .item-item{
+            background:rgba(255,255,255,0.6);
+            /*background:linear-gradient(to right,#3f5081 0%, rgba(0,0,255,.3) 40%);*/
+            /*background:linear-gradient(to right,#ffffff 0%, rgba(0,0,0,.3) 40%);*/
+            height: 100%;
+            border-radius: 10px;
+        }
+        .item-title{
+            padding:12px 20px;
+            font-size: 21px;
+            /*font-weight: 600;*/
+            color: black;
+        }
+        .item-div{
+            padding:0px 18px;
+            text-align: right;
+        }
+        .item-button{
+            border-radius: 50px;
+            font-size: 13px;
+            padding: 8px 8px;
+            background: white;
+        }
+        .item-footer{
+            padding: 18px;
+            font-size: 12px;
+            color: white;
+            font-weight: 300;
+        }
+        #footer{
+            text-align: center;
+            position: relative;
+            height: 25px;
+        }
+                .img2{
+            height: 25px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 44px;
+            margin: auto;
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="items">
+
+        <div class="item" style="">
+            <div class="item-item">
+                <div class="item-title">25th Room Amenity<br><span style="font-size: 16px">A welcome amenity for everyone</span> <span style="float: right;font-size: 14px;"></span></div>
+                <div class="item-div" style="margin-bottom: 10px;">
+
+                    <span style="float: left;font-size: 13px;line-height: 40px;">Package 1 - Eat Seasonally, Eat Locally</span>
+                    <a href="/room_amenity/detail/s1"><button class="item-button">Check</button></a>
+
+                </div>
+
+            </div>
+        </div>
+        <div style="height: 1px;width: 100%;"></div>
+        <div class="item">
+            <div class="item-item">
+                <div class="item-title">26th  Room Amenity<span style="float: right;font-size: 14px;">100 points</span><br><span style="font-size: 16px">Please select your room amenity for Jun 26th</span></div>
+                <div class="item-div" style="margin-bottom: 10px;">
+                    <span style="float: left;font-size: 13px;line-height: 40px;">Package 1 - Local Twist</span>
+                    {% if p1 == 'false' %}
+                    <a href="/room_amenity/detail/p1"><button class="item-button">Sold out</button></a>
+                    {% else %}
+                    <a href="/room_amenity/detail/p1"><button class="item-button">Choose</button></a>
+                    {% endif %}
+                </div>
+                <div class="item-div" style="margin-bottom: 10px;">
+                    <span style="float: left;font-size: 13px;line-height: 40px;">Package 2 - Special Passion Fruit Drink</span>
+                    <!-- <span style="float: left;font-size: 13px;width: 80%;text-align: left;" >Menu 2 - Japanese sashimi rice, mixed salad</span> -->
+                    {% if p2 == 'false' %}
+                    <a href="/room_amenity/detail/p2"><button class="item-button">Sold out</button></a>
+                    {% else %}
+                    <a href="/room_amenity/detail/p2"><button class="item-button">Choose</button></a>
+                    {% endif %}
+                </div>
+                 <div class="item-div" style="margin-bottom: 10px;">
+                    <span style="float: left;font-size: 13px;line-height: 40px;">Package 3 - Chrysanthemum Hawthorn Drink</span>
+                    <!-- <span style="float: left;font-size: 13px;width: 80%;text-align: left;" >Package 3 - Chrysanthemum Hawthorn Drink</span> -->
+                    {% if p3 == 'false' %}
+                    <a href="/room_amenity/detail/p3"><button class="item-button">Sold out</button></a>
+                    {% else %}
+                    <a href="/room_amenity/detail/p3"><button class="item-button">Choose</button></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="footer">
+        <img src="http://pinkslash.metatype.cn/static/images/100years.png"" class="img2">
+    </div>
+
+</body>
 </html>
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+<script src="{% static "/js/app.js" %}"></script>
+<script type="text/javascript">
+    function changefooter(){
+        footer.style.marginTop = '0px'
+        var height = $(this).height() - $(".items").height() - 65;
+        footer.style.height = height + 'px'
+        if(height<=82){
+            footer.style.height = '82px'
+        }
+    }
+    changefooter()
+    $(window).resize(function(){
+        changefooter()
+    });
+</script>

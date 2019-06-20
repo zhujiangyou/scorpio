@@ -11,6 +11,7 @@
         *{
             padding:0;
             margin:0;
+            word-break:break-word;
         }
         body{
             /*background-color: #202837;*/
@@ -32,40 +33,40 @@
             background-size: 100% 100%;
         }
         .item-item{
-            /*background:rgba(0,0,255,.3);*/
-            background:linear-gradient(to right,#3f5081 0%, rgba(0,0,255,.3) 40%);
+            background:rgba(255,255,255,0.6);
+            /*background:linear-gradient(to right,#3f5081 0%, rgba(0,0,255,.3) 40%);*/
+            /*background:linear-gradient(to right,#ffffff 0%, rgba(0,0,0,.3) 40%);*/
             height: 100%;
             border-radius: 10px;
         }
         .item-title{
-            padding:20px 20px;
+            padding:12px 20px;
             font-size: 21px;
             /*font-weight: 600;*/
-            color: white;
+            color: black;
         }
         .item-div{
-            padding:0px 50px;
+            padding:0px 18px;
             text-align: right;
         }
         .item-button{
             border-radius: 50px;
             font-size: 13px;
-            padding: 8px 15px;
+            padding: 8px 8px;
             background: white;
         }
         .item-footer{
-            padding: 20px;
-            font-size: 20px;
+            padding: 18px;
+            font-size: 12px;
             color: white;
             font-weight: 300;
         }
-
         #footer{
             text-align: center;
             position: relative;
             height: 25px;
         }
-        .img2{
+                .img2{
             height: 25px;
             position: absolute;
             left: 0;
@@ -79,35 +80,61 @@
 <body>
 
     <div class="items">
-
-            <div class="item" style="background-image: url(../static/images/b1.jpg);;background-size: 100% auto">
+<!--             <div class="item" style="background-size: 100% auto">
                 <div class="item-item">
-                <!-- <img src="" class="item-img"> -->
                     <div class="item-title">Basic</div>
                     <a href="/lunch/packages/Basic" style="text-decoration:none;">
                         <div class="item-div">
                             <button class="item-button">Choose</button>
                         </div>
                     </a>
-
-                    <div class="item-footer">10</div>
+                    <div class="item-footer">200</div>
                 </div>
             </div>
             <div style="height: 1px;width: 100%;"></div>
-
-            <div class="item" style="background-image: url(../static/images/b2.jpg);;background-size: 100% auto">
+            <div class="item" style="background-size: 100% auto">
                 <div class="item-item">
-                <!-- <img src="" class="item-img"> -->
                     <div class="item-title">Premium</div>
                     <a href="/lunch/packages/Premium" style="text-decoration:none;">
                         <div class="item-div">
                             <button class="item-button">Choose</button>
                         </div>
                     </a>
-                    <div class="item-footer">20</div>
+                    <div class="item-footer">300</div>
                 </div>
             </div>
-            <div style="height: 1px;width: 100%;"></div>
+            <div style="height: 1px;width: 100%;"></div>-->
+        <div class="item" style="">
+            <div class="item-item">
+                <div class="item-title">Standard<span style="float: right;font-size: 14px;">200 points</span></div>
+                <div class="item-div" style="margin-bottom: 10px;">
+                        <span style="float: left;font-size: 13px;width: 80%;text-align: left;" >Menu 1 - Crispy chicken, green vegetable, steamed rice</span>
+                        <a href="/lunch/detail/s1"><button class="item-button">Choose</button></a>
+                </div>
+                <div class="item-div" style="margin-bottom: 10px;">
+                        <!-- <span style="float: left;font-size: 13px;line-height: 40px;">Menu 2 - Cheese-baked pork chop rice</span> -->
+                        <span style="float: left;font-size: 13px;width: 80%;text-align: left;" >Menu 2 - Cheese baked pork, salad, steamed rice</span>
+                        <a href="/lunch/detail/s2"><button class="item-button">Choose</button></a>
+                </div>
+            </div>
+        </div>
+        <div style="height: 1px;width: 100%;"></div>
+        <div class="item">
+            <div class="item-item">
+                <div class="item-title">Premium<span style="float: right;font-size: 14px;">300 points</span></div>
+                <div class="item-div" style="margin-bottom: 10px;">
+                    <!-- <span style="float: left;font-size: 13px;line-height: 40px;">Menu 1 - Roasted goose</span> -->
+                    <span style="float: left;font-size: 13px;width: 80%;text-align: left;" >Menu 1 - Roasted goose, veg. bun, sautéed egg, fried rice</span>
+                    <a href="/lunch/detail/p1"><button class="item-button">Choose</button></a>
+                </div>
+                <div class="item-div" style="margin-bottom: 10px;">
+                    <span style="float: left;font-size: 13px;line-height: 40px;">Menu 2 - Japanese sashimi rice, mixed salad</span>
+                    <!-- <span style="float: left;font-size: 13px;width: 80%;text-align: left;" >Menu 2 - Japanese sashimi rice, mixed salad</span> -->
+                    <a href="/lunch/detail/p2"><button class="item-button">Choose</button></a>
+                </div>
+            </div>
+        </div>
+
 
 
     </div>

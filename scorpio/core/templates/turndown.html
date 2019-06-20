@@ -1,4 +1,5 @@
 
+
 {% load staticfiles %}
 
 <!DOCTYPE html>
@@ -6,15 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% if lunch.name == 's1' %}
-    <title>Crispy chicken, green vegetable, steamed rice</title>
-    {% elif lunch.name == 's2' %}
-    <title>Cheese baked pork, salad, steamed rice</title>
-    {% elif lunch.name == 'p1' %}
-    <title>Roasted goose, veg. bun, sautéed egg, fried rice</title>
-    {% else %}
-    <title>Japanese sashimi rice, mixed salad</title>
-    {% endif %}
+    <title>Turn Down</title>
+
+
     <link rel="stylesheet" href="{% static "/css/style.css" %}">
     <link rel="stylesheet" href="https://at.alicdn.com/t/font_1143945_p0azd9jns4r.css">
 
@@ -43,15 +38,14 @@
 
         .page-lunch-detail{
             width: 100%;
-            /*height: 380px;*/
-            padding:10px;
+            padding:10px 50px;
             border-radius: 10px;
         }
 
         .lunch-picture{
             width: 100%;
             height: auto;
-            /*max-height: 500px;*/
+
             border-radius: 10px;
             /*transform: rotate(90deg);*/
         }
@@ -131,95 +125,46 @@
             margin-bottom: 3px;
         }
 
-
-        .footer {
-            position: fixed;
-            width: 23%;
-            height: 44px;
-            left: 0;
-            bottom: 0;
-            z-index: 100;
-            /* display: flex; */
-            background:#0c1d4a;
-            border-top: 0px solid #f4f4f4;
-        }
-
-
     </style>
 </head>
 <body>
-<br>
-<br>
+    <br>
+    <br>
+<div class="a">
 <div class="page-lunch-detail">
-    <img src="{{ lunch.img.url }}" class="lunch-picture">
-
-<!--     <div class="main-text">
-        {% for t in text %}
-            <p>{{t}}</p>
-        {% endfor %}
-
-    </div>
- -->
-    {% if status == 0 %}
-        <button data-toggle="modal" data-target="#myModal" class="button big blue-button">Reserve</button></a>
-    {% else %}
-        <button  class="button big blue-button">The package has been reserved.</button>
-    {% endif %}
+    <img src="http://pinkslash.metatype.cn/static/images/2.png" class="lunch-picture">
+</div>
+<div style="text-align: center;">
+<span style="width: 100%; padding: 5px;color: white;font-size: 16px;text-align: center; word-break: keep-all;">25th Turn Down - Lychee bird-nest jelly</span>
+</div>
+<div class="page-lunch-detail">
+    <img src="http://pinkslash.metatype.cn/static/images/1.png" class="lunch-picture">
 
 </div>
+    <div style="text-align: center;">
+        <span style="width: 80%;padding: 5px;color: white;font-size: 16px;text-align: center; word-break: keep-all; ">26th Turn Down - Glutinous rice ball in fermented wine</span>
+</div>
+</div>
+
+
+
 <div id="footer">
-    <img src="http://pinkslash.metatype.cn/static/images/100years.png"" class="img2">
+    <img src="https://pinkslash.metatype.cn/static/images/100years.png" class="img2">
 </div>
-<!--
-    <div class="footer">
-            <div style="font-size:25px;">
-                <a href="https://pinkslash.metatype.cn/customer_profile/{{me.id}}">
-                    <span style="color:white;font-size: 14px;">Back to home</span>
-                </a>
-            </div>
-        </div>
-    </div> -->
-    <a href="https://pinkslash.metatype.cn/customer_profile/{{me.id}}">
-    <div style="bottom: 10px;right: 0px;width: 50px;height: 50px;background: url(); border-radius: 10px;position: fixed;">
-        <img src="https://pinkslash.metatype.cn/static/images/home.svg" style="width:50px;height:50px;">
-    </div>
-</a>
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" style="position: absolute;left: 0;right: 0; top: 180px;margin:auto;width: 60%;background-color: white;border-radius: 5px;">
-        <div class="modal-content money-modal">
-            <div class="money">
-                <img src="https://pinkslash.metatype.cn/static/images/credits.svg" style="width: 40px;height: 40px;margin:20px">
-            </div>
-            <div class="wenzi">Reservation needs you to purchase {{lunch.credit}} credits.</div>
-            <div class="money-btn">
-                <a href="/lunch/reserve/{{lunch.id}}">
-                    <button class="confirm" id="confirm">Confirm</button>
-                </a>
-            </div>
-            <div class="money-btn"><button class="cancel" data-dismiss="modal">Cancel</button></div>
-        </div>
-    </div>
-</div>
-
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script src="{% static "/js/app.js" %}"></script>
 </body>
 </html>
 <script type="text/javascript">
     function changefooter(){
-        footer.style.marginTop = '-44px'
-        var height = $(this).height() - $(".page-lunch-detail").height() - 100;
+        footer.style.marginTop = '0px'
+        var height = $(this).height() - $(".a").height() - 80;
         footer.style.height = height + 'px'
         if(height<=82){
             footer.style.height = '82px'
         }
     }
-
-    $(document).ready(function(){
-        changefooter()
-    })
-    
+    changefooter()
     $(window).resize(function(){
         changefooter()
     });

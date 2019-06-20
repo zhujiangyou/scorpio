@@ -69,11 +69,12 @@ urlpatterns = [
     path('room_amenity/', core_views.room_amenity),
     path('lunch/', core_views.lunch),
 
-    path('room_amenity/detail/<int:room_amenity_id>', core_views.room_amenity_detail),
-    path('lunch/detail/<int:lunch_id>', core_views.lunch_detail),
+    path('room_amenity/detail/<str:room_amenity_id>', core_views.room_amenity_detail),
+    path('lunch/detail/<str:lunch_id>', core_views.lunch_detail),
 
     path('lunch/reserve/<int:lunch_id>', core_views.lunch_reserve),
-    path('room_amenity/reserve/<int:room_amenity_id>/<str:flag1>/<str:flag2>/', core_views.room_amenity_reserve),
+    # path('room_amenity/reserve/<int:room_amenity_id>/<str:flag1>/<str:flag2>/', core_views.room_amenity_reserve),
+    path('room_amenity/reserve/<int:lunch_id>', core_views.room_amenity_reserve),
 
     path('reserve_success', core_views.reserve_success),
     path('reserve_failed', core_views.reserve_failed),
@@ -105,6 +106,7 @@ urlpatterns = [
     path('food_purchase/<int:food_id>/', core_views.food_purchase),
     path('purchase_food/<int:food_id>/', core_views.purchase_food),
 
+    path('turndown/', core_views.turndown)
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -47,7 +47,7 @@ class Event(models.Model):
 class Food(models.Model):
     provider = models.ForeignKey(User, on_delete=models.CASCADE)
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    food_img = models.ImageField(upload_to='food')
+    food_img = models.ImageField(upload_to='food',default='')
     name = models.CharField(max_length=100)
     credit = models.IntegerField(default=0)
     qrcode = models.ImageField(upload_to='food/qrcode')
@@ -92,7 +92,7 @@ class History(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     create_time = models.DateTimeField(auto_now=True)
     credit = models.CharField(max_length=10)
-    desc = models.CharField(max_length=100, default='')
+    desc = models.CharField(max_length=1000, default='')
 
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -119,6 +119,7 @@ class RoomAmenity(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     credit = models.IntegerField(default=0)
     text = models.CharField(max_length=5000, default='')
+    count = models.IntegerField(default=0)
 
 
 class RoomAmenityReservation(models.Model):
@@ -139,7 +140,10 @@ class TeaBreak(models.Model):
 class Agenda(models.Model):
     name = models.CharField(default='', max_length=100)
     img = models.ImageField(upload_to='agenda', null=True)
-    text = models.CharField(default='', max_length=5000)
+    text = models.CharField(default='', max_length=5000, blank=True,null=True)
+
+    def __str__(self):
+        return self.name
 
 #选择完的附加选项
 class Attach(models.Model):
@@ -149,3 +153,4 @@ class Attach(models.Model):
 
     def __str__(self):
         return self.user.name + '预订了' + self.roomAmenity.name + ',额外添加了' + self.name
+
