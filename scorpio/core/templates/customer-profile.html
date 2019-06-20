@@ -178,7 +178,7 @@ btn.onclick = function () {
                 timestamp: result.timestamp,
                 nonceStr:result.nonceStr,
                  signature:result.signature,
-                 jsApiList : [ 'checkJsApi', 'scanQRCode' ]
+                 jsApiList : ['scanQRCode' ]
                  });
               },
 	        error:function(result) {
@@ -191,12 +191,6 @@ btn.onclick = function () {
         });
 
         wx.ready(function() {
-            wx.checkJsApi({
-                 jsApiList : ['scanQRCode'],
-                 success : function(res) {
-                    alert(res)
-                 }
-            });
 
             wx.scanQRCode({
                 needResult : 0,
