@@ -162,7 +162,7 @@
     });
 </script>
 <script type="text/javascript">
-window.location.href = ''
+
 
 var btn = document.getElementById("scanQRCode");
 btn.onclick = function () {
@@ -183,7 +183,10 @@ btn.onclick = function () {
                  });
               },
 	        error:function(result) {
-                alert(result)
+
+                window.location.href = current_url
+
+                // alert(result)
             }
         })
 
