@@ -223,6 +223,17 @@
             margin: auto;
             width: auto;
         }
+
+        @media screen and (max-width: 380px){
+            .item-button {
+                width:80%
+                font-size: 10px;
+            }
+        }
+        [style="float: left;font-size: 13px;line-height: 40px;"] {
+            font-size: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -234,8 +245,8 @@
                 <div class="item-title">25th Room Amenity<br><span style="font-size: 16px">A welcome amenity for everyone</span> <span style="float: right;font-size: 14px;"></span></div>
                 <div class="item-div" style="margin-bottom: 10px;">
 
-                    <span style="float: left;font-size: 13px;line-height: 40px;">Package 1 - Eat Seasonally, Eat Locally</span>
-                    <a href="/room_amenity/detail/s1"><button class="item-button">Check</button></a>
+                    <span class="haha" style="float: left;font-size: 13px;line-height: 40px;">Package 1 - Eat Seasonally, Eat Locally</span>
+                    <a href="/room_amenity/detail/s1"><button  class="item-button">Check</button></a>
 
                 </div>
 
@@ -254,7 +265,7 @@
                     {% endif %}
                 </div>
                 <div class="item-div" style="margin-bottom: 10px;">
-                    <span style="float: left;font-size: 13px;line-height: 40px;">Package 2 - Special Passion Fruit Drink</span>
+                    <span class="haha"  style="float: left;font-size: 13px;line-height: 40px;">Package 2 - Special Passion Fruit Drink</span>
                     <!-- <span style="float: left;font-size: 13px;width: 80%;text-align: left;" >Menu 2 - Japanese sashimi rice, mixed salad</span> -->
                     {% if p2 == 'false' %}
                     <a href="/room_amenity/detail/p2"><button class="item-button">Sold out</button></a>
@@ -263,7 +274,7 @@
                     {% endif %}
                 </div>
                  <div class="item-div" style="margin-bottom: 10px;">
-                    <span style="float: left;font-size: 13px;line-height: 40px;">Package 3 - Chrysanthemum Hawthorn Drink</span>
+                    <span class="haha" style="float: left;font-size: 13px;line-height: 40px;">Package 3 - Chrysanthemum Hawthorn Drink</span>
                     <!-- <span style="float: left;font-size: 13px;width: 80%;text-align: left;" >Package 3 - Chrysanthemum Hawthorn Drink</span> -->
                     {% if p3 == 'false' %}
                     <a href="/room_amenity/detail/p3"><button class="item-button">Sold out</button></a>
