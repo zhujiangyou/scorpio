@@ -819,10 +819,10 @@ def agenda_detail(request, me, agenda, agendatime):
     ctx['agenda'] = agenda = Agenda.objects.filter(name=agenda).first()
 
     if agenda.name == 'GatheringDinner':
-        ctx['name'] = '25th Gathering Dinner'
+        ctx['name'] = 'Welcome & Celebration Dinner'
 
     elif agenda.name == 'CoffeeBreak1':
-        ctx['name'] = '26th Coffee Break'
+        ctx['name'] = 'Coffee Break'
 
     elif agenda.name == 'Presentations':
         ctx['name'] = 'Presentations'
