@@ -561,7 +561,8 @@ def lunch_detail(request, me, lunch_id):
 
     ctx = {
         'lunch': lunch,
-        'me':me
+        'me':me,
+        'congfu':'false'
     }
     lunchReservation = LunchReservation.objects.filter(
         user=me, lunch=lunch).first()
@@ -569,6 +570,15 @@ def lunch_detail(request, me, lunch_id):
         ctx['status'] = 1
     else:
         ctx['status'] = 0
+
+    r = LunchReservation.objects.filter(user=me)
+    for _ in r:
+        if _.lunch.id != lunch_id:
+            if 'p' in _.lunch.name:
+                ctx['chongfu'] = 'true'
+
+            if 's' in _.lunch.name:
+                ctx['chongfu'] = 'true'
 
 
     return render(request, 'lunch-detail.html', ctx)
