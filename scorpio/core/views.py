@@ -812,8 +812,6 @@ def agenda(request, me):
 
 @user_required
 def agenda_detail(request, me, agenda, agendatime):
-    print('agenda',agenda)
-    print('agendatime',agendatime)
 
     ctx = {}
     ctx['agenda'] = agenda = Agenda.objects.filter(name=agenda).first()
