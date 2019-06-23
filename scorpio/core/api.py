@@ -33,6 +33,7 @@ def mini_login(status, code, userInfo):
             user = User.objects.create(union_id=unionid, head_img=head_img, event=event,status=0)
 
             print('user',user)
+
             qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event.id))
             buf = BytesIO()
             qr.save(buf)
