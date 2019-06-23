@@ -21,6 +21,8 @@ def mini_login(status, code, userInfo):
     print('res',res)
     print('status',status)
 
+    userInfo = json.loads(userInfo)
+
     event = Event.objects.all().first()
     if status == 'firstLogin':
         if user:
