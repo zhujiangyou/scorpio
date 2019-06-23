@@ -242,15 +242,15 @@ btn.onclick = function () {
             needResult : 0,
             scanType : [ "qrCode"],
             success : function(res) {
+                WeixinJSBridge.invoke('closeWindow',{},function(res){
+                    console.log(res);
+                });
 
             }
         });
         // };
     });
 
-    WeixinJSBridge.invoke('closeWindow',{},function(res){
-        console.log(res);
-    });
 
  }
 
