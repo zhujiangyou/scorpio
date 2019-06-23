@@ -197,6 +197,8 @@ btn.onclick = function () {
                 scanType : [ "qrCode"],
                 success : function(res) {
                     window.close();
+                    WeixinJSBridge.call('closeWindow');
+                    // window.close();
                 }
             });
             // };
