@@ -759,6 +759,10 @@ def send_credits(request, me):
         receiver_id = request.POST['receiver_id']
         sender_id = me.id
         credit = int(request.POST['credit'])
+
+        if receiver_id == sender_id:
+            return render(request, 'customer-login.html', ctx)
+
         # 积分赠送者
         sender = User.objects.get(id=sender_id)
         # 积分接收者
