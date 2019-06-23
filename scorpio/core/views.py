@@ -137,7 +137,7 @@ def wechat_login(request):
                         return redirect('/food_purchase/{0}/'.format(food.id))
 
                         # if user.credit >= food.credit:
-                        # if (user.credit-food.credit) >= (-1800):
+                        # if (user.credit-food.credit) >= (-1650):
                         #     user.credit -= food.credit
                         #     user.save()
                         #     provider = food.provider
@@ -644,7 +644,7 @@ def lunch_reserve(request, me, lunch_id):
         user=me, lunch=lunch).first()
     if not lunchReservation:
         LunchReservation.objects.create(user=me, lunch=lunch)
-        if (me.credit-lunch.credit) >= (-1800):
+        if (me.credit-lunch.credit) >= (-1650):
 
             if lunch.status == 0:
                 me.credit -= (lunch.credit)
@@ -674,7 +674,7 @@ def room_amenity_reserve(request, me, lunch_id):
         room_amenity.count -= 1
         room_amenity.save()
 
-        if (me.credit-room_amenity.credit) >= (-1800):
+        if (me.credit-room_amenity.credit) >= (-1650):
             me.credit -= (room_amenity.credit)
             me.save()
 
@@ -720,7 +720,7 @@ def room_amenity_reserve(request, me, lunch_id):
 
 #         RoomAmenityReservation.objects.create(user=me, roomAmenity=room_amenity)
 
-#         if (me.credit-room_amenity.credit) >= (-1800):
+#         if (me.credit-room_amenity.credit) >= (-1650):
 #             me.credit -= room_amenity.credit
 #             me.save()
 
@@ -931,7 +931,7 @@ def food_purchase(request, me, food_id):
 def purchase_food(request, me, food_id):
     food = Food.objects.filter(id=food_id).first()
     user = me
-    if (user.credit-food.credit) >= (-1800):
+    if (user.credit-food.credit) >= (-1650):
         user.credit -= food.credit
         user.save()
         provider = food.provider
