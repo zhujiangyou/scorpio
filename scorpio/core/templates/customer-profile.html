@@ -196,8 +196,23 @@ btn.onclick = function () {
                 needResult : 0,
                 scanType : [ "qrCode"],
                 success : function(res) {
-                    wx.closeWindow();
-                    // window.close();
+
+
+                    setTimeout(function() {
+                      //这个可以关闭安卓系统的手机
+                       document.addEventListener(
+                          "WeixinJSBridgeReady",
+                          function() {
+                             WeixinJSBridge.call("closeWindow");
+                          },
+                         false
+                       );
+                        //这个可以关闭ios系统的手机
+                       WeixinJSBridge.call("closeWindow");
+                    }, 300);
+
+
+
                 }
             });
             // };
