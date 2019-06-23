@@ -29,7 +29,7 @@ def mini_login(status, code, userInfo):
             else:
                 return {'url':'https://pinkslash.metatype.cn/mini_customer/save_message/{0}/'.format(user.id)}
         else:
-            head_img = userInfo['avatarUrl']
+            head_img = userInfo['rawData']['avatarUrl']
             user = User.objects.create(union_id=unionid, head_img=head_img, event=event,status=0)
 
             print('user',user)
