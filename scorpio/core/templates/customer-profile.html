@@ -196,8 +196,7 @@ btn.onclick = function () {
                 needResult : 0,
                 scanType : [ "qrCode"],
                 success : function(res) {
-                    window.close();
-                    WeixinJSBridge.call('closeWindow');
+                    wx.closeWindow();
                     // window.close();
                 }
             });
