@@ -213,8 +213,9 @@
 
 
 var btn = document.getElementById("scanQRCode");
+var current_url = window.location.href
 btn.onclick = function () {
-        var current_url = window.location.href
+
         // $.ajax({
         //     type:"post",
         //     url:"https://pinkslash.metatype.cn/getticket",
@@ -250,24 +251,19 @@ btn.onclick = function () {
         //     // };
         // });
 
+     }
 
 
 
-
-
-
-
-        console.log(1)
+$(function(){
         $.ajax({
                 type:"post",
                 url:"https://pinkslash.metatype.cn/getticket",
                 data:{'current_url':current_url},
                 dataType : "json",
                 success:function(result){
-
-
                     wx.config({
-                    debug: true,
+                    debug: false,
                     appId: result.appId,
                     timestamp: result.timestamp,
                     nonceStr:result.nonceStr,
@@ -277,10 +273,10 @@ btn.onclick = function () {
 
                     wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
                         wx.onMenuShareAppMessage({
-                            title: 'Hilton 100 years', // 分享标题
-                            desc: 'Hilton 100 years', // 分享描述
+                            title: 'Hilton 2019 F&B Week', // 分享标题
+                            desc: '48 Hours with Hilton', // 分享描述
                             link: 'https://pinkslash.metatype.cn/user_login/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                            imgUrl: 'https://pinkslash.metatype.cn/static/images/1.jpg', // 分享图标
+                            imgUrl: 'https://pinkslash.metatype.cn/static/images/xixi.png', // 分享图标
                             trigger:function(){
                             },
                             success:function(res){
@@ -298,16 +294,7 @@ btn.onclick = function () {
             })
 
 
-
-
-
-
-
-
-
-
-     }
-
+})
 
 </script>
 </body>
