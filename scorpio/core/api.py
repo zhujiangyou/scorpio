@@ -16,10 +16,6 @@ def mini_login(status, code, userInfo):
     res = json.loads(res.text)
     unionid = res['unionid']
     user = User.objects.filter(union_id=unionid).first()
-    print('code',code)
-    print('userInfo',userInfo)
-    print('res',res)
-    print('status',status)
 
     event = Event.objects.all().first()
     if status == 'firstLogin':
@@ -28,11 +24,11 @@ def mini_login(status, code, userInfo):
                 return {'url':'https://pinkslash.metatype.cn/customer_profile/{0}/'.format(user.id)}
             else:
                 return {'url':'https://pinkslash.metatype.cn/mini_customer/save_message/{0}/'.format(user.id)}
-
         else:
             head_img = userInfo['avatarUrl']
             user = User.objects.create(union_id=unionid, head_img=head_img, event=event,status=0)
 
+            print('user',user)
             qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event.id))
             buf = BytesIO()
             qr.save(buf)
@@ -47,6 +43,8 @@ def mini_login(status, code, userInfo):
             _user = User.objects.get(id=user.id)
             _user.qrcode = qr_img
             _user.save()
+
+            print('_user',_user)
 
             return {'url':'https://pinkslash.metatype.cn/mini_customer/save_message/{0}/'.format(user.id)}
 
