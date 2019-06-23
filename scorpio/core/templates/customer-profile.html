@@ -161,45 +161,49 @@
         changefooter()
     });
 
-$(function () {
+// $(function () {
 
- $.ajax({
-            type:"post",
-            url:"https://pinkslash.metatype.cn/getticket",
-            data:{'current_url':current_url},
-            dataType : "json",
-            success:function(result){
-                wx.config({
-                debug: false,
-                appId: result.appId,
-                timestamp: result.timestamp,
-                nonceStr:result.nonceStr,
-                signature:result.signature,
-                jsApiList : ['onMenuShareAppMessage']
-                 });
+//         console.log(1)
+//         $.ajax({
+//                 type:"post",
+//                 url:"https://pinkslash.metatype.cn/getticket",
+//                 data:{'current_url':current_url},
+//                 dataType : "json",
+//                 success:function(result){
 
-                wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
-                    wx.onMenuShareAppMessage({
-                        title: 'Hilton 100 years', // 分享标题
-                        desc: 'Hilton 100 years', // 分享描述
-                        link: 'https://pinkslash.metatype.cn/user_login/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                        imgUrl: 'https://pinkslash.metatype.cn/static/images/100years.png', // 分享图标
-                        trigger:function(){
-                        },
-                        success:function(res){
-                        },
-                        cancel: function(){
-                        },
-                        fail: function(res){
-                        }
-                    })
-                });
-              },
-            error:function(result) {
-                // alert(result)
-            }
-        })
-})
+
+
+//                     wx.config({
+//                     debug: false,
+//                     appId: result.appId,
+//                     timestamp: result.timestamp,
+//                     nonceStr:result.nonceStr,
+//                     signature:result.signature,
+//                     jsApiList : ['onMenuShareAppMessage']
+//                      });
+
+//                     wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
+//                         wx.onMenuShareAppMessage({
+//                             title: 'Hilton 100 years', // 分享标题
+//                             desc: 'Hilton 100 years', // 分享描述
+//                             link: 'https://pinkslash.metatype.cn/user_login/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+//                             imgUrl: 'https://pinkslash.metatype.cn/static/images/100years.png', // 分享图标
+//                             trigger:function(){
+//                             },
+//                             success:function(res){
+//                             },
+//                             cancel: function(){
+//                             },
+//                             fail: function(res){
+//                             }
+//                         })
+//                     });
+//                   },
+//                 error:function(result) {
+//                     // alert(result)
+//                 }
+//             })
+//     })
 
 
 
@@ -210,41 +214,93 @@ $(function () {
 
 var btn = document.getElementById("scanQRCode");
 btn.onclick = function () {
-        var current_url = window.location.href
+        // var current_url = window.location.href
+        // $.ajax({
+        //     type:"post",
+        //     url:"https://pinkslash.metatype.cn/getticket",
+        //     data:{'current_url':current_url},
+        //     dataType : "json",
+        //     success:function(result){
+        //         wx.config({
+        //         debug: false,
+        //         appId: result.appId,
+        //         timestamp: result.timestamp,
+        //         nonceStr:result.nonceStr,
+        //         signature:result.signature,
+        //         jsApiList : ['scanQRCode' ]
+        //          });
+        //       },
+	       //  error:function(result) {
+        //         // alert(result)
+        //     }
+        // })
+
+        // wx.error(function(res) {
+        //     alert("出错了：" + res.errMsg);
+        // });
+
+        // wx.ready(function() {
+        //     wx.scanQRCode({
+        //         needResult : 0,
+        //         scanType : [ "qrCode"],
+        //         success : function(res) {
+
+        //         }
+        //     });
+        //     // };
+        // });
+
+
+
+
+
+
+
+
+        console.log(1)
         $.ajax({
-            type:"post",
-            url:"https://pinkslash.metatype.cn/getticket",
-            data:{'current_url':current_url},
-            dataType : "json",
-            success:function(result){
-                wx.config({
-                debug: false,
-                appId: result.appId,
-                timestamp: result.timestamp,
-                nonceStr:result.nonceStr,
-                signature:result.signature,
-                jsApiList : ['scanQRCode' ]
-                 });
-              },
-	        error:function(result) {
-                // alert(result)
-            }
-        })
+                type:"post",
+                url:"https://pinkslash.metatype.cn/getticket",
+                data:{'current_url':current_url},
+                dataType : "json",
+                success:function(result){
 
-        wx.error(function(res) {
-            alert("出错了：" + res.errMsg);
-        });
 
-        wx.ready(function() {
-            wx.scanQRCode({
-                needResult : 0,
-                scanType : [ "qrCode"],
-                success : function(res) {
+                    wx.config({
+                    debug: true,
+                    appId: result.appId,
+                    timestamp: result.timestamp,
+                    nonceStr:result.nonceStr,
+                    signature:result.signature,
+                    jsApiList : ['onMenuShareAppMessage']
+                     });
 
+                    wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
+                        wx.onMenuShareAppMessage({
+                            title: 'Hilton 100 years', // 分享标题
+                            desc: 'Hilton 100 years', // 分享描述
+                            link: 'https://pinkslash.metatype.cn/user_login/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                            imgUrl: 'https://pinkslash.metatype.cn/static/images/100years.png', // 分享图标
+                            trigger:function(){
+                            },
+                            success:function(res){
+                            },
+                            cancel: function(){
+                            },
+                            fail: function(res){
+                            }
+                        })
+                    });
+                  },
+                error:function(result) {
+                    alert(result)
                 }
-            });
-            // };
-        });
+            })
+
+
+
+
+
 
 
 
