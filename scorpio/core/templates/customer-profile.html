@@ -156,14 +156,14 @@
             footer.style.height = '82px'
         }
     }
-    // changefooter()
-    // $(window).resize(function(){
-    //     changefooter()
-    // });
+    changefooter()
+    $(window).resize(function(){
+        changefooter()
+    });
 
+$(function () {
 
-    function changefooter2(){
-        $.ajax({
+ $.ajax({
             type:"post",
             url:"https://pinkslash.metatype.cn/getticket",
             data:{'current_url':current_url},
@@ -199,13 +199,7 @@
                 // alert(result)
             }
         })
-
-    }
-
-    $(window).resize(function(){
-        changefooter();
-        changefooter2()
-    });
+})
 
 
 
