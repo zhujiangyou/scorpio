@@ -347,7 +347,7 @@ def user_login(request):
                 union_id=union_id, head_img=head_img, status=0,
                 event=event)
             request.session['uid'] = user.id
-            qr = qrcode.make('https://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event_id))
+            qr = qrcode.make('https://pinkslash.metatype.cn/wechat_login/?status=sendcredits_{0}_{1}'.format(user.id, event.id))
             buf = BytesIO()
             qr.save(buf)
             qr_data = buf.getvalue()
