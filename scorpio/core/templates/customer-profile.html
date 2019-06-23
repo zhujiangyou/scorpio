@@ -216,40 +216,40 @@ var btn = document.getElementById("scanQRCode");
 var current_url = window.location.href
 btn.onclick = function () {
 
-        // $.ajax({
-        //     type:"post",
-        //     url:"https://pinkslash.metatype.cn/getticket",
-        //     data:{'current_url':current_url},
-        //     dataType : "json",
-        //     success:function(result){
-        //         wx.config({
-        //         debug: false,
-        //         appId: result.appId,
-        //         timestamp: result.timestamp,
-        //         nonceStr:result.nonceStr,
-        //         signature:result.signature,
-        //         jsApiList : ['scanQRCode' ]
-        //          });
-        //       },
-	       //  error:function(result) {
-        //         // alert(result)
-        //     }
-        // })
+        $.ajax({
+            type:"post",
+            url:"https://pinkslash.metatype.cn/getticket",
+            data:{'current_url':current_url},
+            dataType : "json",
+            success:function(result){
+                wx.config({
+                debug: false,
+                appId: result.appId,
+                timestamp: result.timestamp,
+                nonceStr:result.nonceStr,
+                signature:result.signature,
+                jsApiList : ['scanQRCode' ]
+                 });
+              },
+	        error:function(result) {
+                // alert(result)
+            }
+        })
 
-        // wx.error(function(res) {
-        //     alert("出错了：" + res.errMsg);
-        // });
+        wx.error(function(res) {
+            alert("出错了：" + res.errMsg);
+        });
 
-        // wx.ready(function() {
-        //     wx.scanQRCode({
-        //         needResult : 0,
-        //         scanType : [ "qrCode"],
-        //         success : function(res) {
+        wx.ready(function() {
+            wx.scanQRCode({
+                needResult : 0,
+                scanType : [ "qrCode"],
+                success : function(res) {
 
-        //         }
-        //     });
-        //     // };
-        // });
+                }
+            });
+            // };
+        });
 
      }
 
