@@ -111,10 +111,8 @@ def wechat_login(request):
     full_path = request.get_full_path()
 
     if 'code' in full_path:
-
         code = request.GET.get('code')
         user_data = wechat_api(code)
-
         nickname = user_data['nickname']
         union_id = user_data['union_id']
         head_img = user_data['head_img']
@@ -136,7 +134,6 @@ def wechat_login(request):
                     if user.name and user.hotel_name:
                         food_id = status.split('_')[2]
                         food = Food.objects.filter(id=food_id).first()
-
                         return redirect('/food_purchase/{0}/'.format(food.id))
 
                         # if user.credit >= food.credit:
@@ -324,6 +321,41 @@ def wechat_login(request):
 
     return HttpResponse("xixi")
 
+
+
+def user_login(request):
+    full_path = request.get_full_path()
+    if 'code' in full_path:
+        code = request.GET.get('code')
+        user_data = wechat_api(code)
+        nickname = user_data['nickname']
+        union_id = user_data['union_id']
+        head_img = user_data['head_img']
+
+        user = User.objects.filter(union_id=union_id).first()
+        status = request.GET.get('status')
+
+        if user:
+            if user.name and user.hotel_name:
+                return redirect('/customer_profile/{0}/'.format(user.id))
+            else:
+                return redirect('/customer/save_message/')
+        else:
+
+            event = Event.objects.all().first()
+            user = User.objects.create(
+                union_id=union_id, head_img=head_img, status=0,
+                event=event)
+            request.session['uid'] = user.id
+            return redirect('/customer/save_message/')
+
+    else:
+        redirect_uri = 'https://pinkslash.metatype.cn' + full_path
+        get_code_url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc7594d7d49e0235f&redirect_uri=" + \
+                       redirect_uri + "&response_type=code&scope=snsapi_userinfo"
+        return redirect(get_code_url)
+
+    return HttpResponse("xixi")
 
 @user_required
 def customer_save_message(request, me):
