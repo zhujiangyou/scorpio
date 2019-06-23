@@ -166,6 +166,7 @@
 
 var btn = document.getElementById("scanQRCode");
 btn.onclick = function () {
+
         var current_url = window.location.href
         $.ajax({
             type:"post",
@@ -197,26 +198,14 @@ btn.onclick = function () {
                 scanType : [ "qrCode"],
                 success : function(res) {
 
-
-                    setTimeout(function() {
-                      //这个可以关闭安卓系统的手机
-                       document.addEventListener(
-                          "WeixinJSBridgeReady",
-                          function() {
-                             WeixinJSBridge.call("closeWindow");
-                          },
-                         false
-                       );
-                        //这个可以关闭ios系统的手机
-                       WeixinJSBridge.call("closeWindow");
-                    }, 300);
-
-
-
                 }
             });
             // };
         });
+
+
+        window.close()
+
      }
 
 </script>
