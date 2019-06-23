@@ -163,6 +163,11 @@ def wechat_login(request):
                 elif 'sendcredits' in full_path:
 
                     receiver_id = status.split('_')[1]
+
+                    if str(user.id) == receiver_id:
+                        return redirect('/customer_profile/{0}/'.format(user.id))
+
+
                     ctx = {
                         'receiver_id': receiver_id
                     }
@@ -760,14 +765,13 @@ def send_credits(request, me):
         sender_id = me.id
         credit = int(request.POST['credit'])
 
-        if receiver_id == sender_id:
-            return render(request, 'customer-login.html', ctx)
 
         # 积分赠送者
         sender = User.objects.get(id=sender_id)
         # 积分接收者
         receiver = User.objects.get(id=receiver_id)
         # 判断积分余额
+
         if credit > sender.credit:
             return render(request, 'present-failed.html', ctx)
         else:
