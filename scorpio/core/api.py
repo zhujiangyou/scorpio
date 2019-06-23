@@ -16,6 +16,10 @@ def mini_login(status, code, userInfo):
     res = json.loads(res.text)
     unionid = res['unionid']
     user = User.objects.filter(union_id=unionid).first()
+    print('code',code)
+    print('userInfo',userInfo)
+    print('res',res)
+    print('status',status)
 
     event = Event.objects.all().first()
     if status == 'firstLogin':
