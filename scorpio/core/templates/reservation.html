@@ -36,3 +36,46 @@
 <script src="{% static "/js/app.js" %}"></script>
 </body>
 </html>
+
+
+<script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+<script type="text/javascript">
+var current_url = window.location.href
+$(function(){
+    $.ajax({
+        type:"post",
+        url:"https://pinkslash.metatype.cn/getticket",
+        data:{'current_url':current_url},
+        dataType : "json",
+        success:function(result){
+            wx.config({
+            debug: false,
+            appId: result.appId,
+            timestamp: result.timestamp,
+            nonceStr:result.nonceStr,
+            signature:result.signature,
+            jsApiList : ['onMenuShareAppMessage']
+             });
+            wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
+                wx.onMenuShareAppMessage({
+                    title: 'Hilton 2019 F&B Week', // 分享标题
+                    desc: '48 Hours with Hilton', // 分享描述
+                    link: 'https://pinkslash.metatype.cn/user_login/', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                    imgUrl: 'https://pinkslash.metatype.cn/static/images/xixi.png', // 分享图标
+                    trigger:function(){
+                    },
+                    success:function(res){
+                    },
+                    cancel: function(){
+                    },
+                    fail: function(res){
+                    }
+                })
+            });
+        },
+        error:function(result) {
+        }
+    })
+})
+
+</script>
