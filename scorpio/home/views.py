@@ -203,7 +203,7 @@ def data_report(request, me):
     ctx['foods'] = []
     for _ in foods:
         count = UserFood.objects.filter(food=_).count()
-        if count != 0:
+        if count > 0:
             ctx['food_names'].append(_.name)
             ctx['counts'].append(count)
             ctx['foods'].append(_)
@@ -277,11 +277,11 @@ def user_detail(request, me, user_id):
         ctx['user_report'].append(user_dict)
 
     for _ in usercredits:
-        user_dict = {'create_time':_.create_time,'user_desc':'扫了积分二维码','user_credits':-(_.credit)}
+        user_dict = {'create_time':_.create_time,'user_desc':'扫了积分二维码','user_credits':+(_.int(float(credit)))}
         ctx['user_report'].append(-(_.food.credit))
 
     for _ in usersans:
-        user_dict = {'create_time':_.create_time,'user_desc':'扫了一次性积分二维码','user_credits':-(_.credit)}
+        user_dict = {'create_time':_.create_time,'user_desc':'扫了一次性积分二维码','user_credits':+(_.credit)}
         ctx['user_report'].append(-(_.food.credit))
 
 
