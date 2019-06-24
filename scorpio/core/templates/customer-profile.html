@@ -241,7 +241,8 @@ btn.onclick = function () {
             needResult : 1,
             scanType : [ "qrCode"],
             success : function(res) {
-                console.log('res.resultStr',res.resultStr)
+                // console.log('res.resultStr',res.resultStr)
+                window.location = res.resultStr
             }
         });
         // };
