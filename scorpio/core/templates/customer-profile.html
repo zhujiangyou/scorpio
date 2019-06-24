@@ -238,7 +238,7 @@ btn.onclick = function () {
 
     wx.ready(function() {
         wx.scanQRCode({
-            needResult : 0,
+            needResult : 1,
             scanType : [ "qrCode"],
             success : function(res) {
                 console.log(res)
