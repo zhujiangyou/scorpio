@@ -200,14 +200,13 @@ def data_report(request, me):
 
     ctx['food_names'] = []
     ctx['counts'] = []
-
+    ctx['foods'] = []
     for _ in foods:
         count = UserFood.objects.filter(food=_).count()
-        ctx['food_names'].append(_.name)
-        ctx['counts'].append(count)
-
-    ctx['foods'] = foods
-
+        if count != 0:
+            ctx['food_names'].append(_.name)
+            ctx['counts'].append(count)
+            ctx['foods'].append(_)
 
     return render(request, 'team/dashboard.html', ctx)
 
@@ -274,15 +273,15 @@ def user_detail(request, me, user_id):
     ctx['user_report'] = []
 
     for _ in userfoods:
-        user_dict = {'create_time':_.create_time,'user_desc':'扫了积分二维码','user_credits':-(_.food.credit)}
+        user_dict = {'create_time':_.create_time,'user_desc':'扫了食物二维码','user_credits':-(_.food.credit)}
         ctx['user_report'].append(user_dict)
 
     for _ in usercredits:
-        user_dict = {'create_time':_.create_time,'user_desc':'扫了积分二维码','user_credits':-(_.food.credit)}
+        user_dict = {'create_time':_.create_time,'user_desc':'扫了积分二维码','user_credits':-(_.credit)}
         ctx['user_report'].append(-(_.food.credit))
 
     for _ in usersans:
-        user_dict = {'create_time':_.create_time,'user_desc':'扫了积分二维码','user_credits':-(_.food.credit)}
+        user_dict = {'create_time':_.create_time,'user_desc':'扫了一次性积分二维码','user_credits':-(_.credit)}
         ctx['user_report'].append(-(_.food.credit))
 
 
