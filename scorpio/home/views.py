@@ -235,13 +235,16 @@ def countdown(request, me):
 
     ctx['food_names'] = []
     ctx['counts'] = []
+    ctx['foods'] = []
 
     for _ in foods:
         count = UserFood.objects.filter(food=_).count()
-        ctx['food_names'].append(_.name)
-        ctx['counts'].append(count)
+        if count >= 1:
+            ctx['food_names'].append(_.name)
+            ctx['counts'].append(count)
+            ctx['foods'].append(_)
 
-    ctx['foods'] = foods
+    # ctx['foods'] = foods
 
 
     return render(request, 'team/dashboard.html', ctx)
@@ -278,11 +281,11 @@ def user_detail(request, me, user_id):
 
     for _ in usercredits:
         user_dict = {'create_time':_.create_time,'user_desc':'扫了积分二维码','user_credits':+int(float(_.credit))}
-        ctx['user_report'].append(-(_.food.credit))
+        ctx['user_report'].append(user_dict)
 
     for _ in usersans:
         user_dict = {'create_time':_.create_time,'user_desc':'扫了一次性积分二维码','user_credits':+(_.credit.credit)}
-        ctx['user_report'].append(-(_.food.credit))
+        ctx['user_report'].append(user_dict)
 
 
     return render(request, 'team/user_detail.html',ctx)
