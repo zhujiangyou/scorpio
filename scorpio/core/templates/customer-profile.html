@@ -213,7 +213,6 @@
 var btn = document.getElementById("scanQRCode");
 var current_url = window.location.href
 btn.onclick = function () {
-
     $.ajax({
         type:"post",
         url:"https://pinkslash.metatype.cn/getticket",
@@ -242,10 +241,7 @@ btn.onclick = function () {
             needResult : 0,
             scanType : [ "qrCode"],
             success : function(res) {
-                WeixinJSBridge.invoke('closeWindow',{},function(res){
-                    console.log(res);
-                });
-
+                console.log(res)
             }
         });
         // };
