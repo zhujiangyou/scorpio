@@ -407,7 +407,7 @@ def add_food(request, me):
                                    food_img=food_img)
         # 生成二维码
 
-        qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=purchase_{0}_{1}'.format(event.id, food.id))
+        qr = qrcode.make('https://pinkslash.metatype.cn/wechat_login/?status=purchase_{0}_{1}'.format(event.id, food.id))
         buf = BytesIO()
         qr.save(buf)
         qr_data = buf.getvalue()
@@ -445,7 +445,7 @@ def add_event(request, me):
                                      address=address,
                                      introduce=introduce,
                                      event_img=event_img)
-        qr = qrcode.make('http://pinkslash.metatype.cn/wechat_login/?status=provider_{0}'.format(event.id))
+        qr = qrcode.make('https://pinkslash.metatype.cn/wechat_login/?status=provider_{0}'.format(event.id))
         buf = BytesIO()
         qr.save(buf)
         qr_data = buf.getvalue()
@@ -477,7 +477,7 @@ def add_credit(request, me):
         box_size=1,
         border=4
     )
-    qr.add_data('http://pinkslash.metatype.cn/wechat_login/?status=customer_{0}_{1}'.format(event_id, credit))
+    qr.add_data('https://pinkslash.metatype.cn/wechat_login/?status=customer_{0}_{1}'.format(event_id, credit))
     img = qr.make_image()
     buf = BytesIO()
     img.save(buf)
@@ -535,7 +535,7 @@ def add_only_once_credit(request, me):
     )
 
     qr.add_data(
-        'http://pinkslash.metatype.cn/wechat_login/?status=customeronce_{0}_{1}_{2}'.format(event_id, credit, s.id))
+        'https://pinkslash.metatype.cn/wechat_login/?status=customeronce_{0}_{1}_{2}'.format(event_id, credit, s.id))
     img = qr.make_image()
     buf = BytesIO()
     img.save(buf)
