@@ -550,7 +550,8 @@ def lunch(request, me):
     packages = Lunch.objects.filter(event=me.event)
     ctx = {
         'packages': packages,
-        'status': 'lunch'
+        'status': 'lunch',
+        'me':me
     }
     return render(request, 'lunch.html', ctx)
 
