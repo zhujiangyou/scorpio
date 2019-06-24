@@ -233,7 +233,6 @@ btn.onclick = function () {
     })
 
     wx.error(function(res) {
-        alert("出错了：" + res.errMsg);
     });
 
     wx.ready(function() {
@@ -241,7 +240,6 @@ btn.onclick = function () {
             needResult : 1,
             scanType : [ "qrCode"],
             success : function(res) {
-                // console.log('res.resultStr',res.resultStr)
                 window.location = res.resultStr
             }
         });
@@ -266,7 +264,6 @@ $(function(){
             signature:result.signature,
             jsApiList : ['onMenuShareAppMessage']
              });
-
             wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
                 wx.onMenuShareAppMessage({
                     title: 'Hilton 2019 F&B Week', // 分享标题
@@ -285,7 +282,6 @@ $(function(){
             });
         },
         error:function(result) {
-            alert(result)
         }
     })
 
