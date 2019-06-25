@@ -204,17 +204,17 @@ def wechat_login(request):
                     else:
                         return redirect('/customer/save_message/')
 
-                if user.name and user.hotel_name:
-                    user.credit += int(credit)
-                    user.save()
+                # if user.name and user.hotel_name:
+                #     user.credit += int(credit)
+                #     user.save()
 
-                    History.objects.create(user=user,
-                                           credit='+{0}'.format(str(credit)),
-                                           desc='Scanning QRCode')
+                #     History.objects.create(user=user,
+                #                            credit='+{0}'.format(str(credit)),
+                #                            desc='Scanning QRCode')
 
-                    UserCredit.objects.create(user=user, credit=credit)
+                #     UserCredit.objects.create(user=user, credit=credit)
 
-                    return redirect('/customer_profile/{0}/'.format(user.id))
+                    # return redirect('/customer_profile/{0}/'.format(user.id))
                 else:
                     return redirect('/customer/save_message/')
         else:
