@@ -155,7 +155,7 @@
 <br>
 <div class="page-lunch-detail">
     <img src="{{ lunch.img.url }}" class="lunch-picture" style="vertical-align:bottom;display:block">
-    {% if lunch.name == 's1' %}
+    <!-- {% if lunch.name == 's1' %}
     {% else %}
         {% if lunch.count < 1 %}
             <button class="button big blue-button">Sold out</button></a>
@@ -166,7 +166,9 @@
         {% else %}
             <button data-toggle="modal" data-target="#myModal" class="button big blue-button">Reserve</button></a>
         {% endif %}
-    {% endif %}
+    {% endif %} -->
+    <button  class="button big blue-button">The package has been reserved.</button>
+
 </div>
 <div id="footer">
     <img src="https://pinkslash.metatype.cn/static/images/100years.png" class="img2">
@@ -209,6 +211,7 @@
 <script src="{% static "/js/app.js" %}"></script>
 </body>
 </html>
+
 <script type="text/javascript">
     function changefooter(){
         footer.style.marginTop = '-44px'
@@ -217,7 +220,6 @@
         if(height<=82){
             footer.style.height = '82px'
         }
-
     }
     $(document).ready(function(){
         changefooter()
@@ -230,7 +232,6 @@
     });
 
 </script>
-
 
 <script src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
 <script type="text/javascript">
