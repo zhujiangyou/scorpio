@@ -152,7 +152,6 @@
 <br>
 <div class="page-lunch-detail">
     <img src="{{ lunch.img.url }}" class="lunch-picture">
-
 <!--     <div class="main-text">
         {% for t in text %}
             <p>{{t}}</p>
@@ -160,13 +159,16 @@
 
     </div>
  -->
-    {% if status == 1 %}
+<!--     {% if status == 1 %}
         <button  class="button big blue-button">The package has been reserved.</button>
     {% elif chongfu == 'true' %}
         <button  class="button big blue-button">You have already reserved</button></a>
     {% else %}
         <button data-toggle="modal" data-target="#myModal" class="button big blue-button">Reserve</button></a>
     {% endif %}
+ -->
+
+    <button  class="button big blue-button">End of Reservation</button>
 
 </div>
 <div id="footer">
